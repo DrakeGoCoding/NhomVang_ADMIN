@@ -24,7 +24,7 @@
         "lint:fix": "eslint --fix --ext js,jsx src/",
         "prettier": "prettier --check \"src/**/(**.jsx|*.js|*.scss|*.css)\"",
         "prettier:fix": "prettier --write \"src/**/(**.jsx|*.js|*.scss|*.css)\"",
-        "preci": "rm -fr node_modules",
+        "preci": "(yarn lint:fix . && yarn prettier:fix .) | rm -fr node_modules",
         "ci": "yarn install --frozen-lockfile"
     },
     "eslintConfig": {
