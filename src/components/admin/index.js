@@ -1,11 +1,14 @@
-import { Fragment } from "react"
+import { Fragment } from "react";
 import Dashboard from "./dashboard";
 
 const Admin = () => {
-      return ( 
-            <Fragment>
-                  <Dashboard />
-            </Fragment>
-      )
-}
+    return (
+        <Fragment>
+            <div>
+                <Dashboard />
+                <div>ádfasdfa</div>
+            </div>
+        </Fragment>
+    );
+};
 export default Admin;
