@@ -1,101 +1,45 @@
-import { Fragment } from "react";
-import { Form, Menu, Input, message } from "antd";
-import {
-    AppstoreAddOutlined,
-    DesktopOutlined,
-    ContainerOutlined,
-    EyeOutlined,
-    PlusOutlined,
-    CarOutlined
-} from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import Modal from "antd/lib/modal/Modal";
+import { Fragment, useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
+import { Layout, Menu, Breadcrumb } from "antd";
+import "../../style/admin.css";
+import { DesktopOutlined, PieChartOutlined, FileOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
+
+const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
-const layout = {
-    labelCol: {
-        span: 24
-    },
-    wrapperCol: {
-        span: 24
-    }
-};
-const Dashboard = ({ collapse }) => {
-    const [visible, setVisible] = useState(false);
-    const [form] = Form.useForm();
+const Dashboard = () => {
+    const [collapsed, setCollapsed] = useState(false);
+    const onCollapse = collapsed => {
+        console.log("collapsed");
+        setCollapsed(!collapsed);
+    };
 
     return (
-        <Fragment>
-            <Menu
-                defaultSelectedKeys={"1"}
-                defaultOpenKeys={["car"]}
-                mode="inline"
-                theme="dark"
-                inlineCollapsed={collapse}
-                collapsedWidth="400px"
-                style={{ height: "100%", minHeight: "100vh" }}
-            >
-                <Modal
-                    title="Thêm hãng xe mới"
-                    width={600}
-                    footer={false}
-                    visible={visible}
-                    onCancel={() => setVisible(false)}
-                >
-                    <Form
-                        name="basic"
-                        {...layout}
-                        // onFinish={}
-                        // form={}
-                    >
-                        <Form.Item
-                            label="Tên hãng"
-                            name="name"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "*"
-                                }
-                            ]}
-                        >
-                            <Input size="large" />
-                        </Form.Item>
-                        <Form.Item>
-                            <button className="btn-add-manu" type="submit">
-                                {" "}
-                                Thêm
-                            </button>
-                        </Form.Item>
-                    </Form>
-                </Modal>
-                <Menu.Item
-                    key="0"
-                    className="bg-dark"
-                    disabled
-                    style={{ cursor: "default", padding: "0 20px", margin: "0" }}
-                >
-                    <h5 style={{ margin: "0", height: "100%" }} className="text-light d-flex align-items-center">
-                        Dashboard
-                    </h5>
+        <Sider collapsible collapsed={collapsed} onCollapse={() => onCollapse(collapsed)}>
+            <div className="logo" />
+            <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+                <Menu.Item key="0">
+                    <img src="https://binhminhdigital.com/StoreData/PageData/3429/Tim-hieu-ve-ban-quyen-hinh-anh%20(3).jpg" />
                 </Menu.Item>
-                <Menu.Item key="1" icon={<DesktopOutlined />}>
-                    <Link to="/admin">Trang chủ</Link>
+                <Menu.Item key="1" icon={<PieChartOutlined />}>
+                    Option 1
                 </Menu.Item>
-                <Menu.Item onClick={() => setVisible(true)} key="3" icon={<PlusOutlined />}>
-                    <span>Thêm</span>
+                <Menu.Item key="2" icon={<DesktopOutlined />}>
+                    Option 2
                 </Menu.Item>
-                <SubMenu key="car" icon={<CarOutlined />} title="Quản lý xe">
-                    <Menu.Item key="5" icon={<EyeOutlined />}>
-                        {" "}
-                        <Link to=""> Xem danh sách xe</Link>
-                    </Menu.Item>
-                    <Menu.Item key="6" icon={<AppstoreAddOutlined />}>
-                        <Link to=""> Thêm xe mới</Link>
-                    </Menu.Item>
+                <SubMenu key="sub1" icon={<UserOutlined />} title="User">
+                    <Menu.Item key="3">Tom</Menu.Item>
+                    <Menu.Item key="4">Bill</Menu.Item>
+                    <Menu.Item key="5">Alex</Menu.Item>
                 </SubMenu>
+                <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
+                    <Menu.Item key="6">Team 1</Menu.Item>
+                    <Menu.Item key="8">Team 2</Menu.Item>
+                </SubMenu>
+                <Menu.Item key="9" icon={<FileOutlined />}>
+                    Files
+                </Menu.Item>
             </Menu>
-        </Fragment>
+        </Sider>
     );
 };
 export default Dashboard;
