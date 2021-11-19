@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Routes, Route } from "react-router-dom
 import { Form, Input, Button, Checkbox, Modal, Spin } from "antd";
 import { Fragment, useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
+import loginApi from "../../api/loginApi";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 18, color: "white" }} spin />;
 const layout = {
@@ -23,7 +24,25 @@ const Login = () => {
     const [load, setLoad] = useState(false);
     const onFinish = values => {
         setLoad(true);
-        console.log("Success:", values);
+        console.log(values)
+        loginApi.signIn(values)
+            .then((res)=>{
+                console.log(res)
+                if(!values || res.data == null ){
+                    console.log("failed")
+                    Modal.error ({
+                        title: 'đăng nhập thất bại '
+                    })
+                } else { 
+                    Modal.success({
+                        title: 'Đăng nhập thành công',
+                        onOk() { 
+                            localStorage.setItem('token', res.token)
+                            window.location = '/'
+                        }
+                    }, setLoad(false))
+                }
+            })
     };
 
     const onFinishFailed = errorInfo => {
@@ -56,7 +75,7 @@ const Login = () => {
                     </div>
                     <Form.Item
                         label="User"
-                        name="email"
+                        name="username"
                         rules={[{ required: true, message: "Please input your username!" }]}
                         className="field"
                     >
