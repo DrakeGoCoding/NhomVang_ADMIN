@@ -6,7 +6,8 @@ import queryString from "query-string";
 // config` for the full list of configs
 
 const axiosClient = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
+    // baseURL: process.env.REACT_APP_API_URL,
+    baseURL: "https://6198a43c164fa60017c23155.mockapi.io/", // mock api for testing
     headers: {
         "content-type": "application/json"
     },

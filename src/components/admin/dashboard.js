@@ -1,4 +1,5 @@
 import { Fragment, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
 import "../../style/admin.css";
@@ -21,7 +22,7 @@ const Dashboard = () => {
                     <img src="https://binhminhdigital.com/StoreData/PageData/3429/Tim-hieu-ve-ban-quyen-hinh-anh%20(3).jpg" />
                 </Menu.Item>
                 <Menu.Item key="1" icon={<PieChartOutlined />}>
-                    Option 1
+                    <Link to="/">User Management</Link>
                 </Menu.Item>
                 <Menu.Item key="2" icon={<DesktopOutlined />}>
                     Option 2

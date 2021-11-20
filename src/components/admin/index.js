@@ -5,7 +5,7 @@ import { FaUserCircle } from "react-icons/fa";
 import "../../style/admin.css";
 const { Header, Content, Footer, Sider } = Layout;
 
-const Admin = () => {
+const Admin = ({ com }) => {
     const user = () => {
         return (
             <div className="sub-menu bg-gray-200 shadow-md p-2  ">
@@ -34,7 +34,7 @@ const Admin = () => {
                     </div>
                     <Content style={{ margin: "0 16px" }}>
                         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                            Bill is a cat.
+                            {com}
                         </div>
                     </Content>
                 </Layout>

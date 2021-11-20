@@ -24,25 +24,27 @@ const Login = () => {
     const [load, setLoad] = useState(false);
     const onFinish = values => {
         setLoad(true);
-        console.log(values)
-        loginApi.signIn(values)
-            .then((res)=>{
-                console.log(res)
-                if(!values || res.data == null ){
-                    console.log("failed")
-                    Modal.error ({
-                        title: 'đăng nhập thất bại '
-                    })
-                } else { 
-                    Modal.success({
-                        title: 'Đăng nhập thành công',
-                        onOk() { 
-                            localStorage.setItem('token', res.token)
-                            window.location = '/'
+        console.log(values);
+        loginApi.signIn(values).then(res => {
+            console.log(res);
+            if (!values || res.data == null) {
+                console.log("failed");
+                Modal.error({
+                    title: "đăng nhập thất bại "
+                });
+            } else {
+                Modal.success(
+                    {
+                        title: "Đăng nhập thành công",
+                        onOk() {
+                            localStorage.setItem("token", res.token);
+                            window.location = "/";
                         }
-                    }, setLoad(false))
-                }
-            })
+                    },
+                    setLoad(false)
+                );
+            }
+        });
     };
 
     const onFinishFailed = errorInfo => {
