@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosClient from "./axiosClient";
 import { AUTH_LOGIN_ENDPOINT } from "../constant/endpoints";
 

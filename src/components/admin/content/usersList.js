@@ -1,17 +1,10 @@
 import { Fragment, useEffect } from "react";
 import { useState } from "react";
 import { Input, Space } from "antd";
-import { AudioOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
 import usersApi from "../../../api/usersApi";
 const { Search } = Input;
-const suffix = (
-    <AudioOutlined
-        style={{
-            fontSize: 20
-        }}
-    />
-);
+
 const onSearch = values => {
     console.log(values);
 };

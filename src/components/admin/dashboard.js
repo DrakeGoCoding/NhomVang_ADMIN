@@ -1,11 +1,10 @@
-import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu } from "antd";
 import "../../style/admin.css";
 import { DesktopOutlined, PieChartOutlined, FileOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Sider } = Layout;
 const { SubMenu } = Menu;
 const Dashboard = () => {
     const [collapsed, setCollapsed] = useState(false);
@@ -19,7 +18,7 @@ const Dashboard = () => {
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
                 <Menu.Item key="0">
-                    <img src="https://binhminhdigital.com/StoreData/PageData/3429/Tim-hieu-ve-ban-quyen-hinh-anh%20(3).jpg" />
+                    <div>Dashboard admin</div>
                 </Menu.Item>
                 <Menu.Item key="1" icon={<PieChartOutlined />}>
                     <Link to="/">User Management</Link>

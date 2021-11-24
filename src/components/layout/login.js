@@ -1,5 +1,4 @@
 import "../../style/login.css";
-import { BrowserRouter as Router, Switch, Routes, Route } from "react-router-dom";
 import { Form, Input, Button, Checkbox, Modal, Spin } from "antd";
 import { Fragment, useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -27,7 +26,7 @@ const Login = () => {
         console.log(values);
         loginApi.signIn(values).then(res => {
             console.log(res);
-            if (!values || res.data == null) {
+            if (!values || res.data === null) {
                 console.log("failed");
                 Modal.error({
                     title: "đăng nhập thất bại "
@@ -101,7 +100,7 @@ const Login = () => {
                             htmlType="submit"
                             className=" text-white mt-2 text-center"
                         >
-                            {load == true ? (
+                            {load === true ? (
                                 <Spin style={{ transform: "translateX(-20px)translateY(-4px)" }} indicator={antIcon} />
                             ) : (
                                 <span></span>

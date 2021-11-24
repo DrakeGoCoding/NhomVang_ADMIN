@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import Dashboard from "./dashboard";
-import { Layout, Menu, Breadcrumb, Dropdown, Button } from "antd";
+import { Layout, Dropdown } from "antd";
 import { FaUserCircle } from "react-icons/fa";
 import "../../style/admin.css";
-const { Header, Content, Footer, Sider } = Layout;
+const { Content } = Layout;
 
 const Admin = ({ com }) => {
     const user = () => {
