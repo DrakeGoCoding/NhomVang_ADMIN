@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import { USER_ENDPOINT } from "../constant/endpoints";
+import { USER_ENDPOINT } from "../constants/endpoints";
 
 const usersApi = {
     getAll: items => {

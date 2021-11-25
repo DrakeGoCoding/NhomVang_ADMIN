@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import { AUTH_LOGIN_ENDPOINT } from "../constant/endpoints";
+import { AUTH_LOGIN_ENDPOINT } from "../constants/endpoints";
 
 const loginApi = {
     signIn: user => {
