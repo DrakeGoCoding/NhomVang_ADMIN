@@ -1,29 +1,61 @@
+import { useEffect } from "react";
 import "../../style/news.css";
-import NewsList from "./content/newsList";
+import NewsList from "./NewsList";
+import { Button, Pagination } from "antd";
+import { Link } from "react-router-dom";
+import News from "../../api/news.api";
+import { store } from "../../store";
+import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_PAGE } from "../../constants/actionTypes";
+import { useSelector } from "react-redux";
 
-export default function News() {
-    const newslist = [
-        {
-            thumbnail: "https://assets.digilink.vn/uploads/2021/11/BEN-DAM-e1637722800902-750x465.jpg",
-            modifiedDate: "2021-11-24T08:55:42.430Z",
-            title: "KINH NGHIỆM ĐẾN THIÊN ĐƯỜNG DU LỊCH CÔN ĐẢO",
-            description:
-                "Sau kỳ nghỉ lễ dài ngày tại Côn Đảo, Quang Long 1998 cùng nhóm bạn Sài Gòn chia sẻ bài tư vấn chi tiết cho chuyến du lịch hòn đảo thiên đường này. Long và…",
-            slug: "kinh-nghiem-den-thien-duong-du-lich-con-dao"
-        },
-        {
-            thumbnail: "https://assets.digilink.vn/uploads/2021/10/1-e1633884806911-750x465.jpg",
-            modifiedDate: "2021-11-24T08:55:42.430Z",
-            title: "CÙNG HỘI BẠN CHECK-IN SANG CHẢNH HẾT NẤC Ở HẠ LONG",
-            description:
-                "Sở hữu vịnh biển kỳ quan cùng một nhịp sống hiện đại, Hạ Long là điểm đến hấp dẫn không thể bỏ qua dành cho du khách trẻ năng động. Dưới đây là lịch trình…",
-            slug: "tranh-thu-cuoi-tuan-troi-thu-mat-me-cung-hoi-ban-check-in-sang-chanh-het-nac-o-ha-long"
-        }
-    ];
+export default function NewsPage() {
+    const { newsList, currentPage, total, pager } = useSelector(state => state.newsList);
+    const pageSize = 10;
+
+    const changePage = pageNumber => {
+        store.dispatch({
+            type: SET_PAGE,
+            page: pageNumber - 1,
+            payload: pager(pageNumber - 1)
+        });
+    };
+
+    const onLoad = (pager, payload) => {
+        store.dispatch({
+            type: NEWS_PAGE_LOADED,
+            pager,
+            payload
+        });
+    };
+
+    const onUnload = () => {
+        store.dispatch({ type: NEWS_PAGE_UNLOADED });
+    };
+
+    useEffect(() => {
+        const pager = page => News.getAll(pageSize, page);
+        onLoad(pager, News.getAll(pageSize));
+        return () => {
+            onUnload();
+        };
+    }, []);
 
     return (
-        <div className="news-page">
-            <NewsList data={newslist} />
+        <div className="news-page flex flex-col">
+            <div className="flex justify-between mb-8">
+                <Button type="primary" size="large">
+                    <Link to="/editor">New Post</Link>
+                </Button>
+                <Pagination
+                    className="flex items-center"
+                    defaultCurrent={1}
+                    current={currentPage + 1}
+                    pageSize={pageSize}
+                    total={total}
+                    onChange={changePage}
+                />
+            </div>
+            <NewsList data={newsList} />
         </div>
     );
 }

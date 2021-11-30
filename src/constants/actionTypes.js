@@ -1,0 +1,16 @@
+export const APP_LOAD = "APP_LOAD";
+export const ASYNC_START = "ASYNC_START";
+export const DELETE_NEWS = "DELETE_NEWS";
+export const EDITOR_PAGE_LOADED = "EDITOR_PAGE_LOADED";
+export const EDITOR_PAGE_UNLOADED = "EDITOR_PAGE_UNLOADED";
+export const LOGIN = "LOGIN";
+export const LOGIN_PAGE_UNLOADED = "LOGIN_PAGE_UNLOADED";
+export const LOGOUT = "LOGOUT";
+export const NEWS_PAGE_LOADED = "NEWS_PAGE_LOADED";
+export const NEWS_PAGE_UNLOADED = "NEWS_PAGE_UNLOADED";
+export const NEWS_SUBMITTED = "NEWS_SUBMMITED";
+export const REDIRECT = "REDIRECT";
+export const REGISTER = "REGISTER";
+export const SET_PAGE = "SET_PAGE";
+export const TOGGLE_SIDER = "TOGGLE_SIDER";
+export const UPDATE_FIELD_EDITOR = "UPDATE_FIELD_EDITOR";

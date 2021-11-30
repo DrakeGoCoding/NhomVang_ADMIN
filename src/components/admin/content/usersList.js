@@ -2,7 +2,7 @@ import { Fragment, useEffect } from "react";
 import { useState } from "react";
 import { Input, Space } from "antd";
 import { Skeleton } from "antd";
-import usersApi from "../../../api/usersApi";
+import usersApi from "../../../api/user.api";
 const { Search } = Input;
 
 const onSearch = values => {
