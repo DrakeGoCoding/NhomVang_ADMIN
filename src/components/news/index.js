@@ -5,7 +5,7 @@ import { Button, Pagination } from "antd";
 import { Link } from "react-router-dom";
 import News from "../../api/news.api";
 import { store } from "../../store";
-import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_PAGE } from "../../constants/actionTypes";
+import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_NEWSLIST_PAGE } from "../../constants/actionTypes";
 import { useSelector } from "react-redux";
 
 export default function NewsPage() {
@@ -14,7 +14,7 @@ export default function NewsPage() {
 
     const changePage = pageNumber => {
         store.dispatch({
-            type: SET_PAGE,
+            type: SET_NEWSLIST_PAGE,
             page: pageNumber - 1,
             payload: pager(pageNumber - 1)
         });

@@ -1,4 +1,3 @@
-import { message } from "antd";
 import { setToken } from "./api/agent";
 import { ASYNC_START, LOGIN, LOGOUT, REGISTER } from "./constants/actionTypes";
 
@@ -14,7 +13,6 @@ export const promiseMiddleware = store => next => action => {
             error => {
                 action.error = true;
                 action.payload = error.response.data;
-                message.error(action.payload.message);
                 store.dispatch(action);
             }
         );

@@ -1,4 +1,4 @@
-import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_PAGE } from "../constants/actionTypes";
+import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_NEWSLIST_PAGE } from "../constants/actionTypes";
 
 export default function newsListReducer(state = {}, action) {
     switch (action.type) {
@@ -13,7 +13,7 @@ export default function newsListReducer(state = {}, action) {
         case NEWS_PAGE_UNLOADED:
             return {};
 
-        case SET_PAGE:
+        case SET_NEWSLIST_PAGE:
             return {
                 ...state,
                 newsList: action.payload.newsList,

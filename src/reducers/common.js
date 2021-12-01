@@ -23,7 +23,9 @@ export default function commonReducer(state = initialState, action) {
         case APP_LOAD:
             return {
                 ...state,
-                appLoaded: true
+                token: action.token || null,
+                appLoaded: true,
+                currentUser: action.payload ? action.payload.user : null
             };
 
         case ASYNC_START:

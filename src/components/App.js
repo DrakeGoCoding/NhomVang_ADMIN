@@ -12,6 +12,7 @@ import Home from "./Home";
 import Login from "./Login";
 import News from "./News";
 import NewsEditor from "./News/NewsEditor";
+import User from "./User";
 
 export default function App() {
     const navigate = useNavigate();
@@ -45,6 +46,8 @@ export default function App() {
     return (
         <Routes>
             <Route path="/" element={<Home />}>
+                <Route index element={<h2>Welcome to Voucher Hunter Management Website</h2>} />
+                <Route path="/user" element={<User />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/editor" element={<NewsEditor />} />
                 <Route path="/editor/:slug" element={<NewsEditor />} />

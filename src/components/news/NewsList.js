@@ -1,3 +1,4 @@
+import { Space } from "antd";
 import PropTypes from "prop-types";
 import NewsPreview from "./NewsPreview";
 
@@ -6,13 +7,13 @@ function NewsList(props) {
     const isRender = newsList && Array.isArray(newsList) && newsList.length > 0;
 
     return (
-        <div className="flex flex-col justify-center">
+        <Space direction="vertical">
             {isRender ? (
                 newsList.map(news => <NewsPreview key={news.slug} data={news} />)
             ) : (
                 <div className="news-preview">No news are here... yet</div>
             )}
-        </div>
+        </Space>
     );
 }
 

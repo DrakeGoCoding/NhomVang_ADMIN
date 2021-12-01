@@ -41,7 +41,7 @@ function NewsPreview(props) {
     };
 
     return data ? (
-        <div className="news-preview px-10 py-8">
+        <div className="news-preview px-10 py-8 bg-white">
             <Space size={0}>
                 <NewsImage className="mr-8" src={data.thumbnail} hidden={isSiderCollapsed} />
                 <div className="news-body">

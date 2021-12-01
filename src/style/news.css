@@ -1,9 +1,5 @@
 /* News Page */
 
-/* .news-page {
-    padding: 80px 15rem;
-} */
-
 .news-page button.ant-pagination-item-link {
     display: flex;
     justify-content: center;
@@ -12,13 +8,13 @@
 
 /* News Preview */
 
-.news-preview:nth-child(odd) {
+/* .news-preview:nth-child(odd) {
     background-color: #f0f0f0;
 }
 
 .news-preview:nth-child(even) {
     background-color: white;
-}
+} */
 
 .news-preview .news-body .news-date {
     color: #626c84;

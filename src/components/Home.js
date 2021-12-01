@@ -13,9 +13,7 @@ export default function Home() {
                     className="py-6 px-12"
                     style={{
                         maxWidth: "100%",
-                        minWidth: "100%",
-                        maxHeight: "calc(100% - 64px)",
-                        minHeight: "calc(100% - 64px)"
+                        minWidth: "100%"
                     }}
                 >
                     <Outlet />

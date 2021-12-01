@@ -33,8 +33,12 @@ export default function Login() {
                 <h2 className="text-center">Voucher Hunter</h2>
                 <Form
                     className="login-form flex flex-col justify-center items-center mt-8 mb-4 px-3"
+                    labelCol={{ span: 7 }}
+                    labelAlign="left"
+                    wrapperCol={{ span: 18 }}
                     name="loginForm"
                     size="large"
+                    autoComplete="off"
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                 >
@@ -42,7 +46,7 @@ export default function Login() {
                         className="w-full"
                         label="Username"
                         name="username"
-                        rules={[{ required: true, message: "Please input your username!" }]}
+                        rules={[{ required: true, message: "Username is required" }]}
                     >
                         <Input />
                     </Form.Item>
@@ -51,7 +55,7 @@ export default function Login() {
                         className="w-full"
                         label="Password"
                         name="password"
-                        rules={[{ required: true, message: "Please input your password!" }]}
+                        rules={[{ required: true, message: "Password is required" }]}
                     >
                         <Input.Password />
                     </Form.Item>
