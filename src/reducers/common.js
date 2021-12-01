@@ -1,13 +1,4 @@
-import {
-    APP_LOAD,
-    ASYNC_START,
-    DELETE_NEWS,
-    LOGIN,
-    LOGOUT,
-    NEWS_SUBMITTED,
-    REDIRECT,
-    TOGGLE_SIDER
-} from "../constants/actionTypes";
+import { APP_LOAD, ASYNC_START, LOGIN, LOGOUT, NEWS_SUBMITTED, REDIRECT, TOGGLE_SIDER } from "../constants/actionTypes";
 
 const initialState = {
     appName: "Voucher Hunter",
@@ -49,12 +40,6 @@ export default function commonReducer(state = initialState, action) {
             return { ...state, redirectTo: null };
 
         case NEWS_SUBMITTED:
-            return {
-                ...state,
-                redirectTo: action.error ? null : "/news"
-            };
-
-        case DELETE_NEWS:
             return {
                 ...state,
                 redirectTo: action.error ? null : "/news"

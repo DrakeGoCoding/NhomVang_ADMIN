@@ -9,7 +9,7 @@ import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_NEWSLIST_PAGE } from "../../c
 import { useSelector } from "react-redux";
 
 export default function NewsPage() {
-    const { newsList, currentPage, total, pager } = useSelector(state => state.newsList);
+    const { newsList, currentPage, total, pager, reload } = useSelector(state => state.newsList);
     const pageSize = 10;
 
     const changePage = pageNumber => {
@@ -20,11 +20,12 @@ export default function NewsPage() {
         });
     };
 
-    const onLoad = (pager, payload) => {
+    const onLoad = () => {
+        const pager = page => News.getAll(pageSize, page);
         store.dispatch({
             type: NEWS_PAGE_LOADED,
             pager,
-            payload
+            payload: News.getAll(pageSize)
         });
     };
 
@@ -33,12 +34,17 @@ export default function NewsPage() {
     };
 
     useEffect(() => {
-        const pager = page => News.getAll(pageSize, page);
-        onLoad(pager, News.getAll(pageSize));
+        onLoad();
         return () => {
             onUnload();
         };
     }, []);
+
+    useEffect(() => {
+        if (reload) {
+            onLoad();
+        }
+    }, [reload]);
 
     return (
         <div className="news-page flex flex-col">

@@ -1,11 +1,13 @@
 import {
     ASYNC_START,
+    DELETE_USER,
     FILTER_USERLIST,
     SET_USERLIST_PAGE,
     SET_USERLIST_REGEX,
     SET_USERLIST_ROLE,
     USER_PAGE_LOADED,
-    USER_PAGE_UNLOADED
+    USER_PAGE_UNLOADED,
+    USER_SUBMITTED
 } from "../constants/actionTypes";
 
 export default function userListReducer(state = {}, action) {
@@ -24,7 +26,8 @@ export default function userListReducer(state = {}, action) {
                 total: action.payload.total || 0,
                 currentPage: 0,
                 role: "",
-                regex: ""
+                regex: "",
+                reload: false
             };
 
         case USER_PAGE_UNLOADED:
@@ -59,6 +62,14 @@ export default function userListReducer(state = {}, action) {
                 total: action.payload.total || 0,
                 inProgress: false
             };
+
+        case DELETE_USER:
+        case USER_SUBMITTED: {
+            return {
+                ...state,
+                reload: true
+            };
+        }
 
         default:
             return state;

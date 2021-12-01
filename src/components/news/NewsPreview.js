@@ -36,6 +36,7 @@ function NewsPreview(props) {
         closeDeleteModal();
         dispatch({
             type: DELETE_NEWS,
+            slug: data.slug,
             payload: News.delete(data.slug)
         });
     };
@@ -63,7 +64,7 @@ function NewsPreview(props) {
                 </div>
             </Space>
             <Modal
-                title="Delete news"
+                title="Delete News"
                 visible={isDeleteModalVisible}
                 onOk={handleDeleteNews}
                 onCancel={closeDeleteModal}

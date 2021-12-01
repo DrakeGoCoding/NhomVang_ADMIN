@@ -1,6 +1,8 @@
 export const APP_LOAD = "APP_LOAD";
 export const ASYNC_START = "ASYNC_START";
+export const USER_SUBMITTED = "USER_SUBMITTED";
 export const DELETE_NEWS = "DELETE_NEWS";
+export const DELETE_USER = "DELETE_USER";
 export const EDITOR_PAGE_LOADED = "EDITOR_PAGE_LOADED";
 export const EDITOR_PAGE_UNLOADED = "EDITOR_PAGE_UNLOADED";
 export const FILTER_USERLIST = "FILTER_USERLIST";

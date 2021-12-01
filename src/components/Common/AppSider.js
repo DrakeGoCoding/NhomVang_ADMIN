@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Menu } from "antd";
-import { EditOutlined, FileOutlined, ShoppingOutlined, UserOutlined } from "@ant-design/icons";
+import { EditOutlined, FileOutlined, ShoppingOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import { TOGGLE_SIDER } from "../../constants/actionTypes";
 import { useEffect, useState } from "react";
@@ -38,6 +38,12 @@ export default function AppSider() {
             icon: <ShoppingOutlined />,
             link: "/product",
             key: "product"
+        },
+        {
+            label: "Order",
+            icon: <ShoppingCartOutlined />,
+            link: "/order",
+            key: "order"
         }
     ];
 

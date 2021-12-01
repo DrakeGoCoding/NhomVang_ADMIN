@@ -49,7 +49,6 @@ export default function NewsEditor() {
     };
 
     const handleSaveNews = () => {
-        closeSaveModal();
         const news = {
             title: getTitle(),
             description: editor.description,
@@ -61,6 +60,7 @@ export default function NewsEditor() {
             type: NEWS_SUBMITTED,
             payload: editor.slug ? News.update(news) : News.create(news)
         });
+        closeSaveModal();
     };
 
     useEffect(() => {

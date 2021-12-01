@@ -13,6 +13,10 @@ import Login from "./Login";
 import News from "./News";
 import NewsEditor from "./News/NewsEditor";
 import User from "./User";
+import Product from "./Product";
+import Order from "./Order";
+
+import "../App.css";
 
 export default function App() {
     const navigate = useNavigate();
@@ -51,6 +55,8 @@ export default function App() {
                 <Route path="/news" element={<News />} />
                 <Route path="/editor" element={<NewsEditor />} />
                 <Route path="/editor/:slug" element={<NewsEditor />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/order" element={<Order />} />
             </Route>
             <Route path="/login" element={<Login />} />
         </Routes>

@@ -15,7 +15,7 @@ import UserModal from "./UserModal";
 import UserTable from "./UserTable";
 
 export default function UserPage() {
-    const { role, regex, pager } = useSelector(state => state.userList);
+    const { role, regex, pager, reload } = useSelector(state => state.userList);
     const pageSize = 10;
 
     const [isUserModalVisible, setUserModalVisible] = useState(false);
@@ -28,6 +28,11 @@ export default function UserPage() {
     };
     const showEditUserModal = user => {
         setMode("edit");
+        setUser(user);
+        setUserModalVisible(true);
+    };
+    const showDeleteUserModal = user => {
+        setMode("delete");
         setUser(user);
         setUserModalVisible(true);
     };
@@ -57,11 +62,12 @@ export default function UserPage() {
         });
     };
 
-    const onLoad = (pager, payload) => {
+    const onLoad = () => {
+        const pager = (page, role, regex) => User.getAll(pageSize, page, role, regex);
         store.dispatch({
             type: USER_PAGE_LOADED,
             pager,
-            payload
+            payload: User.getAll(pageSize)
         });
     };
 
@@ -70,12 +76,17 @@ export default function UserPage() {
     };
 
     useEffect(() => {
-        const pager = (page, role, regex) => User.getAll(pageSize, page, role, regex);
-        onLoad(pager, User.getAll(pageSize));
+        onLoad();
         return () => {
             onUnload();
         };
     }, []);
+
+    useEffect(() => {
+        if (reload) {
+            onLoad();
+        }
+    }, [reload]);
 
     return (
         <Space className="user-page max-w-full" direction="vertical" size="large">
@@ -105,7 +116,7 @@ export default function UserPage() {
                     />
                 </Space>
             </div>
-            <UserTable showEditUserModal={showEditUserModal} />
+            <UserTable showEditUserModal={showEditUserModal} showDeleteUserModal={showDeleteUserModal} />
             <UserModal visible={isUserModalVisible} mode={mode} user={user} onCancel={closeUserModal} />
         </Space>
     );

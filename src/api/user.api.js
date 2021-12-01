@@ -17,7 +17,7 @@ const User = {
         agent.get(`${USER_ENDPOINT}?${limit(size, page)}&${filter(role, regex)}`).then(response => response),
     create: user => agent.post(USER_ENDPOINT, { user: omitForUser(user) }),
     update: user => agent.put(USER_ENDPOINT, { user: omitForUser(user) }),
-    delete: username => agent.delete(USER_ENDPOINT, { username })
+    delete: username => agent.delete(`${USER_ENDPOINT}/${username}`)
 };
 
 export default User;

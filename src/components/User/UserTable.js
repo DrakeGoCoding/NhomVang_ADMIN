@@ -1,9 +1,12 @@
 import { Button, Empty, Pagination, Skeleton, Space, Table, Tag } from "antd";
+import moment from "moment";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { SET_USERLIST_PAGE } from "../../constants/actionTypes";
 import { store } from "../../store";
 
 export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
+    const { currentUser } = useSelector(state => state.common);
     const { userList, currentPage, role, regex, total, pager, inProgress } = useSelector(state => state.userList);
     const pageSize = 10;
     const columns = [
@@ -46,6 +49,7 @@ export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
             dataIndex: "dob",
             key: "dob",
             width: 150,
+            render: text => moment(text).format("DD/MM/YYYY") || "",
             ellipsis: true,
             textWrap: "word-break",
             align: "center"
@@ -68,12 +72,25 @@ export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
             width: 150,
             render: (text, record) => (
                 <Space size="middle">
-                    <Button type="primary" onClick={() => showEditUserModal(record)}>
-                        Edit
-                    </Button>
-                    <Button type="primary" onClick={() => showDeleteUserModal(record)} danger>
-                        Delete
-                    </Button>
+                    {record.role === "admin" ? (
+                        <>
+                            <Button type="primary" onClick={() => showEditUserModal(record)}>
+                                Edit
+                            </Button>
+                            <Button
+                                disabled={record.username === currentUser.username}
+                                type="primary"
+                                onClick={() => showDeleteUserModal(record)}
+                                danger
+                            >
+                                Delete
+                            </Button>
+                        </>
+                    ) : (
+                        <Button type="primary" className="view-order-btn bg-green-400 text-white border-green-400">
+                            <Link to={`/order/${record.username}`}>View Order</Link>
+                        </Button>
+                    )}
                 </Space>
             ),
             align: "center",
