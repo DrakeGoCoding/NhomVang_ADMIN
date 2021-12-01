@@ -1,4 +1,4 @@
-import { Button, Empty, Pagination, Skeleton, Space, Table, Tag } from "antd";
+import { Button, Pagination, Space, Spin, Table, Tag } from "antd";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -117,10 +117,8 @@ export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
                 dataSource={userList}
                 rowKey="username"
                 pagination={false}
+                loading={{ indicator: <Spin size="large" />, spinning: inProgress }}
                 scroll={{ x: 1500, y: 670 }}
-                locale={{
-                    emptyText: inProgress ? <Skeleton active={true} /> : <Empty />
-                }}
             />
             {total > 0 ? (
                 <Pagination
