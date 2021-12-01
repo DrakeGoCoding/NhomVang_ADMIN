@@ -13,7 +13,7 @@ import {
 export default function userListReducer(state = {}, action) {
     switch (action.type) {
         case ASYNC_START:
-            if ([SET_USERLIST_PAGE, SET_USERLIST_ROLE, FILTER_USERLIST].includes(action.subtype)) {
+            if ([USER_PAGE_LOADED, SET_USERLIST_PAGE, SET_USERLIST_ROLE, FILTER_USERLIST].includes(action.subtype)) {
                 return { ...state, inProgress: true };
             }
             return state;
@@ -27,7 +27,8 @@ export default function userListReducer(state = {}, action) {
                 currentPage: 0,
                 role: "",
                 regex: "",
-                reload: false
+                reload: false,
+                inProgress: false
             };
 
         case USER_PAGE_UNLOADED:
