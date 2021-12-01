@@ -64,7 +64,7 @@ export default function NewsPage() {
                 )}
             </div>
             {inProgress ? <Spin size="large" /> : <NewsList data={newsList} />}
-            <BackTop />
+            <BackTop style={{ verticalAlign: "middle" }} />
         </div>
     );
 }

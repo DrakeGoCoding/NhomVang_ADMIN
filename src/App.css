@@ -7,3 +7,18 @@
     font-weight: bold;
     font-size: 1rem;
 }
+
+.ant-back-top-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+}
+
+.ant-back-top-icon span {
+    font-size: 24px;
+}
+
+.ant-back-top-icon span svg {
+    font-size: inherit;
+}
