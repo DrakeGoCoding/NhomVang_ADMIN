@@ -13,7 +13,7 @@ function SaveUserModal({ visible, mode, title, user, onOk, onCancel }) {
         console.log(errorInfo);
     };
 
-    const initialValues = { ...user, dob: user.dob ? moment(user.dob) : undefined };
+    const initialValues = { ...user, dob: user ? (user.dob ? moment(user.dob) : undefined) : undefined };
 
     return (
         <Modal
