@@ -34,9 +34,11 @@ export default function App() {
         const token = localStorage.getItem("jwt");
         if (token) {
             setToken(token);
+            onLoad(token ? Auth.current() : null, token);
+        } else {
+            navigate("/login");
         }
-        onLoad(token ? Auth.current() : null, token);
-    }, []);
+    }, [navigate]);
 
     useEffect(() => {
         if (common.redirectTo) {
