@@ -16,7 +16,8 @@ export default function commonReducer(state = initialState, action) {
                 ...state,
                 token: action.token || null,
                 appLoaded: true,
-                currentUser: action.payload ? action.payload.user : null
+                currentUser: action.payload ? action.payload.user : null,
+                redirectTo: action.token ? "/" : "/login"
             };
 
         case ASYNC_START:
@@ -34,7 +35,7 @@ export default function commonReducer(state = initialState, action) {
             };
 
         case LOGOUT:
-            return { ...state, redirectTo: "/", token: null, currentUser: null };
+            return { ...state, redirectTo: "/login", token: null, currentUser: null };
 
         case REDIRECT:
             return { ...state, redirectTo: null };

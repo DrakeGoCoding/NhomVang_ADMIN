@@ -74,7 +74,11 @@ export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
                 <Space size="middle">
                     {record.role === "admin" ? (
                         <>
-                            <Button type="primary" onClick={() => showEditUserModal(record)}>
+                            <Button
+                                disabled={record.username === "admin"}
+                                type="primary"
+                                onClick={() => showEditUserModal(record)}
+                            >
                                 Edit
                             </Button>
                             <Button
