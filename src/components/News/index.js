@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "../../style/news.css";
 import NewsList from "./NewsList";
-import { Button, Pagination } from "antd";
+import { BackTop, Button, Pagination, Spin } from "antd";
 import { Link } from "react-router-dom";
 import News from "../../api/news.api";
 import { store } from "../../store";
@@ -9,7 +9,7 @@ import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_NEWSLIST_PAGE } from "../../c
 import { useSelector } from "react-redux";
 
 export default function NewsPage() {
-    const { newsList, currentPage, total, pager, reload } = useSelector(state => state.newsList);
+    const { newsList, currentPage, total, pager, reload, inProgress } = useSelector(state => state.newsList);
     const pageSize = 10;
 
     const changePage = pageNumber => {
@@ -52,16 +52,19 @@ export default function NewsPage() {
                 <Button type="primary" size="large">
                     <Link to="/editor">New Post</Link>
                 </Button>
-                <Pagination
-                    className="flex items-center"
-                    defaultCurrent={1}
-                    current={currentPage + 1}
-                    pageSize={pageSize}
-                    total={total}
-                    onChange={changePage}
-                />
+                {inProgress ? null : (
+                    <Pagination
+                        className="flex items-center"
+                        defaultCurrent={1}
+                        current={currentPage + 1}
+                        pageSize={pageSize}
+                        total={total}
+                        onChange={changePage}
+                    />
+                )}
             </div>
-            <NewsList data={newsList} />
+            {inProgress ? <Spin size="large" /> : <NewsList data={newsList} />}
+            <BackTop style={{ verticalAlign: "middle" }} />
         </div>
     );
 }
