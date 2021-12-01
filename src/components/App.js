@@ -31,21 +31,19 @@ export default function App() {
     };
 
     useEffect(() => {
+        const token = localStorage.getItem("jwt");
+        if (token) {
+            setToken(token);
+        }
+        onLoad(token ? Auth.current() : null, token);
+    }, []);
+
+    useEffect(() => {
         if (common.redirectTo) {
             navigate(common.redirectTo);
             onRedirect();
         }
     }, [common.redirectTo, navigate]);
-
-    useEffect(() => {
-        const token = localStorage.getItem("jwt");
-        if (token) {
-            setToken(token);
-        } else {
-            navigate("/login");
-        }
-        onLoad(token ? Auth.current() : null, token);
-    }, [navigate]);
 
     return (
         <Routes>
