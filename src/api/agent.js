@@ -5,12 +5,11 @@ import queryString from "query-string";
 // Please have a look at here `https://github.com/axios/axios#request-
 // config` for the full list of configs
 
-// const MOCK_API_URL = "https://6198a43c164fa60017c23155.mockapi.io/";
-const LOCAL_API = "http://localhost:5543/";
+// const LOCAL_API = "http://localhost:5543/";
 
 const instance = axios.create({
-    // baseURL: process.env.REACT_APP_API_URL,
-    baseURL: LOCAL_API, // mock api for testing
+    // baseURL: LOCAL_API, // mock api for testing
+    baseURL: process.env.REACT_APP_API_URL,
     headers: {
         "content-type": "application/json"
     },
