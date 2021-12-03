@@ -4,5 +4,5 @@ export const USER_ENDPOINT = "/admin/users";
 export const NEWS_ENDPOINT = "/news";
 export const ADMIN_NEWS_ENDPOINT = "/admin/news";
 export const IMAGE_ENDPOINT = "/image";
-export const PRODUCT_ENDPOINT = "/product";
-export const ADMIN_PRODUCT_ENDPOINT = "/admin/product";
+export const PRODUCT_ENDPOINT = "/products";
+export const ADMIN_PRODUCT_ENDPOINT = "/admin/products";
