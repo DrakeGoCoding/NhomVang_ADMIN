@@ -9,7 +9,7 @@ import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_NEWSLIST_PAGE } from "../../c
 import { useSelector } from "react-redux";
 
 export default function NewsPage() {
-    const { newsList, currentPage, total, pager, reload, inProgress } = useSelector(state => state.newsList);
+    const { newsList, page, total, pager, reload, inProgress } = useSelector(state => state.newsList);
     const pageSize = 10;
 
     const changePage = pageNumber => {
@@ -56,7 +56,7 @@ export default function NewsPage() {
                     <Pagination
                         className="flex items-center"
                         defaultCurrent={1}
-                        current={currentPage + 1}
+                        current={page + 1}
                         pageSize={pageSize}
                         total={total}
                         onChange={changePage}

@@ -1,14 +1,12 @@
 import { Button, Pagination, Space, Spin, Table, Tag } from "antd";
-import moment from "moment";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { SET_USERLIST_PAGE } from "../../constants/actionTypes";
-import { store } from "../../store";
 
-export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
+export default function UserTable(props) {
+    const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.common);
-    const { userList, currentPage, role, regex, total, pager, inProgress } = useSelector(state => state.userList);
-    const pageSize = 10;
+    const { inProgress } = useSelector(state => state.userList);
     const columns = [
         {
             title: "User Name",
@@ -45,16 +43,6 @@ export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
             align: "center"
         },
         {
-            title: "Date of birth",
-            dataIndex: "dob",
-            key: "dob",
-            width: 150,
-            render: text => moment(text).format("DD/MM/YYYY") || "",
-            ellipsis: true,
-            textWrap: "word-break",
-            align: "center"
-        },
-        {
             title: "Role",
             dataIndex: "role",
             key: "role",
@@ -63,8 +51,7 @@ export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
                 let color = text === "admin" ? "geekblue" : "green";
                 return <Tag color={color}>{text.toUpperCase()}</Tag>;
             },
-            align: "center",
-            fixed: "right"
+            align: "center"
         },
         {
             title: "Action",
@@ -77,14 +64,14 @@ export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
                             <Button
                                 disabled={record.username === "admin"}
                                 type="primary"
-                                onClick={() => showEditUserModal(record)}
+                                onClick={e => props.showUserModal(e, "edit", record)}
                             >
                                 Edit
                             </Button>
                             <Button
                                 disabled={record.username === currentUser.username}
                                 type="primary"
-                                onClick={() => showDeleteUserModal(record)}
+                                onClick={e => props.showUserModal(e, "delete", record)}
                                 danger
                             >
                                 Delete
@@ -103,10 +90,10 @@ export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
     ];
 
     const changePage = pageNumber => {
-        store.dispatch({
+        dispatch({
             type: SET_USERLIST_PAGE,
             page: pageNumber - 1,
-            payload: pager(pageNumber - 1, role, regex)
+            payload: props.pager(pageNumber - 1, props.filter)
         });
     };
 
@@ -114,19 +101,19 @@ export default function UserTable({ showEditUserModal, showDeleteUserModal }) {
         <div>
             <Table
                 columns={columns}
-                dataSource={userList}
+                dataSource={props.userList}
                 rowKey="username"
                 pagination={false}
                 loading={{ indicator: <Spin size="large" />, spinning: inProgress }}
                 scroll={{ x: 1500, y: 670 }}
             />
-            {total > 0 ? (
+            {props.total > 0 ? (
                 <Pagination
                     className="flex items-center mt-4"
                     defaultCurrent={1}
-                    current={currentPage + 1}
-                    pageSize={pageSize}
-                    total={total}
+                    current={props.currentPage}
+                    pageSize={props.pageSize}
+                    total={props.total}
                     onChange={changePage}
                 />
             ) : null}

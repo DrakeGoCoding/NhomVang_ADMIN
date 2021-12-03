@@ -3,8 +3,9 @@
     font-size: 1.5rem;
 }
 
+.ant-table-thead th,
 .ant-table-thead th span {
-    font-weight: bold;
+    font-weight: bold !important;
     font-size: 1rem;
 }
 
@@ -21,4 +22,24 @@
 
 .ant-back-top-icon span svg {
     font-size: inherit;
+}
+
+.ant-pagination-item-link {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.ant-menu-item > span {
+    font-size: 16px !important;
+}
+
+.ant-message .anticon, .ant-message .anticon > svg {
+    vertical-align: top !important;
+    font-size: 16px !important;
+}
+
+.ant-btn .anticon, .ant-btn .anticon > svg {
+    vertical-align: middle !important;
+    font-size: 16px !important;
 }

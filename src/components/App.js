@@ -35,10 +35,8 @@ export default function App() {
         if (token) {
             setToken(token);
             onLoad(token ? Auth.current() : null, token);
-        } else {
-            navigate("/login");
         }
-    }, [navigate]);
+    }, []);
 
     useEffect(() => {
         if (common.redirectTo) {
@@ -49,16 +47,19 @@ export default function App() {
 
     return (
         <Routes>
-            <Route path="/" element={<Home />}>
-                <Route index element={<h2>Welcome to Voucher Hunter Management Website</h2>} />
-                <Route path="/user" element={<User />} />
-                <Route path="/news" element={<News />} />
-                <Route path="/editor" element={<NewsEditor />} />
-                <Route path="/editor/:slug" element={<NewsEditor />} />
-                <Route path="/product" element={<Product />} />
-                <Route path="/order" element={<Order />} />
-            </Route>
-            <Route path="/login" element={<Login />} />
+            {common.token ? (
+                <Route path="/" element={<Home />}>
+                    <Route index element={<h2>Welcome to Voucher Hunter Management Website</h2>} />
+                    <Route path="/user" element={<User />} />
+                    <Route path="/news" element={<News />} />
+                    <Route path="/editor" element={<NewsEditor />} />
+                    <Route path="/editor/:slug" element={<NewsEditor />} />
+                    <Route path="/product" element={<Product />} />
+                    <Route path="/order" element={<Order />} />
+                </Route>
+            ) : (
+                <Route path="/login" element={<Login />} />
+            )}
         </Routes>
     );
 }

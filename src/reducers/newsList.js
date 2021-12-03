@@ -3,14 +3,13 @@ import {
     DELETE_NEWS,
     NEWS_PAGE_LOADED,
     NEWS_PAGE_UNLOADED,
-    SET_NEWSLIST_PAGE,
-    USER_SUBMITTED
+    SET_NEWSLIST_PAGE
 } from "../constants/actionTypes";
 
 export default function newsListReducer(state = {}, action) {
     switch (action.type) {
         case ASYNC_START:
-            if ([NEWS_PAGE_LOADED, SET_NEWSLIST_PAGE, USER_SUBMITTED, DELETE_NEWS].includes(action.subtype)) {
+            if ([NEWS_PAGE_LOADED, SET_NEWSLIST_PAGE, DELETE_NEWS].includes(action.subtype)) {
                 return { ...state, inProgress: true };
             }
             return state;
@@ -20,7 +19,7 @@ export default function newsListReducer(state = {}, action) {
                 pager: action.pager,
                 newsList: action.payload.newsList,
                 total: action.payload.total,
-                currentPage: 0,
+                page: 0,
                 reload: false,
                 inProgress: false
             };
@@ -32,7 +31,7 @@ export default function newsListReducer(state = {}, action) {
                 ...state,
                 newsList: action.payload.newsList,
                 total: action.payload.total,
-                currentPage: action.page,
+                page: action.page,
                 inProgress: false
             };
 

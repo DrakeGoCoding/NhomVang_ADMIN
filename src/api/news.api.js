@@ -11,7 +11,7 @@ const omitForNews = news =>
     });
 
 const News = {
-    getAll: (size, page) => agent.get(`${NEWS_ENDPOINT}?${limit(size, page)}`),
+    getAll: (size = 10, page = 0) => agent.get(`${NEWS_ENDPOINT}?${limit(size, page)}`),
     getBySlug: slug => agent.get(`${NEWS_ENDPOINT}/${slug}`),
     create: news => agent.post(ADMIN_NEWS_ENDPOINT, { news }),
     update: news => agent.put(`${ADMIN_NEWS_ENDPOINT}/${news.slug}`, { news: omitForNews(news) }),
