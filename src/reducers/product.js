@@ -1,54 +1,60 @@
 import {
     ASYNC_START,
-    EDITOR_PAGE_LOADED,
-    EDITOR_PAGE_UNLOADED,
-    NEWS_SUBMITTED,
-    UPDATE_FIELD_NEWS_EDITOR
+    PRODUCT_PAGE_LOADED,
+    PRODUCT_PAGE_UNLOADED,
+    PRODUCT_SUBMITTED,
+    UPDATE_FIELD_PRODUCT_EDITOR
 } from "../constants/actionTypes";
 import { htmlDecode } from "../utils";
 
 const initialState = {
     data: {
-        author: "",
-        slug: "",
-        title: "",
+        name: "",
+        listedPrice: undefined,
+        discountPrice: undefined,
+        supplier: "",
+        isHot: false,
+        isInSlider: false,
+        thumbnail: "",
+        photos: [],
+        quantity: 0,
         description: "",
-        content: "",
-        thumbnail: ""
+        tags: []
     }
 };
 
-export default function editorReducer(state = initialState, action) {
+export default function productReducer(state = initialState, action) {
     switch (action.type) {
         case ASYNC_START:
             switch (action.subtype) {
-                case EDITOR_PAGE_LOADED:
-                case NEWS_SUBMITTED:
+                case PRODUCT_PAGE_LOADED:
+                case PRODUCT_SUBMITTED:
                     return { ...state, inProgress: true };
 
                 default:
                     return state;
             }
 
-        case EDITOR_PAGE_LOADED:
+        case PRODUCT_PAGE_LOADED:
             return {
                 ...state,
                 inProgress: false,
                 data: action.payload
-                    ? { ...action.payload.news, content: htmlDecode(action.payload.news.content) }
+                    ? { ...action.payload.product, description: htmlDecode(action.payload.product.description) }
                     : state.data
             };
-        case EDITOR_PAGE_UNLOADED:
+
+        case PRODUCT_PAGE_UNLOADED:
             return initialState;
 
-        case NEWS_SUBMITTED:
+        case PRODUCT_SUBMITTED:
             return {
                 ...state,
                 inProgress: false,
                 error: action.error ? action.payload.message : null
             };
 
-        case UPDATE_FIELD_NEWS_EDITOR:
+        case UPDATE_FIELD_PRODUCT_EDITOR:
             return { ...state, data: { ...state.data, [action.key]: action.value } };
 
         default:

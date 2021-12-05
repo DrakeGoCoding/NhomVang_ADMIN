@@ -1,6 +1,8 @@
-import { Button, Pagination, Space, Spin, Table } from "antd";
+import { Button, Pagination, Space, Spin, Table, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { SET_PRODUCTLIST_PAGE } from "../../constants/actionTypes";
+import "../../style/product.css";
 
 export default function ProductTable(props) {
     const dispatch = useDispatch();
@@ -11,7 +13,7 @@ export default function ProductTable(props) {
             dataIndex: "name",
             key: "name",
             fixed: "left",
-            width: 150,
+            width: 100,
             ellipsis: true,
             textWrap: "word-break"
         },
@@ -24,12 +26,47 @@ export default function ProductTable(props) {
             textWrap: "word-break"
         },
         {
+            title: "Quantity",
+            dataIndex: "quantity",
+            key: "quantity",
+            width: 40,
+            align: "center"
+        },
+        {
+            title: "Feature",
+            dataIndex: "feature",
+            key: "feature",
+            width: 60,
+            align: "center",
+            render: (text, record) => (
+                <div>
+                    {record.isHot ? <Tag color="volcano">HOT</Tag> : null}
+                    {record.isInSlider ? <Tag color="cyan">SLIDER</Tag> : null}
+                </div>
+            )
+        },
+        {
+            title: "Tags",
+            dataIndex: "tags",
+            key: "tags",
+            width: 80,
+            align: "center",
+            render: (text, record) => (
+                <Space direction="vertical">
+                    {record.tags.map((tag, index) => (
+                        <Tag key={index} color="processing">
+                            {tag.toUpperCase()}
+                        </Tag>
+                    ))}
+                </Space>
+            )
+        },
+        {
             title: "Listed Price",
             dataIndex: "listedPrice",
             key: "listedPrice",
             width: 50,
-            ellipsis: true,
-            align: "center",
+            align: "right",
             render: text => text.toLocaleString("it-IT")
         },
         {
@@ -37,17 +74,8 @@ export default function ProductTable(props) {
             dataIndex: "discountPrice",
             key: "discountPrice",
             width: 50,
-            ellipsis: true,
-            align: "center",
+            align: "right",
             render: text => (text ? text.toLocaleString("it-IT") : "")
-        },
-        {
-            title: "Quantity",
-            dataIndex: "quantity",
-            key: "quantity",
-            width: 30,
-            ellipsis: true,
-            align: "center"
         },
         {
             title: "Action",
@@ -55,7 +83,9 @@ export default function ProductTable(props) {
             width: 100,
             render: (text, record) => (
                 <Space size="middle">
-                    <Button type="primary">Edit</Button>
+                    <Button type="primary">
+                        <Link to={`/product/edit/${record.slug}`}>Edit</Link>
+                    </Button>
                     <Button type="primary" danger>
                         Delete
                     </Button>

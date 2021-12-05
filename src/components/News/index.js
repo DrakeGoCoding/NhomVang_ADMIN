@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "../../style/news.css";
 import NewsList from "./NewsList";
-import { BackTop, Button, Pagination, Spin } from "antd";
+import { BackTop, Button, Pagination, Space, Spin } from "antd";
 import { Link } from "react-router-dom";
 import News from "../../api/news.api";
 import { store } from "../../store";
@@ -49,9 +49,12 @@ export default function NewsPage() {
     return (
         <div className="news-page flex flex-col">
             <div className="flex justify-between mb-8">
-                <Button type="primary" size="large">
-                    <Link to="/editor">New Post</Link>
-                </Button>
+                <Space size="large">
+                    <Button type="primary" size="large">
+                        <Link to="/news/create">New Post</Link>
+                    </Button>
+                    {inProgress ? <Spin /> : null}
+                </Space>
                 {inProgress ? null : (
                     <Pagination
                         className="flex items-center"
@@ -63,7 +66,7 @@ export default function NewsPage() {
                     />
                 )}
             </div>
-            {inProgress ? <Spin size="large" /> : <NewsList data={newsList} />}
+            <NewsList data={newsList} inProgress={inProgress} />
             <BackTop style={{ verticalAlign: "middle" }} />
         </div>
     );

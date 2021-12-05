@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Menu } from "antd";
-import { EditOutlined, FileOutlined, ShoppingOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
+import { FileOutlined, HomeOutlined, ShoppingOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import { TOGGLE_SIDER } from "../../constants/actionTypes";
 import { useEffect, useState } from "react";
@@ -12,9 +12,15 @@ export default function AppSider() {
     const location = useLocation();
     const common = useSelector(state => state.common);
 
-    const [current, setCurrent] = useState("user");
+    const [current, setCurrent] = useState("home");
 
     const menuItemList = [
+        {
+            label: "Dashboard",
+            icon: <HomeOutlined />,
+            link: "/",
+            key: ""
+        },
         {
             label: "User",
             icon: <UserOutlined />,
@@ -26,12 +32,6 @@ export default function AppSider() {
             icon: <FileOutlined />,
             link: "/news",
             key: "news"
-        },
-        {
-            label: "Editor",
-            icon: <EditOutlined />,
-            link: "/editor",
-            key: "editor"
         },
         {
             label: "Product",
@@ -64,7 +64,7 @@ export default function AppSider() {
             breakpoint="lg"
             collapsedWidth="60"
         >
-            <div className="logo text-white h-8 m-4 text-xl text-center">
+            <div className="logo h-8 m-4 text-white text-xl text-center">
                 {common.isSiderCollapsed ? common.appNameMini : common.appName}
             </div>
             <Menu selectedKeys={[current]} theme="dark" mode="inline">

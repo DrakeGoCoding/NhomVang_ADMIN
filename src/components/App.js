@@ -17,6 +17,7 @@ import Product from "./Product";
 import Order from "./Order";
 
 import "../App.css";
+import ProductEditor from "./Product/ProductEditor";
 
 export default function App() {
     const navigate = useNavigate();
@@ -52,9 +53,11 @@ export default function App() {
                     <Route index element={<h2>Welcome to Voucher Hunter Management Website</h2>} />
                     <Route path="/user" element={<User />} />
                     <Route path="/news" element={<News />} />
-                    <Route path="/editor" element={<NewsEditor />} />
-                    <Route path="/editor/:slug" element={<NewsEditor />} />
+                    <Route path="/news/create" element={<NewsEditor />} />
+                    <Route path="/news/edit/:slug" element={<NewsEditor />} />
                     <Route path="/product" element={<Product />} />
+                    <Route path="/product/create" element={<ProductEditor />} />
+                    <Route path="/product/edit/:slug" element={<ProductEditor />} />
                     <Route path="/order" element={<Order />} />
                 </Route>
             ) : (

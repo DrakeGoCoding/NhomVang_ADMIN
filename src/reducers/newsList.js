@@ -9,10 +9,16 @@ import {
 export default function newsListReducer(state = {}, action) {
     switch (action.type) {
         case ASYNC_START:
-            if ([NEWS_PAGE_LOADED, SET_NEWSLIST_PAGE, DELETE_NEWS].includes(action.subtype)) {
-                return { ...state, inProgress: true };
+            switch (action.subtype) {
+                case NEWS_PAGE_LOADED:
+                case SET_NEWSLIST_PAGE:
+                case DELETE_NEWS:
+                    return { ...state, inProgress: true };
+
+                default:
+                    return state;
             }
-            return state;
+
         case NEWS_PAGE_LOADED:
             return {
                 ...state,
