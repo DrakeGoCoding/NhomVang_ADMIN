@@ -103,8 +103,6 @@ export default function UserModal({ user, visible, mode, onCancel }) {
     const { inProgress } = useSelector(state => state.userList);
 
     const saveUser = user => {
-        const dob = user.dob ? new Date(user.dob.format("L")) : undefined;
-        user = { ...user, dob };
         dispatch({
             type: USER_SUBMITTED,
             payload: mode === "create" ? User.create(user) : User.update(user)

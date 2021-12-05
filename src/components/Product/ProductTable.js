@@ -7,6 +7,7 @@ import "../../style/product.css";
 export default function ProductTable(props) {
     const dispatch = useDispatch();
     const { inProgress } = useSelector(state => state.productList);
+
     const columns = [
         {
             title: "Name",
@@ -86,7 +87,7 @@ export default function ProductTable(props) {
                     <Button type="primary">
                         <Link to={`/product/edit/${record.slug}`}>Edit</Link>
                     </Button>
-                    <Button type="primary" danger>
+                    <Button type="primary" danger onClick={() => props.showDeleteUserModal(record.slug)}>
                         Delete
                     </Button>
                 </Space>
