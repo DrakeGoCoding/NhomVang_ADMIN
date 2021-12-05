@@ -8,14 +8,6 @@
 
 /* News Preview */
 
-/* .news-preview:nth-child(odd) {
-    background-color: #f0f0f0;
-}
-
-.news-preview:nth-child(even) {
-    background-color: white;
-} */
-
 .news-preview .news-body .news-date {
     color: #626c84;
 }

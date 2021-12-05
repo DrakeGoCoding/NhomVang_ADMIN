@@ -1,4 +1,18 @@
-import { APP_LOAD, ASYNC_START, LOGIN, LOGOUT, NEWS_SUBMITTED, REDIRECT, TOGGLE_SIDER } from "../constants/actionTypes";
+import {
+    APP_LOAD,
+    ASYNC_START,
+    EDITOR_PAGE_LOADED,
+    LOGIN,
+    LOGOUT,
+    NEWS_PAGE_LOADED,
+    NEWS_SUBMITTED,
+    PRODUCTLIST_PAGE_LOADED,
+    PRODUCT_PAGE_LOADED,
+    PRODUCT_SUBMITTED,
+    REDIRECT,
+    TOGGLE_SIDER,
+    USER_PAGE_LOADED
+} from "../constants/actionTypes";
 
 const initialState = {
     appName: "Voucher Hunter",
@@ -16,7 +30,8 @@ export default function commonReducer(state = initialState, action) {
                 ...state,
                 token: action.token || null,
                 appLoaded: true,
-                currentUser: action.payload ? action.payload.user : null
+                currentUser: action.payload ? action.payload.user : null,
+                inProgress: false
             };
 
         case ASYNC_START:
@@ -30,7 +45,8 @@ export default function commonReducer(state = initialState, action) {
                 ...state,
                 redirectTo: action.error ? null : "/",
                 token: action.error ? null : action.payload.token,
-                currentUser: action.error ? null : action.payload.user
+                currentUser: action.error ? null : action.payload.user,
+                inProgress: false
             };
 
         case LOGOUT:
@@ -42,8 +58,23 @@ export default function commonReducer(state = initialState, action) {
         case NEWS_SUBMITTED:
             return {
                 ...state,
-                redirectTo: action.error ? null : "/news"
+                redirectTo: action.error ? null : "/news",
+                inProgress: false
             };
+
+        case PRODUCT_SUBMITTED:
+            return {
+                ...state,
+                redirectTo: action.error ? null : "/product",
+                inProgress: false
+            };
+
+        case EDITOR_PAGE_LOADED:
+        case NEWS_PAGE_LOADED:
+        case PRODUCT_PAGE_LOADED:
+        case PRODUCTLIST_PAGE_LOADED:
+        case USER_PAGE_LOADED:
+            return { ...state, inProgress: false };
 
         default:
             return state;

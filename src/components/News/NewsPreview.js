@@ -42,20 +42,20 @@ function NewsPreview(props) {
     };
 
     return data ? (
-        <div className="news-preview px-10 py-8 bg-white">
+        <div className={`news-preview px-10 py-8 bg-white ${props.inProgress ? "pointer-events-none opacity-50" : ""}`}>
             <Space size={0}>
                 <NewsImage className="mr-8" src={data.thumbnail} hidden={isSiderCollapsed} />
                 <div className="news-body">
                     <div className="news-date mb-2">{new Date(data.modifiedDate).toLocaleDateString()}</div>
                     <h2 className="news-title my-0 mb-4">
-                        <Link className="text-xl" to={`/news/${data.slug}`}>
+                        <Link className="text-xl" to={`/news/edit/${data.slug}`}>
                             {data.title}
                         </Link>
                     </h2>
                     <div className="news-description leading-7">{data.description}</div>
                     <Space className="news-footer mt-6" size="middle">
                         <Button className="px-6" type="primary" size="large">
-                            <Link to={`/editor/${data.slug}`}>Edit</Link>
+                            <Link to={`/news/edit/${data.slug}`}>Edit</Link>
                         </Button>
                         <Button className="px-6" type="primary" size="large" onClick={showDeleteModal} danger>
                             Delete

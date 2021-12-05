@@ -14,7 +14,7 @@ export default function AppHeader() {
     };
 
     return (
-        <Header className="bg-white px-12">
+        <Header className="bg-white px-7 sm:px-8 md:px-12">
             <Space className="float-right" align="center">
                 <Tooltip title="Logout">
                     <Button shape="circle" size="large" icon={<LogoutOutlined />} onClick={handleLogout}></Button>

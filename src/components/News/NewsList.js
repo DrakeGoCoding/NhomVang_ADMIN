@@ -9,7 +9,7 @@ function NewsList(props) {
     return (
         <Space direction="vertical">
             {isRender ? (
-                newsList.map(news => <NewsPreview key={news.slug} data={news} />)
+                newsList.map(news => <NewsPreview key={news.slug} data={news} inProgress={props.inProgress} />)
             ) : (
                 <div className="news-preview">No news are here... yet</div>
             )}

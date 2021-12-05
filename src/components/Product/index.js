@@ -1,10 +1,12 @@
-import { message, Space } from "antd";
+import { Button, message, Space } from "antd";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Product from "../../api/product.api";
-import { PRODUCT_PAGE_LOADED, PRODUCT_PAGE_UNLOADED } from "../../constants/actionTypes";
+import { PRODUCTLIST_PAGE_LOADED, PRODUCTLIST_PAGE_UNLOADED } from "../../constants/actionTypes";
 import { store } from "../../store";
 import ProductTable from "./ProductTable";
+import "../../style/product.css";
 
 export default function ProductPage() {
     const { productList, total, page, pager, error, reload } = useSelector(state => state.productList);
@@ -12,12 +14,12 @@ export default function ProductPage() {
     const onLoad = () => {
         const pager = (page, filter) => Product.getAll(page, filter);
         store.dispatch({
-            type: PRODUCT_PAGE_LOADED,
+            type: PRODUCTLIST_PAGE_LOADED,
             pager,
             payload: Product.getAll()
         });
     };
-    const onUnload = () => store.dispatch({ type: PRODUCT_PAGE_UNLOADED });
+    const onUnload = () => store.dispatch({ type: PRODUCTLIST_PAGE_UNLOADED });
 
     useEffect(() => {
         onLoad();
@@ -36,7 +38,13 @@ export default function ProductPage() {
 
     return (
         <Space className="product-page max-w-full" direction="vertical" size="large">
-            <div></div>
+            <div className="flex justify-between">
+                <Space className="mr-4" size="middle">
+                    <Button type="primary" size="large">
+                        <Link to="/product/create">New Product</Link>
+                    </Button>
+                </Space>
+            </div>
             <ProductTable
                 productList={productList}
                 pageSize={Product.pageSize}

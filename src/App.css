@@ -6,7 +6,7 @@
 .ant-table-thead th,
 .ant-table-thead th span {
     font-weight: bold !important;
-    font-size: 1rem;
+    font-size: 1.125rem;
 }
 
 .ant-back-top-icon {
@@ -34,12 +34,39 @@
     font-size: 16px !important;
 }
 
-.ant-message .anticon, .ant-message .anticon > svg {
+.ant-message .anticon,
+.ant-message .anticon > svg {
     vertical-align: top !important;
     font-size: 16px !important;
 }
 
-.ant-btn .anticon, .ant-btn .anticon > svg {
+.ant-btn .anticon,
+.ant-btn .anticon > svg {
     vertical-align: middle !important;
     font-size: 16px !important;
+}
+
+.ant-popover-inner-content {
+    padding: 0 1rem !important;
+}
+
+.anticon.anticon-up.ant-input-number-handler-up-inner svg,
+.anticon.anticon-down.ant-input-number-handler-down-inner svg {
+    font-size: 7px !important;
+}
+
+.ant-input-number {
+    width: 100%;
+}
+
+.ant-tabs-tab-btn {
+    font-weight: bold;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    text-shadow: none !important;
+}
+
+.ant-input-number-group-wrapper {
+    width: 100%;
 }

@@ -2,9 +2,8 @@ import {
     ASYNC_START,
     DELETE_PRODUCT,
     FILTER_PRODUCTLIST,
-    PRODUCT_PAGE_LOADED,
-    PRODUCT_PAGE_UNLOADED,
-    PRODUCT_SUBMITTED,
+    PRODUCTLIST_PAGE_LOADED,
+    PRODUCTLIST_PAGE_UNLOADED,
     SET_PRODUCTLIST_PAGE
 } from "../constants/actionTypes";
 
@@ -12,17 +11,16 @@ export default function productListReducer(state = {}, action) {
     switch (action.type) {
         case ASYNC_START:
             switch (action.subtype) {
-                case PRODUCT_PAGE_LOADED:
+                case PRODUCTLIST_PAGE_LOADED:
                 case SET_PRODUCTLIST_PAGE:
                 case FILTER_PRODUCTLIST:
-                case PRODUCT_SUBMITTED:
                 case DELETE_PRODUCT:
                     return { ...state, inProgress: true };
                 default:
                     return state;
             }
 
-        case PRODUCT_PAGE_LOADED:
+        case PRODUCTLIST_PAGE_LOADED:
             return {
                 ...state,
                 pager: action.pager,
@@ -33,7 +31,7 @@ export default function productListReducer(state = {}, action) {
                 inProgress: false
             };
 
-        case PRODUCT_PAGE_UNLOADED:
+        case PRODUCTLIST_PAGE_UNLOADED:
             return {};
 
         case SET_PRODUCTLIST_PAGE:
@@ -54,7 +52,6 @@ export default function productListReducer(state = {}, action) {
             };
 
         case DELETE_PRODUCT:
-        case PRODUCT_SUBMITTED:
             return {
                 ...state,
                 inProgress: false,
