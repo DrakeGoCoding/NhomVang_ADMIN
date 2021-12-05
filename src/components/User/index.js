@@ -58,9 +58,9 @@ export default function UserPage() {
 
     useEffect(() => {
         if (reload) {
+            closeUserModal();
             onLoad();
             resetFilter();
-            closeUserModal();
         } else if (error) {
             message.error({ content: error });
         }
