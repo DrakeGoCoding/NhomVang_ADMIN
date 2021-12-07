@@ -68,21 +68,10 @@ export default function UserPage() {
 
     return (
         <Space className="user-page max-w-full" direction="vertical" size="large">
-            <div className="flex justify-between">
-                <Space className="mr-4" size="middle">
-                    <Button type="primary" size="large" onClick={showUserModal}>
-                        New Admin
-                    </Button>
-                    <Button size="large" icon={<ReloadOutlined />} onClick={onReload} />
-                </Space>
+            <div className="flex flex-col-reverse justify-between xl:flex-row">
                 <Space size="middle">
-                    <Radio.Group size="small" value={filter.role} name="role" onChange={changeRole}>
-                        <Radio value="">Any</Radio>
-                        <Radio value="admin">Admin</Radio>
-                        <Radio value="user">User</Radio>
-                    </Radio.Group>
                     <Input.Search
-                        className="float-right box-border"
+                        className="box-border"
                         style={{ minWidth: "320px" }}
                         placeholder="Enter name, email or phonenumber"
                         enterButton
@@ -92,6 +81,17 @@ export default function UserPage() {
                         onChange={changeRegex}
                         onSearch={onFilter}
                     />
+                    <Radio.Group size="small" value={filter.role} name="role" onChange={changeRole}>
+                        <Radio value="">Any</Radio>
+                        <Radio value="admin">Admin</Radio>
+                        <Radio value="user">User</Radio>
+                    </Radio.Group>
+                </Space>
+                <Space className="mb-6 xl:mb-0" size="middle">
+                    <Button type="primary" size="large" onClick={showUserModal}>
+                        New Admin
+                    </Button>
+                    <Button size="large" icon={<ReloadOutlined />} onClick={onReload} />
                 </Space>
             </div>
             <UserTable
