@@ -46,9 +46,14 @@ function NewsPreview(props) {
             <Space size={0}>
                 <NewsImage className="mr-8" src={data.thumbnail} hidden={isSiderCollapsed} />
                 <div className="news-body">
-                    <div className="news-date mb-2">{new Date(data.modifiedDate).toLocaleDateString()}</div>
+                    <div className="news-date mb-3 text-gray-500">
+                        {new Date(data.modifiedDate).toLocaleDateString()}
+                    </div>
+                    <div className="news-author mb-4 italic">
+                        By <span className="font-bold">{data.author}</span>
+                    </div>
                     <h2 className="news-title my-0 mb-4">
-                        <Link className="text-xl" to={`/news/edit/${data.slug}`}>
+                        <Link className="text-2xl" to={`/news/edit/${data.slug}`}>
                             {data.title}
                         </Link>
                     </h2>
@@ -79,6 +84,7 @@ function NewsPreview(props) {
 
 NewsPreview.propTypes = {
     data: PropTypes.shape({
+        author: PropTypes.string,
         thumbnail: PropTypes.string,
         modifiedDate: PropTypes.string,
         title: PropTypes.string,
