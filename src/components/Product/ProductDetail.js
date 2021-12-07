@@ -41,6 +41,7 @@ const formItems = [
                 formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 parser={value => value.replace(/\$\s?|(,*)/g, "")}
                 addonAfter="VND"
+                min={0}
             />
         )
     },
@@ -55,6 +56,7 @@ const formItems = [
                 formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 parser={value => value.replace(/\$\s?|(,*)/g, "")}
                 addonAfter="VND"
+                min={0}
             />
         )
     },
