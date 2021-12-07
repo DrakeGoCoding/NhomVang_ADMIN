@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 
 export default function NewsPage() {
     const { newsList, page, total, pager, reload, inProgress } = useSelector(state => state.newsList);
-    const pageSize = 10;
 
     const changePage = pageNumber => {
         store.dispatch({
@@ -21,11 +20,11 @@ export default function NewsPage() {
     };
 
     const onLoad = () => {
-        const pager = page => News.getAll(pageSize, page);
+        const pager = page => News.getAll(page);
         store.dispatch({
             type: NEWS_PAGE_LOADED,
             pager,
-            payload: News.getAll(pageSize)
+            payload: News.getAll()
         });
     };
 
@@ -55,12 +54,12 @@ export default function NewsPage() {
                     </Button>
                     {inProgress ? <Spin /> : null}
                 </Space>
-                {inProgress ? null : (
+                {inProgress || (Array.isArray(newsList) && newsList.length === 0) ? null : (
                     <Pagination
                         className="flex items-center"
                         defaultCurrent={1}
                         current={page + 1}
-                        pageSize={pageSize}
+                        pageSize={News.pageSize}
                         total={total}
                         onChange={changePage}
                     />
