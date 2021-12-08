@@ -4,7 +4,6 @@ import { USER_ENDPOINT } from "../constants/endpoints";
 const pageSize = 10;
 
 const encode = encodeURIComponent;
-const limit = (size, page) => `limit=${size}&offset=${page ? page * size : 0}`;
 const omitForUser = user =>
     Object.assign({}, user, {
         hash: undefined,
@@ -16,7 +15,13 @@ const omitForUser = user =>
 
 const User = {
     getAll: (page = 0, filter = {}) =>
-        agent.get(`${USER_ENDPOINT}?${limit(pageSize, page)}&${new URLSearchParams(filter).toString()}`),
+        agent.get(USER_ENDPOINT, {
+            params: {
+                limit: pageSize,
+                offset: page * pageSize || 0,
+                ...filter
+            }
+        }),
     create: user => agent.post(USER_ENDPOINT, { user: omitForUser(user) }),
     update: user => agent.put(USER_ENDPOINT, { user: omitForUser(user) }),
     delete: username => agent.delete(`${USER_ENDPOINT}?username=${encode(username)}`),
