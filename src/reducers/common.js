@@ -28,10 +28,11 @@ export default function commonReducer(state = initialState, action) {
         case APP_LOAD:
             return {
                 ...state,
-                token: action.token || null,
+                token: action.error ? null : action.token,
                 appLoaded: true,
                 currentUser: action.payload ? action.payload.user : null,
-                inProgress: false
+                inProgress: false,
+                redirectTo: action.error ? "/login" : "/"
             };
 
         case ASYNC_START:
