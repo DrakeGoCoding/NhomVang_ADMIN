@@ -14,10 +14,10 @@ import News from "./News";
 import NewsEditor from "./News/NewsEditor";
 import User from "./User";
 import Product from "./Product";
+import ProductEditor from "./Product/ProductEditor";
 import Order from "./Order";
 
 import "../App.css";
-import ProductEditor from "./Product/ProductEditor";
 
 export default function App() {
     const navigate = useNavigate();
@@ -35,8 +35,8 @@ export default function App() {
         const token = localStorage.getItem("jwt");
         if (token) {
             setToken(token);
-            onLoad(token ? Auth.current() : null, token);
         }
+        onLoad(token ? Auth.current() : null, token);
     }, []);
 
     useEffect(() => {
