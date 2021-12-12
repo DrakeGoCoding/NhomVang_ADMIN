@@ -62,8 +62,8 @@ const formItems = [
     },
     {
         props: {
-            label: "Quantity",
-            name: "quantity"
+            label: "In Stock",
+            name: "inStock"
         },
         component: <InputNumber min={0} />
     },

@@ -17,7 +17,7 @@ const initialState = {
         isInSlider: false,
         thumbnail: "",
         photos: [],
-        quantity: 0,
+        inStock: 0,
         description: "",
         tags: []
     }
