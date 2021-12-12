@@ -27,9 +27,9 @@ export default function ProductTable(props) {
             textWrap: "word-break"
         },
         {
-            title: "Quantity",
-            dataIndex: "quantity",
-            key: "quantity",
+            title: "In Stock",
+            dataIndex: "inStock",
+            key: "inStock",
             width: 40,
             align: "center"
         },
