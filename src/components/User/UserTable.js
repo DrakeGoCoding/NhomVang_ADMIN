@@ -29,7 +29,7 @@ export default function UserTable(props) {
             title: "Email",
             dataIndex: "email",
             key: "email",
-            width: 250,
+            width: 200,
             ellipsis: true,
             textWrap: "word-break"
         },
