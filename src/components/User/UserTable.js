@@ -79,7 +79,7 @@ export default function UserTable(props) {
                         </>
                     ) : (
                         <Button type="primary" className="view-order-btn bg-green-400 text-white border-green-400">
-                            <Link to={`/order/${record.username}`}>View Order</Link>
+                            <Link to={`/invoice/${record.username}`}>View Orders</Link>
                         </Button>
                     )}
                 </Space>
