@@ -15,7 +15,7 @@ import NewsEditor from "./News/NewsEditor";
 import User from "./User";
 import Product from "./Product";
 import ProductEditor from "./Product/ProductEditor";
-import Order from "./Order";
+import Invoice from "./Invoice";
 
 import "../App.css";
 
@@ -58,7 +58,7 @@ export default function App() {
                     <Route path="/product" element={<Product />} />
                     <Route path="/product/create" element={<ProductEditor />} />
                     <Route path="/product/edit/:slug" element={<ProductEditor />} />
-                    <Route path="/order" element={<Order />} />
+                    <Route path="/invoice" element={<Invoice />} />
                 </Route>
             ) : (
                 <Route path="/login" element={<Login />} />
