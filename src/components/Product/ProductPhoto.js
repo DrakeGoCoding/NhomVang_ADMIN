@@ -20,7 +20,11 @@ export default function ProductPhoto({ thumbnail, photos }) {
     const addPhoto = url => {
         onUpdateField("photos", [...photos, url]);
     };
-    const removePhoto = file => {};
+    const removePhoto = file => {
+        let updatedPhotos = [...photos];
+        updatedPhotos.splice(file.uid, 1);
+        onUpdateField("photos", updatedPhotos);
+    };
 
     return (
         <Form
@@ -64,8 +68,8 @@ export default function ProductPhoto({ thumbnail, photos }) {
                 <Upload
                     listType="picture-card"
                     accept="image/*"
-                    fileList={photos.map(photo => ({
-                        uid: photo,
+                    fileList={photos.map((photo, index) => ({
+                        uid: index,
                         status: "done",
                         url: photo
                     }))}
