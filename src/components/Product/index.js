@@ -36,10 +36,6 @@ export default function ProductPage() {
     };
     const onUnload = () => store.dispatch({ type: PRODUCTLIST_PAGE_UNLOADED });
 
-    const onReload = () => {
-        //
-    };
-
     const [filter, setFilter] = useState(DEFAULT_FILTER);
     const [deleteProductModal, setDeleteProductModal] = useState({ visible: false, slug: "" });
 
@@ -95,6 +91,13 @@ export default function ProductPage() {
     const onResetFilter = e => {
         setFilter(DEFAULT_FILTER);
         onLoad();
+    };
+
+    const onReload = () => {
+        store.dispatch({
+            type: FILTER_PRODUCTLIST,
+            payload: pager(page, filter)
+        });
     };
 
     useEffect(() => {
