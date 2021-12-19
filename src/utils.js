@@ -22,3 +22,11 @@ export const beforeUploadImage = (file, callback, statusCallback) => {
     };
     return false;
 };
+
+export const toLocaleStringCurrency = (input, locale = "en-US", currency = "USD") => {
+    if (!input) return "";
+    return input.toLocaleString(locale, {
+        style: "currency",
+        currency
+    });
+};

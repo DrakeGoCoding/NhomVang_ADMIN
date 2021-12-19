@@ -68,7 +68,7 @@ export default function ProductTable(props) {
             key: "listedPrice",
             width: 50,
             align: "right",
-            render: text => (text ? text.toLocaleString("it-IT") : "")
+            render: text => (text ? text.toLocaleString("en-US") : "")
         },
         {
             title: "Discount Price",
@@ -76,7 +76,7 @@ export default function ProductTable(props) {
             key: "discountPrice",
             width: 50,
             align: "right",
-            render: text => (text ? text.toLocaleString("it-IT") : "")
+            render: text => (text ? text.toLocaleString("en-US") : "")
         },
         {
             title: "Action",
