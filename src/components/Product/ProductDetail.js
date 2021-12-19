@@ -37,10 +37,10 @@ const formItems = [
         },
         component: (
             <InputNumber
-                step={1000}
+                step={5}
                 formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 parser={value => value.replace(/\$\s?|(,*)/g, "")}
-                addonAfter="VND"
+                addonAfter="$"
                 min={0}
             />
         )
@@ -52,10 +52,10 @@ const formItems = [
         },
         component: (
             <InputNumber
-                step={1000}
+                step={5}
                 formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 parser={value => value.replace(/\$\s?|(,*)/g, "")}
-                addonAfter="VND"
+                addonAfter="$"
                 min={0}
             />
         )

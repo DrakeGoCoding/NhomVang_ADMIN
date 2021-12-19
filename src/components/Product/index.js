@@ -150,10 +150,10 @@ export default function ProductPage() {
                             <span>Price</span>
                             <InputNumber
                                 placeholder="Min"
-                                step={1000}
+                                step={5}
                                 formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                 parser={value => value.replace(/\$\s?|(,*)/g, "")}
-                                addonAfter="VND"
+                                addonAfter="$"
                                 min={0}
                                 value={filter.minPrice}
                                 onChange={changeMinPrice}
@@ -162,10 +162,10 @@ export default function ProductPage() {
                             <span>to</span>
                             <InputNumber
                                 placeholder="Max"
-                                step={1000}
+                                step={5}
                                 formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                 parser={value => value.replace(/\$\s?|(,*)/g, "")}
-                                addonAfter="VND"
+                                addonAfter="$"
                                 min={0}
                                 value={filter.maxPrice}
                                 onChange={changeMaxPrice}
