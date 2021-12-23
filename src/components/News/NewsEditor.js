@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Editor from "@drakegocoding/ckeditor5-custom-build";
 import UploadAdapterPlugin from "../Common/ckeditor/UploadAdapter";
-import { Button, Form, Input, message, Modal, Space, Spin, Tabs, Upload } from "antd";
+import { Button, Form, Input, message, Modal, Space, Spin, Tabs, Tag, Upload } from "antd";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import News from "../../api/news.api";
 import { store } from "../../store";
@@ -14,7 +14,7 @@ import {
     UPDATE_FIELD_NEWS_EDITOR
 } from "../../constants/actionTypes";
 import { useSelector } from "react-redux";
-import { beforeUploadImage } from "../../utils";
+import { beforeUploadImage, isStringInArray } from "../../utils";
 
 export default function NewsEditor() {
     const { slug } = useParams();
@@ -28,6 +28,22 @@ export default function NewsEditor() {
     const [isUploadingThumbnail, setUploadingThumbnail] = useState(false);
     const [isSaveModalVisible, setIsSaveModalVisible] = useState(false);
     const [thumbnailImage, setThumbnailImage] = useState([]);
+    const [tagInput, setTagInput] = useState("");
+
+    const onTagInputChange = e => setTagInput(e.target.value);
+    const addTag = e => {
+        e.preventDefault();
+        const lowerCaseTag = tagInput.toLocaleLowerCase();
+        if (!isStringInArray(data.tags, lowerCaseTag)) {
+            onUpdateField("tags", [...data.tags, lowerCaseTag]);
+        }
+        setTagInput("");
+    };
+    const removeTag = index => {
+        const newTagList = [...data.tags];
+        newTagList.splice(index, 1);
+        onUpdateField("tags", newTagList);
+    };
 
     const changeTab = activeKey => setCurrentTab(activeKey);
 
@@ -160,6 +176,22 @@ export default function NewsEditor() {
                                         Upload thumbnail
                                     </Button>
                                 </Upload>
+                            </Form.Item>
+                            <Form.Item label="Tags">
+                                <Input value={tagInput} onChange={onTagInputChange} onPressEnter={addTag} />
+                                <div>
+                                    {data.tags.map((tag, index) => (
+                                        <Tag
+                                            className="mt-3 p-1"
+                                            key={index}
+                                            color="processing"
+                                            closable
+                                            onClose={() => removeTag(index)}
+                                        >
+                                            {tag.toUpperCase()}
+                                        </Tag>
+                                    ))}
+                                </div>
                             </Form.Item>
                             <Form.Item label="Description">
                                 <Input.TextArea
