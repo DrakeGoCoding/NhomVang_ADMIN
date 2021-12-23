@@ -57,9 +57,9 @@ function NewsPreview(props) {
                             {data.title}
                         </Link>
                     </h2>
-                    <div className="news-tags">
+                    <div className="news-tags mb-2">
                         {data.tags.map((tag, index) => (
-                            <Tag className="mt-2 p-1" key={index} color="success">
+                            <Tag className="mb-1 p-1" key={index} color="success">
                                 {tag.toUpperCase()}
                             </Tag>
                         ))}
