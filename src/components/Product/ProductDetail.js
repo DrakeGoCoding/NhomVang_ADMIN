@@ -2,15 +2,7 @@ import { Checkbox, Form, Input, InputNumber, Space, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { UPDATE_FIELD_PRODUCT_EDITOR } from "../../constants/actionTypes";
-
-/**
- * @param {Array} array
- * @param {String} string
- * @returns {Boolean}
- */
-const isStringInArray = (array, string) => {
-    return array.some(elem => elem.toLocaleLowerCase() === string.toLocaleLowerCase());
-};
+import { isStringInArray } from "../../utils";
 
 const formItems = [
     {

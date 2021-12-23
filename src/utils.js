@@ -30,3 +30,12 @@ export const toLocaleStringCurrency = (input, locale = "en-US", currency = "USD"
         currency
     });
 };
+
+/**
+ * @param {Array} array
+ * @param {String} string
+ * @returns {Boolean}
+ */
+export const isStringInArray = (array, string) => {
+    return array.some(elem => elem.toLocaleLowerCase() === string.toLocaleLowerCase());
+};

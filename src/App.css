@@ -70,3 +70,8 @@
 .ant-input-number-group-wrapper {
     width: 100%;
 }
+
+.ant-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+}

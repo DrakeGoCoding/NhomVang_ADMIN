@@ -14,7 +14,8 @@ const initialState = {
         title: "",
         description: "",
         content: "",
-        thumbnail: ""
+        thumbnail: "",
+        tags: []
     }
 };
 

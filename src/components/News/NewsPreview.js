@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Button, Image, Modal, Space } from "antd";
+import { Button, Image, Modal, Space, Tag } from "antd";
 import defaultNewsImage from "../../assets/defaultNewsImage.png";
 import { useDispatch, useSelector } from "react-redux";
 import { DELETE_NEWS } from "../../constants/actionTypes";
@@ -57,6 +57,13 @@ function NewsPreview(props) {
                             {data.title}
                         </Link>
                     </h2>
+                    <div className="news-tags mb-2">
+                        {data.tags.map((tag, index) => (
+                            <Tag className="mb-1 p-1" key={index} color="success">
+                                {tag.toUpperCase()}
+                            </Tag>
+                        ))}
+                    </div>
                     <div className="news-description leading-7">{data.description}</div>
                     <Space className="news-footer mt-6" size="middle">
                         <Button className="px-6" type="primary" size="large">
