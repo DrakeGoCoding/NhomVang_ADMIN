@@ -6,7 +6,6 @@ import { SET_USERLIST_PAGE } from "../../constants/actionTypes";
 export default function UserTable(props) {
     const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.common);
-    const { inProgress } = useSelector(state => state.userList);
     const columns = [
         {
             title: "User Name",
@@ -79,7 +78,7 @@ export default function UserTable(props) {
                         </>
                     ) : (
                         <Button type="primary" className="view-order-btn bg-green-400 text-white border-green-400">
-                            <Link to={`/invoice/${record.username}`}>View Orders</Link>
+                            <Link to={`/invoice?user=${record.username}`}>View Orders</Link>
                         </Button>
                     )}
                 </Space>
@@ -104,7 +103,7 @@ export default function UserTable(props) {
                 dataSource={props.userList}
                 rowKey="username"
                 pagination={false}
-                loading={{ indicator: <Spin size="large" />, spinning: inProgress }}
+                loading={{ indicator: <Spin size="large" />, spinning: props.inProgress }}
                 scroll={{ x: 1500, y: 670 }}
             />
             {props.total > 0 ? (

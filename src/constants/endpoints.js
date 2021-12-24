@@ -6,3 +6,5 @@ export const ADMIN_NEWS_ENDPOINT = "/admin/news";
 export const IMAGE_ENDPOINT = "/image";
 export const PRODUCT_ENDPOINT = "/products";
 export const ADMIN_PRODUCT_ENDPOINT = "/admin/products";
+export const INVOICE_ENDPOINT = "/invoices";
+export const ADMIN_INVOICE_ENDPOINT = "/admin/invoices";

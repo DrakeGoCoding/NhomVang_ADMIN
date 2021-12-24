@@ -40,7 +40,10 @@ export default function productReducer(state = initialState, action) {
                 ...state,
                 inProgress: false,
                 data: action.payload
-                    ? { ...action.payload.product, description: htmlDecode(action.payload.product.description) }
+                    ? {
+                          ...action.payload.product,
+                          description: htmlDecode(action.payload.product.description)
+                      }
                     : state.data
             };
 

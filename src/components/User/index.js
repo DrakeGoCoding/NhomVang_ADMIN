@@ -10,7 +10,7 @@ import UserTable from "./UserTable";
 import "../../style/user.css";
 
 export default function UserPage() {
-    const { userList, total, page, pager, error, reload } = useSelector(state => state.userList);
+    const { userList, total, page, pager, error, reload, inProgress } = useSelector(state => state.userList);
     const [userModal, setUserModal] = useState({
         user: null,
         mode: "",
@@ -101,6 +101,7 @@ export default function UserPage() {
                 currentPage={page + 1}
                 pager={pager}
                 filter={filter}
+                inProgress={inProgress}
                 showUserModal={showUserModal}
             />
             <UserModal
