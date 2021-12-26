@@ -1,4 +1,5 @@
-import { DatePicker, Input, Space } from "antd";
+import { Button, DatePicker, Input, Space } from "antd";
+import { ReloadOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
@@ -26,6 +27,11 @@ export default function InvoicePage() {
         });
     };
     const onUnload = () => store.dispatch({ type: INVOICELIST_PAGE_UNLOADED });
+    const onReload = () =>
+        store.dispatch({
+            type: FILTER_INVOICELIST,
+            payload: pager(page, filter)
+        });
 
     const onDateChange = (date, dateString) => {
         updateFilter("date", date);
@@ -70,6 +76,9 @@ export default function InvoicePage() {
                         onSearch={onFilter}
                     />
                     <DatePicker value={filter.date} onChange={onDateChange} />
+                </Space>
+                <Space className="flex-row mb-6 xl:mb-0 xl:items-end xl:flex-col" size="middle">
+                    <Button size="large" icon={<ReloadOutlined />} onClick={onReload} />
                 </Space>
             </div>
             <InvoiceTable
