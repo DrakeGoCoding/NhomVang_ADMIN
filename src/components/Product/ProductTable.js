@@ -16,7 +16,8 @@ export default function ProductTable(props) {
             fixed: "left",
             width: 100,
             ellipsis: true,
-            textWrap: "word-break"
+            textWrap: "word-break",
+            sorter: (a, b) => a.name.localeCompare(b.name)
         },
         {
             title: "Supplier",
@@ -24,14 +25,16 @@ export default function ProductTable(props) {
             key: "supplier",
             width: 100,
             ellipsis: true,
-            textWrap: "word-break"
+            textWrap: "word-break",
+            sorter: (a, b) => a.supplier.localeCompare(b.supplier)
         },
         {
             title: "In Stock",
             dataIndex: "inStock",
             key: "inStock",
             width: 40,
-            align: "center"
+            align: "center",
+            sorter: (a, b) => a.inStock - b.inStock
         },
         {
             title: "Feature",
@@ -66,22 +69,24 @@ export default function ProductTable(props) {
             title: "Listed Price",
             dataIndex: "listedPrice",
             key: "listedPrice",
-            width: 50,
+            width: 60,
             align: "right",
+            sorter: (a, b) => a.listedPrice - b.listedPrice,
             render: text => (text ? text.toFixed(2).toLocaleString("en-US") : "")
         },
         {
             title: "Discount Price",
             dataIndex: "discountPrice",
             key: "discountPrice",
-            width: 50,
+            width: 60,
             align: "right",
+            sorter: (a, b) => a.discountPrice - b.discountPrice,
             render: text => (text ? text.toFixed(2).toLocaleString("en-US") : "")
         },
         {
             title: "Action",
             key: "action",
-            width: 100,
+            width: 90,
             render: (text, record) => (
                 <Space size="middle">
                     <Button type="primary">
@@ -112,6 +117,7 @@ export default function ProductTable(props) {
                 dataSource={props.productList}
                 rowKey="name"
                 pagination={false}
+                showSorterTooltip={false}
                 loading={{ indicator: <Spin size="large" />, spinning: inProgress }}
                 scroll={{ x: 1500, y: 670 }}
             />

@@ -1,18 +1,25 @@
 import { Button, Pagination, Space, Spin, Table, Tag } from "antd";
+import { ReactComponent as PaypalSvg } from "../../assets/paypal.svg";
+import { ReactComponent as StripeSvg } from "../../assets/stripe.svg";
 import { useDispatch } from "react-redux";
 import { SET_INVOICELIST_PAGE } from "../../constants/actionTypes";
+import { Link } from "react-router-dom";
+
+const PaypalIcon = () => <PaypalSvg className="w-full" />;
+const StripeIcon = () => <StripeSvg className="w-full" />;
 
 export default function InvoiceTable(props) {
     const dispatch = useDispatch();
     const columns = [
         {
-            title: "User",
+            title: "Client",
             dataIndex: "user",
             key: "user",
             fixed: "left",
             width: 80,
             ellipsis: true,
             textWrap: "word-break",
+            sorter: (a, b) => a.user.username.localeCompare(b.user.username),
             render: (text, record) => record.user.username
         },
         {
@@ -21,10 +28,30 @@ export default function InvoiceTable(props) {
             key: "status",
             width: 50,
             align: "center",
+            filters: [
+                {
+                    text: "pending",
+                    value: "pending"
+                },
+                {
+                    text: "in progress",
+                    value: "in_progress"
+                },
+                {
+                    text: "delivered",
+                    value: "delivered"
+                },
+                {
+                    text: "failed",
+                    value: "failed"
+                }
+            ],
+            onFilter: (value, record) => record.status.indexOf(value) === 0,
             render: text => {
                 let color;
                 switch (text) {
                     case "in_progress":
+                        color = "blue";
                         break;
                     case "delivered":
                         color = "success";
@@ -44,14 +71,33 @@ export default function InvoiceTable(props) {
             dataIndex: "total",
             key: "total",
             width: 80,
-            align: "right"
+            align: "right",
+            sorter: (a, b) => a.total - b.total
         },
         {
-            title: "Discount",
+            title: "Discount Total",
             dataIndex: "discountTotal",
             key: "discountTotal",
             width: 80,
-            align: "right"
+            align: "right",
+            sorter: (a, b) => a.discountTotal - b.discountTotal
+        },
+        {
+            title: "Payment Method",
+            dataIndex: "paymentMethod",
+            key: "paymentMethod",
+            width: 50,
+            align: "center",
+            render: text => {
+                switch (text) {
+                    case "paypal":
+                        return <PaypalIcon />;
+                    case "stripe":
+                        return <StripeIcon />;
+                    default:
+                        break;
+                }
+            }
         },
         {
             title: "Payment Status",
@@ -59,6 +105,21 @@ export default function InvoiceTable(props) {
             key: "paymentStatus",
             width: 50,
             align: "center",
+            filters: [
+                {
+                    text: "pending",
+                    value: "pending"
+                },
+                {
+                    text: "done",
+                    value: "done"
+                },
+                {
+                    text: "cancel",
+                    value: "cancel"
+                }
+            ],
+            onFilter: (value, record) => record.paymentStatus.indexOf(value) === 0,
             render: text => {
                 let color;
                 switch (text) {
@@ -78,12 +139,17 @@ export default function InvoiceTable(props) {
         {
             title: "Action",
             key: "action",
-            width: 50,
+            width: 70,
             align: "center",
             fixed: "right",
             render: (text, record) => (
                 <Space size="middle">
-                    <Button type="primary">Edit</Button>
+                    <Button type="primary">
+                        <Link to={`/invoice/${record._id}`}>View</Link>
+                    </Button>
+                    <Button type="primary" danger>
+                        Cancel
+                    </Button>
                 </Space>
             )
         }
@@ -104,6 +170,7 @@ export default function InvoiceTable(props) {
                 dataSource={props.invoiceList}
                 rowKey="_id"
                 pagination={false}
+                showSorterTooltip={false}
                 loading={{ indicator: <Spin size="large" />, spinning: props.inProgress }}
                 scroll={{ x: 1500, y: 670 }}
             />

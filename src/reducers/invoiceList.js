@@ -1,7 +1,8 @@
 import {
     ASYNC_START,
-    INVOICE_PAGE_LOADED,
-    INVOICE_PAGE_UNLOADED,
+    FILTER_INVOICELIST,
+    INVOICELIST_PAGE_LOADED,
+    INVOICELIST_PAGE_UNLOADED,
     SET_INVOICELIST_PAGE
 } from "../constants/actionTypes";
 
@@ -9,14 +10,14 @@ export default function invoiceListReducer(state = {}, action) {
     switch (action.type) {
         case ASYNC_START:
             switch (action.subtype) {
-                case INVOICE_PAGE_LOADED:
+                case INVOICELIST_PAGE_LOADED:
                 case SET_INVOICELIST_PAGE:
                     return { ...state, inProgress: true };
                 default:
                     return state;
             }
 
-        case INVOICE_PAGE_LOADED:
+        case INVOICELIST_PAGE_LOADED:
             return {
                 ...state,
                 pager: action.pager,
@@ -26,7 +27,7 @@ export default function invoiceListReducer(state = {}, action) {
                 inProgress: false
             };
 
-        case INVOICE_PAGE_UNLOADED:
+        case INVOICELIST_PAGE_UNLOADED:
             return {};
 
         case SET_INVOICELIST_PAGE:
@@ -35,6 +36,15 @@ export default function invoiceListReducer(state = {}, action) {
                 invoiceList: action.payload.invoiceList || [],
                 total: action.payload.total || 0,
                 page: action.page,
+                inProgress: false
+            };
+
+        case FILTER_INVOICELIST:
+            return {
+                ...state,
+                invoiceList: action.payload.invoiceList || [],
+                total: action.payload.total || 0,
+                page: 0,
                 inProgress: false
             };
 

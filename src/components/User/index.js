@@ -31,7 +31,7 @@ export default function UserPage() {
 
     const showUserModal = (e, mode = "create", user = null) => {
         e.preventDefault();
-        setUserModal({ user, mode, visible: true, message: "" });
+        setUserModal({ user, mode, visible: true });
     };
     const closeUserModal = () => {
         setUserModal({ user: null, mode: "", visible: false });
