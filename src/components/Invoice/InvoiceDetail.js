@@ -151,8 +151,12 @@ export default function InvoiceDetail({ invoice }) {
                         </span>
                     </Descriptions.Item>
                     <Descriptions.Item label="Payment Info" span={3}>
+                        <span className="inline-flex mb-2">
+                            <span className="pr-4">Status:</span> {invoice.paymentStatus}
+                        </span>
+                        <br />
                         <span className="inline-flex">
-                            <span className="pr-4">Payment Method:</span> {renderPaymentMethod(invoice.paymentMethod)}
+                            <span className="pr-4">Method:</span> {renderPaymentMethod(invoice.paymentMethod)}
                         </span>
                     </Descriptions.Item>
                 </Descriptions>
