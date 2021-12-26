@@ -34,7 +34,7 @@ export default function NewsEditor() {
     const addTag = e => {
         e.preventDefault();
         const lowerCaseTag = tagInput.toLocaleLowerCase();
-        if (!isStringInArray(data.tags, lowerCaseTag)) {
+        if (!isStringInArray(data.tags, lowerCaseTag) && lowerCaseTag.trim().length > 0) {
             onUpdateField("tags", [...data.tags, lowerCaseTag]);
         }
         setTagInput("");

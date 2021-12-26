@@ -89,7 +89,7 @@ export default function ProductDetail({ product }) {
     const addTag = e => {
         e.preventDefault();
         const lowerCaseTag = tagInput.toLocaleLowerCase();
-        if (!isStringInArray(product.tags, lowerCaseTag)) {
+        if (!isStringInArray(product.tags, lowerCaseTag) && lowerCaseTag.trim().length > 0) {
             onUpdateField("tags", [...product.tags, lowerCaseTag]);
         }
         setTagInput("");
