@@ -83,3 +83,7 @@
 .ant-spin {
     padding: 8px !important;
 }
+
+.ant-timeline-item-tail {
+    border-left: 2px solid #999999 !important;
+}
