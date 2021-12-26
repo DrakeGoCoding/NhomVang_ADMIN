@@ -18,6 +18,7 @@ import ProductEditor from "./Product/ProductEditor";
 import Invoice from "./Invoice";
 
 import "../App.css";
+import InvoiceEditor from "./Invoice/InvoiceEditor";
 
 export default function App() {
     const navigate = useNavigate();
@@ -59,6 +60,7 @@ export default function App() {
                     <Route path="/product/create" element={<ProductEditor />} />
                     <Route path="/product/edit/:slug" element={<ProductEditor />} />
                     <Route path="/invoice" element={<Invoice />} />
+                    <Route path="/invoice/:id" element={<InvoiceEditor />} />
                 </Route>
             ) : (
                 <Route path="/login" element={<Login />} />

@@ -10,7 +10,7 @@ export default function Home() {
             <Layout>
                 <AppHeader />
                 <Layout.Content
-                    className="px-7 py-6 sm:px-8 md:px-12"
+                    className="p-4 sm:px-8 md:px-12 md:py-6"
                     style={{
                         maxWidth: "100%",
                         minWidth: "100%"

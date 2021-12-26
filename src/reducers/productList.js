@@ -48,6 +48,7 @@ export default function productListReducer(state = {}, action) {
                 ...state,
                 productList: action.payload.productList || [],
                 total: action.payload.total || 0,
+                page: 0,
                 inProgress: false
             };
 

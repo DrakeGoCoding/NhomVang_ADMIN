@@ -14,7 +14,8 @@ export default function UserTable(props) {
             fixed: "left",
             width: 150,
             ellipsis: true,
-            textWrap: "word-break"
+            textWrap: "word-break",
+            sorter: (a, b) => a.username.localeCompare(b.username)
         },
         {
             title: "Display Name",
@@ -22,7 +23,8 @@ export default function UserTable(props) {
             key: "displayname",
             width: 150,
             ellipsis: true,
-            textWrap: "word-break"
+            textWrap: "word-break",
+            sorter: (a, b) => a.displayname.localeCompare(b.displayname)
         },
         {
             title: "Email",
@@ -46,6 +48,17 @@ export default function UserTable(props) {
             dataIndex: "role",
             key: "role",
             width: 80,
+            filters: [
+                {
+                    text: "user",
+                    value: "user"
+                },
+                {
+                    text: "admin",
+                    value: "admin"
+                }
+            ],
+            onFilter: (value, record) => record.role.indexOf(value) === 0,
             render: text => {
                 let color = text === "admin" ? "geekblue" : "green";
                 return <Tag color={color}>{text.toUpperCase()}</Tag>;
@@ -55,7 +68,7 @@ export default function UserTable(props) {
         {
             title: "Action",
             key: "action",
-            width: 150,
+            width: 120,
             render: (text, record) => (
                 <Space size="middle">
                     {record.role === "admin" ? (
@@ -103,6 +116,7 @@ export default function UserTable(props) {
                 dataSource={props.userList}
                 rowKey="username"
                 pagination={false}
+                showSorterTooltip={false}
                 loading={{ indicator: <Spin size="large" />, spinning: props.inProgress }}
                 scroll={{ x: 1500, y: 670 }}
             />

@@ -59,14 +59,7 @@ export default function ProductEditor() {
 
     return (
         <div className="product-editor">
-            <Tabs
-                type="card"
-                className="mb-4"
-                activeKey={currentTab}
-                defaultActiveKey="form"
-                onChange={changeTab}
-                style={{ minHeight: 550 }}
-            >
+            <Tabs type="card" className="mb-4" activeKey={currentTab} defaultActiveKey="form" onChange={changeTab}>
                 <Tabs.TabPane tab="Detail" key="form">
                     {inProgress ? <Spin size="large" /> : <ProductDetail product={data} />}
                 </Tabs.TabPane>

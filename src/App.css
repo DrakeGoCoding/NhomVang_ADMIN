@@ -9,6 +9,10 @@
     font-size: 1.125rem;
 }
 
+.ant-table-thead th span.ant-table-column-sorter {
+    display: flex;
+}
+
 .ant-back-top-icon {
     display: flex;
     justify-content: center;
@@ -74,4 +78,8 @@
 .ant-tag {
     display: inline-flex !important;
     align-items: center !important;
+}
+
+.ant-spin {
+    padding: 8px !important;
 }

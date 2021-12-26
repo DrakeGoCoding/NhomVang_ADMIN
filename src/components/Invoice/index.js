@@ -1,9 +1,9 @@
-import { Space } from "antd";
-import { useEffect } from "react";
+import { Input, Space } from "antd";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Invoice from "../../api/invoice.api";
-import { INVOICE_PAGE_LOADED, INVOICE_PAGE_UNLOADED } from "../../constants/actionTypes";
+import { FILTER_INVOICELIST, INVOICELIST_PAGE_LOADED, INVOICELIST_PAGE_UNLOADED } from "../../constants/actionTypes";
 import { store } from "../../store";
 import InvoiceTable from "./InvoiceTable";
 
@@ -12,15 +12,27 @@ export default function InvoicePage() {
     const user = searchParams[0].get("user");
     const { invoiceList, total, page, pager, inProgress } = useSelector(state => state.invoiceList);
 
+    const [filter, setFilter] = useState({ user: user || "" });
+
     const onLoad = user => {
         const pager = (page, filter) => Invoice.getAll(page, { ...filter, user });
         store.dispatch({
-            type: INVOICE_PAGE_LOADED,
+            type: INVOICELIST_PAGE_LOADED,
             pager,
             payload: Invoice.getAll(0, { user })
         });
     };
-    const onUnload = () => store.dispatch({ type: INVOICE_PAGE_UNLOADED });
+    const onUnload = () => store.dispatch({ type: INVOICELIST_PAGE_UNLOADED });
+
+    const updateFilter = (key, value) => {
+        setFilter({ ...filter, [key]: value });
+    };
+    const onFilter = () => {
+        store.dispatch({
+            type: FILTER_INVOICELIST,
+            payload: Invoice.getAll(0, filter)
+        });
+    };
 
     useEffect(() => {
         onLoad(user);
@@ -32,7 +44,20 @@ export default function InvoicePage() {
     return (
         <Space className="invoice-page max-w-full" direction="vertical" size="large">
             <div className="flex flex-col-reverse justify-between xl:flex-row">
-                <Space size="middle"></Space>
+                <Space size="middle">
+                    <Input.Search
+                        className="box-border"
+                        style={{ minWidth: "320px" }}
+                        placeholder="Enter username"
+                        enterButton
+                        maxLength={100}
+                        size="middle"
+                        value={filter.user}
+                        allowClear
+                        onChange={e => updateFilter("user", e.target.value)}
+                        onSearch={onFilter}
+                    />
+                </Space>
             </div>
             <InvoiceTable
                 invoiceList={invoiceList}
@@ -40,6 +65,7 @@ export default function InvoicePage() {
                 total={total}
                 currentPage={page + 1}
                 pager={pager}
+                filter={filter}
                 inProgress={inProgress}
             />
         </Space>

@@ -16,7 +16,8 @@ const initialState = {
         content: "",
         thumbnail: "",
         tags: []
-    }
+    },
+    inProgress: false
 };
 
 export default function editorReducer(state = initialState, action) {

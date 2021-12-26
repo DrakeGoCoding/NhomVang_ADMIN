@@ -20,7 +20,8 @@ const initialState = {
         inStock: 0,
         description: "",
         tags: []
-    }
+    },
+    inProgress: false
 };
 
 export default function productReducer(state = initialState, action) {
@@ -58,7 +59,10 @@ export default function productReducer(state = initialState, action) {
             };
 
         case UPDATE_FIELD_PRODUCT_EDITOR:
-            return { ...state, data: { ...state.data, [action.key]: action.value } };
+            return {
+                ...state,
+                data: { ...state.data, [action.key]: action.value }
+            };
 
         default:
             return state;
