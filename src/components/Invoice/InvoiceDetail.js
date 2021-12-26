@@ -1,4 +1,4 @@
-import { Button, Descriptions, Input, Select, Space, Table, Typography } from "antd";
+import { Button, Descriptions, Input, message, Select, Space, Table, Typography } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -101,6 +101,21 @@ export default function InvoiceDetail({ invoice }) {
     };
     const handleSaveInvoice = () => {
         console.log(invoice);
+        if (invoice.status === "delivered") {
+            const isValidInvoice = invoice.products.every(product => {
+                return (
+                    product.vouchers.length === product.quantity &&
+                    product.vouchers.every(voucher => {
+                        return voucher && voucher.trim().length > 0;
+                    })
+                );
+            });
+            if (!isValidInvoice) {
+                message.error({ content: "Please fill in all voucher codes." });
+                return;
+            }
+        } else if (invoice.status === "cancelled") {
+        }
     };
 
     if (!invoice) return null;
@@ -115,9 +130,15 @@ export default function InvoiceDetail({ invoice }) {
                     </Descriptions.Item>
                     <Descriptions.Item label="Status" span={3}>
                         <Select className="w-40" value={invoice.status} onChange={onStatusChange}>
-                            <Select.Option value="pending">Pending</Select.Option>
-                            <Select.Option value="in_progress">In progress</Select.Option>
-                            <Select.Option value="delivered">Delivered</Select.Option>
+                            <Select.Option disabled value="pending">
+                                Pending
+                            </Select.Option>
+                            <Select.Option disabled value="in_progress">
+                                In progress
+                            </Select.Option>
+                            <Select.Option disabled={invoice.paymentStatus !== "done"} value="delivered">
+                                Delivered
+                            </Select.Option>
                             <Select.Option value="cancel">Cancel</Select.Option>
                         </Select>
                     </Descriptions.Item>
@@ -163,13 +184,12 @@ export default function InvoiceDetail({ invoice }) {
                     </Descriptions.Item>
                 </Descriptions>
             </div>
-            <Space size="large">
-                <Button type="primary" onClick={showSaveModal}>
-                    Save
-                </Button>
-
+            <Space className="float-right" size="middle">
                 <Button>
                     <Link to="/invoice">Cancel</Link>
+                </Button>
+                <Button type="primary" onClick={showSaveModal}>
+                    Save
                 </Button>
             </Space>
 

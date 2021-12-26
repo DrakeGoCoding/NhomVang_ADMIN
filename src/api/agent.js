@@ -5,7 +5,7 @@ import queryString from "query-string";
 // Please have a look at here `https://github.com/axios/axios#request-
 // config` for the full list of configs
 
-// export const LOCAL_API = "http://localhost:5543/";
+export const LOCAL_API = "http://localhost:5543/";
 
 const instance = axios.create({
     // baseURL: LOCAL_API,
