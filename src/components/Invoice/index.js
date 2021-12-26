@@ -1,4 +1,4 @@
-import { Input, Space } from "antd";
+import { DatePicker, Input, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
@@ -12,7 +12,10 @@ export default function InvoicePage() {
     const user = searchParams[0].get("user");
     const { invoiceList, total, page, pager, inProgress } = useSelector(state => state.invoiceList);
 
-    const [filter, setFilter] = useState({ user: user || "" });
+    const [filter, setFilter] = useState({
+        user: user || "",
+        date: null
+    });
 
     const onLoad = user => {
         const pager = (page, filter) => Invoice.getAll(page, { ...filter, user });
@@ -24,7 +27,16 @@ export default function InvoicePage() {
     };
     const onUnload = () => store.dispatch({ type: INVOICELIST_PAGE_UNLOADED });
 
+    const onDateChange = (date, dateString) => {
+        updateFilter("date", date);
+        store.dispatch({
+            type: FILTER_INVOICELIST,
+            payload: Invoice.getAll(0, { ...filter, date })
+        });
+    };
+
     const updateFilter = (key, value) => {
+        console.log(value);
         setFilter({ ...filter, [key]: value });
     };
     const onFilter = () => {
@@ -57,6 +69,7 @@ export default function InvoicePage() {
                         onChange={e => updateFilter("user", e.target.value)}
                         onSearch={onFilter}
                     />
+                    <DatePicker value={filter.date} onChange={onDateChange} />
                 </Space>
             </div>
             <InvoiceTable

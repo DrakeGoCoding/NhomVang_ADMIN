@@ -4,6 +4,7 @@ import { ReactComponent as StripeSvg } from "../../assets/stripe.svg";
 import { useDispatch } from "react-redux";
 import { SET_INVOICELIST_PAGE } from "../../constants/actionTypes";
 import { Link } from "react-router-dom";
+import { toLocaleStringCurrency } from "../../utils";
 
 const PaypalIcon = () => <PaypalSvg className="w-full" />;
 const StripeIcon = () => <StripeSvg className="w-full" />;
@@ -67,26 +68,17 @@ export default function InvoiceTable(props) {
             }
         },
         {
-            title: "Total",
-            dataIndex: "total",
-            key: "total",
+            title: "Amount",
+            key: "amount",
             width: 80,
-            align: "right",
-            sorter: (a, b) => a.total - b.total
-        },
-        {
-            title: "Discount Total",
-            dataIndex: "discountTotal",
-            key: "discountTotal",
-            width: 80,
-            align: "right",
-            sorter: (a, b) => a.discountTotal - b.discountTotal
+            align: "center",
+            render: (text, record) => toLocaleStringCurrency(record.discountTotal || record.total)
         },
         {
             title: "Payment Method",
             dataIndex: "paymentMethod",
             key: "paymentMethod",
-            width: 50,
+            width: 80,
             align: "center",
             render: text => {
                 switch (text) {
@@ -103,7 +95,7 @@ export default function InvoiceTable(props) {
             title: "Payment Status",
             dataIndex: "paymentStatus",
             key: "paymentStatus",
-            width: 50,
+            width: 80,
             align: "center",
             filters: [
                 {
@@ -137,6 +129,15 @@ export default function InvoiceTable(props) {
             }
         },
         {
+            title: "Date",
+            key: "createdDate",
+            dataIndex: "createdDate",
+            width: 60,
+            align: "center",
+            sorter: (a, b) => new Date(a).getTime - new Date(b).getTime(),
+            render: text => new Date(text).toLocaleDateString()
+        },
+        {
             title: "Action",
             key: "action",
             width: 70,
@@ -145,10 +146,7 @@ export default function InvoiceTable(props) {
             render: (text, record) => (
                 <Space size="middle">
                     <Button type="primary">
-                        <Link to={`/invoice/${record._id}`}>View</Link>
-                    </Button>
-                    <Button type="primary" danger>
-                        Cancel
+                        <Link to={`/invoice/${record._id}`}>View details</Link>
                     </Button>
                 </Space>
             )

@@ -3,6 +3,18 @@ import agent from "./agent";
 
 const pageSize = 10;
 
+const omitForInvoice = invoice =>
+    Object.assign({}, invoice, {
+        user: undefined,
+        total: undefined,
+        discountTotal: undefined,
+        paymentMethod: undefined,
+        paymentStatus: undefined,
+        paymentId: undefined,
+        createdDate: undefined,
+        logs: undefined
+    });
+
 const Invoice = {
     getAll: (page = 0, filter = {}) =>
         agent.get(ADMIN_INVOICE_ENDPOINT, {
@@ -13,6 +25,7 @@ const Invoice = {
             }
         }),
     getById: invoiceId => agent.get(`${ADMIN_INVOICE_ENDPOINT}/${invoiceId}`),
+    update: invoice => agent.put(`${ADMIN_INVOICE_ENDPOINT}/${invoice._id}`, { invoice: omitForInvoice(invoice) }),
     pageSize
 };
 
