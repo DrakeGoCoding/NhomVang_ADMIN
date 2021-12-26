@@ -1,4 +1,4 @@
-import { Button, Descriptions, Input, Select, Space, Table } from "antd";
+import { Button, Descriptions, Input, Select, Space, Table, Typography } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,8 @@ import { UPDATE_FIELD_INVOICE_EDITOR } from "../../constants/actionTypes";
 import { ReactComponent as PaypalSvg } from "../../assets/paypal.svg";
 import { ReactComponent as StripeSvg } from "../../assets/stripe.svg";
 import { toLocaleStringCurrency } from "../../utils";
+
+const { Text } = Typography;
 
 const renderPaymentMethod = paymentMethod => {
     switch (paymentMethod) {
@@ -18,6 +20,64 @@ const renderPaymentMethod = paymentMethod => {
             return null;
     }
 };
+
+const productColumns = [
+    {
+        title: "No.",
+        key: "ordinal",
+        width: 50,
+        fixed: "left",
+        ellipsis: true,
+        render: (text, record, index) => index + 1
+    },
+    {
+        title: "Product Name",
+        dataIndex: "name",
+        key: "name",
+        width: 200,
+        fixed: "left",
+        ellipsis: true,
+        textWrap: "word-break"
+    },
+    {
+        title: "Listed Price",
+        dataIndex: "listedPrice",
+        key: "listedPrice",
+        width: 100,
+        ellipsis: true,
+        align: "center",
+        render: text => toLocaleStringCurrency(text)
+    },
+    {
+        title: "Discount Price",
+        dataIndex: "discountPrice",
+        key: "discountPrice",
+        width: 100,
+        ellipsis: true,
+        align: "center",
+        render: text => <Text type="success">{toLocaleStringCurrency(text)}</Text>
+    },
+    {
+        title: "Qty.",
+        dataIndex: "quantity",
+        key: "quantity",
+        width: 50,
+        ellipsis: true,
+        align: "center"
+    },
+    {
+        title: "Subtotal",
+        key: "subtotal",
+        width: 120,
+        align: "right",
+        fixed: "right",
+        render: (text, record) => {
+            const { listedPrice, discountPrice, quantity } = record;
+            const subtotal = discountPrice ? discountPrice * quantity : listedPrice * quantity;
+            return toLocaleStringCurrency(subtotal);
+        }
+    }
+];
 
 export default function InvoiceDetail({ invoice }) {
     const dispatch = useDispatch();
@@ -42,64 +102,6 @@ export default function InvoiceDetail({ invoice }) {
     const handleSaveInvoice = () => {
         console.log(invoice);
     };
-
-    const productColumns = [
-        {
-            title: "No.",
-            key: "ordinal",
-            width: 50,
-            fixed: "left",
-            ellipsis: true,
-            render: (text, record, index) => index + 1
-        },
-        {
-            title: "Product Name",
-            dataIndex: "name",
-            key: "name",
-            width: 200,
-            fixed: "left",
-            ellipsis: true,
-            textWrap: "word-break"
-        },
-        {
-            title: "Listed Price",
-            dataIndex: "listedPrice",
-            key: "listedPrice",
-            width: 100,
-            ellipsis: true,
-            align: "center",
-            render: text => toLocaleStringCurrency(text)
-        },
-        {
-            title: "Discount Price",
-            dataIndex: "discountPrice",
-            key: "discountPrice",
-            width: 100,
-            ellipsis: true,
-            align: "center",
-            render: text => toLocaleStringCurrency(text)
-        },
-        {
-            title: "Qty.",
-            dataIndex: "quantity",
-            key: "quantity",
-            width: 50,
-            ellipsis: true,
-            align: "center"
-        },
-        {
-            title: "Subtotal",
-            key: "subtotal",
-            width: 120,
-            align: "right",
-            fixed: "right",
-            render: (text, record) => {
-                const { listedPrice, discountPrice, quantity } = record;
-                const subtotal = discountPrice ? discountPrice * quantity : listedPrice * quantity;
-                return toLocaleStringCurrency(subtotal);
-            }
-        }
-    ];
 
     if (!invoice) return null;
     return (
