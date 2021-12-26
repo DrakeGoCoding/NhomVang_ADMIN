@@ -3,10 +3,11 @@ import Modal from "antd/lib/modal/Modal";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { UPDATE_FIELD_INVOICE_EDITOR } from "../../constants/actionTypes";
+import { INVOICE_SUBMITTED, UPDATE_FIELD_INVOICE_EDITOR } from "../../constants/actionTypes";
 import { ReactComponent as PaypalSvg } from "../../assets/paypal.svg";
 import { ReactComponent as StripeSvg } from "../../assets/stripe.svg";
 import { toLocaleStringCurrency } from "../../utils";
+import Invoice from "../../api/invoice.api";
 
 const { Text } = Typography;
 
@@ -79,7 +80,7 @@ const productColumns = [
     }
 ];
 
-export default function InvoiceDetail({ invoice }) {
+export default function InvoiceDetail({ invoice, disabled }) {
     const dispatch = useDispatch();
     const onUpdateField = (key, value) => {
         dispatch({
@@ -89,19 +90,10 @@ export default function InvoiceDetail({ invoice }) {
         });
     };
 
+    const [status, setStatus] = useState(invoice.status || "pending");
     const [isSaveModalVisible, setIsSaveModalVisible] = useState(false);
-    const showSaveModal = () => setIsSaveModalVisible(true);
-    const closeSaveModal = () => setIsSaveModalVisible(false);
-
-    const onStatusChange = value => onUpdateField("status", value);
-    const onVoucherCodeChange = (productIndex, voucherIndex, value) => {
-        const updatedInvoice = [...invoice.products];
-        updatedInvoice[productIndex]["vouchers"][voucherIndex] = value;
-        onUpdateField("products", updatedInvoice);
-    };
-    const handleSaveInvoice = () => {
-        console.log(invoice);
-        if (invoice.status === "delivered") {
+    const showSaveModal = () => {
+        if (status === "delivered") {
             const isValidInvoice = invoice.products.every(product => {
                 return (
                     product.vouchers.length === product.quantity &&
@@ -114,8 +106,23 @@ export default function InvoiceDetail({ invoice }) {
                 message.error({ content: "Please fill in all voucher codes." });
                 return;
             }
-        } else if (invoice.status === "cancelled") {
         }
+        setIsSaveModalVisible(true);
+    };
+    const closeSaveModal = () => setIsSaveModalVisible(false);
+
+    const onStatusChange = value => setStatus(value);
+    const onVoucherCodeChange = (productIndex, voucherIndex, value) => {
+        const updatedInvoice = [...invoice.products];
+        updatedInvoice[productIndex]["vouchers"][voucherIndex] = value;
+        onUpdateField("products", updatedInvoice);
+    };
+    const handleSaveInvoice = () => {
+        dispatch({
+            type: INVOICE_SUBMITTED,
+            payload: Invoice.update({ ...invoice, status })
+        });
+        closeSaveModal();
     };
 
     if (!invoice) return null;
@@ -125,11 +132,9 @@ export default function InvoiceDetail({ invoice }) {
                 <Descriptions labelStyle={{ fontWeight: "bold" }} className="overflow-auto" column={3} bordered>
                     <Descriptions.Item label="ID#">{invoice._id}</Descriptions.Item>
                     <Descriptions.Item label="Client">{invoice.user.displayname}</Descriptions.Item>
-                    <Descriptions.Item label="Date">
-                        {new Date(invoice.createdDate).toLocaleDateString()}
-                    </Descriptions.Item>
+                    <Descriptions.Item label="Date">{new Date(invoice.createdDate).toDateString()}</Descriptions.Item>
                     <Descriptions.Item label="Status" span={3}>
-                        <Select className="w-40" value={invoice.status} onChange={onStatusChange}>
+                        <Select disabled={disabled} className="w-40" value={status} onChange={onStatusChange}>
                             <Select.Option disabled value="pending">
                                 Pending
                             </Select.Option>
@@ -139,7 +144,7 @@ export default function InvoiceDetail({ invoice }) {
                             <Select.Option disabled={invoice.paymentStatus !== "done"} value="delivered">
                                 Delivered
                             </Select.Option>
-                            <Select.Option value="cancel">Cancel</Select.Option>
+                            <Select.Option value="failed">Failed</Select.Option>
                         </Select>
                     </Descriptions.Item>
                     <Descriptions.Item label="Products" span={3}>
@@ -151,7 +156,7 @@ export default function InvoiceDetail({ invoice }) {
                             scroll={{ x: 800 }}
                             expandable={{
                                 expandedRowRender: (record, index) => {
-                                    if (invoice.status !== "delivered") return null;
+                                    if (status !== "delivered") return null;
                                     const voucherInputs = [];
                                     for (let i = 0; i < record.quantity; i++) {
                                         voucherInputs.push(
@@ -159,6 +164,7 @@ export default function InvoiceDetail({ invoice }) {
                                                 key={i}
                                                 value={record.vouchers?.[i]}
                                                 className="mb-2 last:mb-0"
+                                                disabled={disabled}
                                                 placeholder="Enter voucher code here"
                                                 onChange={e => onVoucherCodeChange(index, i, e.target.value)}
                                             />
@@ -168,9 +174,18 @@ export default function InvoiceDetail({ invoice }) {
                                 }
                             }}
                         />
-                        <span className="float-right pt-4 text-2xl">
+                        <span className="float-right flex items-center pt-4 text-2xl">
                             <span className="font-bold text-2xl pr-8">Total:</span>
-                            {toLocaleStringCurrency(invoice.discountTotal || invoice.total)}
+                            <div className="flex flex-col text-right">
+                                <Text className="text-2xl" delete={invoice.discountTotal < invoice.total}>
+                                    {toLocaleStringCurrency(invoice.discountTotal)}
+                                </Text>
+                                {invoice.discountTotal < invoice.total && (
+                                    <Text className="text-2xl" type="success">
+                                        {toLocaleStringCurrency(invoice.discountTotal)}
+                                    </Text>
+                                )}
+                            </div>
                         </span>
                     </Descriptions.Item>
                     <Descriptions.Item label="Payment Info" span={3}>
@@ -185,10 +200,15 @@ export default function InvoiceDetail({ invoice }) {
                 </Descriptions>
             </div>
             <Space className="float-right" size="middle">
-                <Button>
-                    <Link to="/invoice">Cancel</Link>
+                <Button size="large">
+                    <Link to="/invoice">{disabled ? "Back" : "Cancel"}</Link>
                 </Button>
-                <Button type="primary" onClick={showSaveModal}>
+                <Button
+                    disabled={disabled || !["delivered", "failed"].includes(status)}
+                    size="large"
+                    type="primary"
+                    onClick={showSaveModal}
+                >
                     Save
                 </Button>
             </Space>

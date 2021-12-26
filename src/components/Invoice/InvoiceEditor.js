@@ -40,7 +40,11 @@ export default function InvoiceEditor() {
         <div className="invoice-editor">
             <Tabs type="card" className="mb-4" activeKey={currentTab} defaultActiveKey="details" onChange={changeTab}>
                 <Tabs.TabPane tab="Details" key="details">
-                    {inProgress ? <Spin size="large" /> : <InvoiceDetail invoice={data} />}
+                    {inProgress ? (
+                        <Spin size="large" />
+                    ) : (
+                        <InvoiceDetail invoice={data} disabled={["delivered", "failed"].includes(data.status)} />
+                    )}
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Logs" key="logs">
                     {inProgress ? <Spin size="large" /> : <InvoiceLogger invoice={data} />}

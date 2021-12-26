@@ -12,6 +12,7 @@ export default function invoiceListReducer(state = {}, action) {
             switch (action.subtype) {
                 case INVOICELIST_PAGE_LOADED:
                 case SET_INVOICELIST_PAGE:
+                case FILTER_INVOICELIST:
                     return { ...state, inProgress: true };
                 default:
                     return state;

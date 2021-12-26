@@ -2,6 +2,7 @@ import {
     APP_LOAD,
     ASYNC_START,
     EDITOR_PAGE_LOADED,
+    INVOICE_SUBMITTED,
     LOGIN,
     LOGOUT,
     NEWS_PAGE_LOADED,
@@ -67,6 +68,13 @@ export default function commonReducer(state = initialState, action) {
             return {
                 ...state,
                 redirectTo: action.error ? null : "/product",
+                inProgress: false
+            };
+
+        case INVOICE_SUBMITTED:
+            return {
+                ...state,
+                redirectTo: action.error ? null : "/invoice",
                 inProgress: false
             };
 
