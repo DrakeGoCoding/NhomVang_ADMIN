@@ -8,8 +8,8 @@ import queryString from "query-string";
 export const LOCAL_API = "http://localhost:5543/";
 
 const instance = axios.create({
-    baseURL: LOCAL_API,
-    // baseURL: process.env.REACT_APP_API_URL,
+    // baseURL: LOCAL_API,
+    baseURL: process.env.REACT_APP_API_URL,
     headers: {
         "content-type": "application/json"
     },
