@@ -1,6 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Menu } from "antd";
-import { FileOutlined, HomeOutlined, ShoppingOutlined, SolutionOutlined, UserOutlined } from "@ant-design/icons";
+import {
+    FileOutlined,
+    FormOutlined,
+    HomeOutlined,
+    ShoppingOutlined,
+    SolutionOutlined,
+    UserOutlined
+} from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import { TOGGLE_SIDER } from "../../constants/actionTypes";
 import { useEffect, useState } from "react";
@@ -44,6 +51,12 @@ export default function AppSider() {
             icon: <SolutionOutlined />,
             link: "/invoice",
             key: "invoice"
+        },
+        {
+            label: "Newsletter",
+            icon: <FormOutlined />,
+            link: "/newsletter",
+            key: "newsletter"
         }
     ];
 

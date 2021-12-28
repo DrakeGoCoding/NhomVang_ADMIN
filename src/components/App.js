@@ -19,6 +19,7 @@ import Invoice from "./Invoice";
 
 import "../App.css";
 import InvoiceEditor from "./Invoice/InvoiceEditor";
+import NewsletterPage from "./Newsletter";
 
 export default function App() {
     const navigate = useNavigate();
@@ -61,6 +62,7 @@ export default function App() {
                     <Route path="/product/edit/:slug" element={<ProductEditor />} />
                     <Route path="/invoice" element={<Invoice />} />
                     <Route path="/invoice/:id" element={<InvoiceEditor />} />
+                    <Route path="/newsletter" element={<NewsletterPage />} />
                 </Route>
             ) : (
                 <Route path="/login" element={<Login />} />
