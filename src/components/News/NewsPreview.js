@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Image, Modal, Space, Tag } from "antd";
 import defaultNewsImage from "../../assets/defaultNewsImage.png";
 import { useDispatch, useSelector } from "react-redux";
-import { DELETE_NEWS } from "../../constants/actionTypes";
+import { DELETE_NEWS } from "../../store/actions";
 import News from "../../api/news.api";
 import { useState } from "react";
 

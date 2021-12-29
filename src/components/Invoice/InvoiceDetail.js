@@ -3,7 +3,7 @@ import Modal from "antd/lib/modal/Modal";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { INVOICE_SUBMITTED, UPDATE_FIELD_INVOICE_EDITOR } from "../../constants/actionTypes";
+import { INVOICE_SUBMITTED, UPDATE_FIELD_INVOICE_EDITOR } from "../../store/actions";
 import { ReactComponent as PaypalSvg } from "../../assets/paypal.svg";
 import { ReactComponent as StripeSvg } from "../../assets/stripe.svg";
 import { toLocaleStringCurrency } from "../../utils";

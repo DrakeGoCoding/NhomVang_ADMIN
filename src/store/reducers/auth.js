@@ -1,4 +1,4 @@
-import { ASYNC_START, LOGIN, LOGIN_PAGE_UNLOADED } from "../constants/actionTypes";
+import { ASYNC_START, LOGIN, LOGIN_PAGE_UNLOADED } from "../actions";
 
 export default function authReducer(state = {}, action) {
     switch (action.type) {

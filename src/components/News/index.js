@@ -5,7 +5,7 @@ import { BackTop, Button, Pagination, Space, Spin } from "antd";
 import { Link } from "react-router-dom";
 import News from "../../api/news.api";
 import { store } from "../../store";
-import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_NEWSLIST_PAGE } from "../../constants/actionTypes";
+import { NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_NEWSLIST_PAGE } from "../../store/actions";
 import { useSelector } from "react-redux";
 
 export default function NewsPage() {

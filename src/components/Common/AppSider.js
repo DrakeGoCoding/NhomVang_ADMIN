@@ -9,7 +9,7 @@ import {
     UserOutlined
 } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
-import { TOGGLE_SIDER } from "../../constants/actionTypes";
+import { TOGGLE_SIDER } from "../../store/actions";
 import { useEffect, useState } from "react";
 
 const { Sider } = Layout;

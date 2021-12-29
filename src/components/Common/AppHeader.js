@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Layout, Space, Tooltip } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { LOGOUT } from "../../constants/actionTypes";
+import { LOGOUT } from "../../store/actions";
 
 const { Header } = Layout;
 

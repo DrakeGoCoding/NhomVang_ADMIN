@@ -1,7 +1,7 @@
 import { Button, Pagination, Space, Spin, Table, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { SET_USERLIST_PAGE } from "../../constants/actionTypes";
+import { SET_USERLIST_PAGE } from "../../store/actions";
 
 export default function UserTable(props) {
     const dispatch = useDispatch();

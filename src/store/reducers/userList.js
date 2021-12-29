@@ -6,7 +6,7 @@ import {
     USER_PAGE_LOADED,
     USER_PAGE_UNLOADED,
     USER_SUBMITTED
-} from "../constants/actionTypes";
+} from "../actions";
 
 export default function userListReducer(state = {}, action) {
     switch (action.type) {

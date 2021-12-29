@@ -9,7 +9,7 @@ import {
     FILTER_PRODUCTLIST,
     PRODUCTLIST_PAGE_LOADED,
     PRODUCTLIST_PAGE_UNLOADED
-} from "../../constants/actionTypes";
+} from "../../store/actions";
 import { store } from "../../store";
 import ProductTable from "./ProductTable";
 import "../../style/product.css";

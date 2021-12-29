@@ -5,7 +5,7 @@ import {
     PRODUCTLIST_PAGE_LOADED,
     PRODUCTLIST_PAGE_UNLOADED,
     SET_PRODUCTLIST_PAGE
-} from "../constants/actionTypes";
+} from "../actions";
 
 export default function productListReducer(state = {}, action) {
     switch (action.type) {

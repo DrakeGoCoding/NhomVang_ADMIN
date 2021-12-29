@@ -1,6 +1,6 @@
 import { Button, Form, Input, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { DELETE_USER, USER_SUBMITTED } from "../../constants/actionTypes";
+import { DELETE_USER, USER_SUBMITTED } from "../../store/actions";
 import User from "../../api/user.api";
 
 function SaveUserModal({ visible, mode, title, user, onOk, onCancel, loading }) {

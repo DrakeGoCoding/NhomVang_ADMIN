@@ -4,7 +4,7 @@ import {
     INVOICELIST_PAGE_LOADED,
     INVOICELIST_PAGE_UNLOADED,
     SET_INVOICELIST_PAGE
-} from "../constants/actionTypes";
+} from "../actions";
 
 export default function invoiceListReducer(state = {}, action) {
     switch (action.type) {

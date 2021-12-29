@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { store } from "../../store";
-import { PRODUCT_PAGE_LOADED, PRODUCT_PAGE_UNLOADED, PRODUCT_SUBMITTED } from "../../constants/actionTypes";
+import { PRODUCT_PAGE_LOADED, PRODUCT_PAGE_UNLOADED, PRODUCT_SUBMITTED } from "../../store/actions";
 import Product from "../../api/product.api";
 import { Button, message, Modal, Space, Spin, Tabs } from "antd";
 import ProductDescriptor from "./ProductDescriptor";

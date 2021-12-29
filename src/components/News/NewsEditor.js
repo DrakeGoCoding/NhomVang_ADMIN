@@ -12,7 +12,7 @@ import {
     EDITOR_PAGE_UNLOADED,
     NEWS_SUBMITTED,
     UPDATE_FIELD_NEWS_EDITOR
-} from "../../constants/actionTypes";
+} from "../../store/actions";
 import { useSelector } from "react-redux";
 import { beforeUploadImage, isStringInArray } from "../../utils";
 
