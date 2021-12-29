@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import { store } from "../store";
-import { APP_LOAD, REDIRECT } from "../constants/actionTypes";
+import { APP_LOAD, REDIRECT } from "../store/actions";
 
 import { setToken } from "../api/agent";
 import Auth from "../api/auth.api";
@@ -17,7 +17,7 @@ import Product from "./Product";
 import ProductEditor from "./Product/ProductEditor";
 import Invoice from "./Invoice";
 
-import "../App.css";
+import "../style/App.css";
 import InvoiceEditor from "./Invoice/InvoiceEditor";
 import NewsletterPage from "./Newsletter";
 

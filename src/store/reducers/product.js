@@ -4,8 +4,8 @@ import {
     PRODUCT_PAGE_UNLOADED,
     PRODUCT_SUBMITTED,
     UPDATE_FIELD_PRODUCT_EDITOR
-} from "../constants/actionTypes";
-import { htmlDecode } from "../utils";
+} from "../actions";
+import { htmlDecode } from "../../utils";
 
 const initialState = {
     data: {

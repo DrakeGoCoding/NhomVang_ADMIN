@@ -1,10 +1,4 @@
-import {
-    ASYNC_START,
-    DELETE_NEWS,
-    NEWS_PAGE_LOADED,
-    NEWS_PAGE_UNLOADED,
-    SET_NEWSLIST_PAGE
-} from "../constants/actionTypes";
+import { ASYNC_START, DELETE_NEWS, NEWS_PAGE_LOADED, NEWS_PAGE_UNLOADED, SET_NEWSLIST_PAGE } from "../actions";
 
 export default function newsListReducer(state = {}, action) {
     switch (action.type) {

@@ -3,7 +3,7 @@ import { ReloadOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import User from "../../api/user.api";
-import { FILTER_USERLIST, USER_PAGE_LOADED, USER_PAGE_UNLOADED } from "../../constants/actionTypes";
+import { FILTER_USERLIST, USER_PAGE_LOADED, USER_PAGE_UNLOADED } from "../../store/actions";
 import { store } from "../../store";
 import UserModal from "./UserModal";
 import UserTable from "./UserTable";

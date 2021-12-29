@@ -13,7 +13,7 @@ import {
     REDIRECT,
     TOGGLE_SIDER,
     USER_PAGE_LOADED
-} from "../constants/actionTypes";
+} from "../actions";
 
 const initialState = {
     appName: "Voucher Hunter",

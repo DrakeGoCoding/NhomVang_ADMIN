@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Invoice from "../../api/invoice.api";
-import { INVOICE_PAGE_LOADED, INVOICE_PAGE_UNLOADED } from "../../constants/actionTypes";
+import { INVOICE_PAGE_LOADED, INVOICE_PAGE_UNLOADED } from "../../store/actions";
 import { store } from "../../store";
 import InvoiceDetail from "./InvoiceDetail";
 import InvoiceLogger from "./InvoiceLogger";

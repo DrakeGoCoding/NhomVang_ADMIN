@@ -1,7 +1,7 @@
 import { Button, Pagination, Space, Spin, Table, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { SET_PRODUCTLIST_PAGE } from "../../constants/actionTypes";
+import { SET_PRODUCTLIST_PAGE } from "../../store/actions";
 import "../../style/product.css";
 
 export default function ProductTable(props) {

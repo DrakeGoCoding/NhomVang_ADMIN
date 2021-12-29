@@ -1,5 +1,5 @@
-import { setToken } from "./api/agent";
-import { ASYNC_START, LOGIN, LOGOUT, REGISTER } from "./constants/actionTypes";
+import { setToken } from "../api/agent";
+import { ASYNC_START, LOGIN, LOGOUT, REGISTER } from "./actions";
 
 export const promiseMiddleware = store => next => action => {
     if (isPromise(action.payload)) {

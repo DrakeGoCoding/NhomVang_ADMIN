@@ -2,7 +2,7 @@ import { Button, Form, Input, Typography } from "antd";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Auth from "../api/auth.api";
-import { LOGIN, LOGIN_PAGE_UNLOADED } from "../constants/actionTypes";
+import { LOGIN, LOGIN_PAGE_UNLOADED } from "../store/actions";
 import { store } from "../store";
 import "../style/login.css";
 

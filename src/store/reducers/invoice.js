@@ -4,7 +4,7 @@ import {
     INVOICE_PAGE_UNLOADED,
     INVOICE_SUBMITTED,
     UPDATE_FIELD_INVOICE_EDITOR
-} from "../constants/actionTypes";
+} from "../actions";
 
 const initialState = {
     data: {

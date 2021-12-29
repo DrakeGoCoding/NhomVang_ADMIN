@@ -1,7 +1,7 @@
 import { Checkbox, Form, Input, InputNumber, Space, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { UPDATE_FIELD_PRODUCT_EDITOR } from "../../constants/actionTypes";
+import { UPDATE_FIELD_PRODUCT_EDITOR } from "../../store/actions";
 import { isStringInArray } from "../../utils";
 
 const formItems = [

@@ -2,7 +2,7 @@ import { Button, Pagination, Space, Spin, Table, Tag } from "antd";
 import { ReactComponent as PaypalSvg } from "../../assets/paypal.svg";
 import { ReactComponent as StripeSvg } from "../../assets/stripe.svg";
 import { useDispatch } from "react-redux";
-import { SET_INVOICELIST_PAGE } from "../../constants/actionTypes";
+import { SET_INVOICELIST_PAGE } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { toLocaleStringCurrency } from "../../utils";
 

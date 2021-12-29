@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Invoice from "../../api/invoice.api";
-import { FILTER_INVOICELIST, INVOICELIST_PAGE_LOADED, INVOICELIST_PAGE_UNLOADED } from "../../constants/actionTypes";
+import { FILTER_INVOICELIST, INVOICELIST_PAGE_LOADED, INVOICELIST_PAGE_UNLOADED } from "../../store/actions";
 import { store } from "../../store";
 import InvoiceTable from "./InvoiceTable";
 

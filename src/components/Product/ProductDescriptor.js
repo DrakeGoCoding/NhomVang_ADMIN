@@ -1,7 +1,7 @@
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Editor from "@drakegocoding/ckeditor5-custom-build";
 import { useDispatch } from "react-redux";
-import { UPDATE_FIELD_PRODUCT_EDITOR } from "../../constants/actionTypes";
+import { UPDATE_FIELD_PRODUCT_EDITOR } from "../../store/actions";
 import UploadAdapterPlugin from "../Common/ckeditor/UploadAdapter";
 
 export default function ProductDescriptor({ description }) {

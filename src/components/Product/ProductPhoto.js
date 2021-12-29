@@ -1,7 +1,7 @@
 import { Button, Form, Upload } from "antd";
 import { LoadingOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { UPDATE_FIELD_PRODUCT_EDITOR } from "../../constants/actionTypes";
+import { UPDATE_FIELD_PRODUCT_EDITOR } from "../../store/actions";
 import { useState } from "react";
 import { beforeUploadImage } from "../../utils";
 

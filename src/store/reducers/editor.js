@@ -4,8 +4,8 @@ import {
     EDITOR_PAGE_UNLOADED,
     NEWS_SUBMITTED,
     UPDATE_FIELD_NEWS_EDITOR
-} from "../constants/actionTypes";
-import { htmlDecode } from "../utils";
+} from "../actions";
+import { htmlDecode } from "../../utils";
 
 const initialState = {
     data: {
