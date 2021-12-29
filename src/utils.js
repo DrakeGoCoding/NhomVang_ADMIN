@@ -15,9 +15,10 @@ export const beforeUploadImage = (file, callback, statusCallback) => {
             const base64Image = reader.result;
             const { url } = await Image.upload(base64Image);
             callback(url);
-            statusCallback(false);
         } catch (error) {
             callback("");
+        } finally {
+            statusCallback(false);
         }
     };
     return false;
