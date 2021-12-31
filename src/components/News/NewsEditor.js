@@ -25,19 +25,15 @@ export default function NewsEditor() {
     const onUpdateField = (key, value) => store.dispatch({ type: UPDATE_FIELD_NEWS_EDITOR, key, value });
 
     const [currentTab, setCurrentTab] = useState("content");
-    const [isUploadingThumbnail, setUploadingThumbnail] = useState(false);
     const [isSaveModalVisible, setIsSaveModalVisible] = useState(false);
     const [thumbnailImage, setThumbnailImage] = useState([]);
-    const [tagInput, setTagInput] = useState("");
 
-    const onTagInputChange = e => setTagInput(e.target.value);
-    const addTag = e => {
-        e.preventDefault();
-        const lowerCaseTag = tagInput.toLocaleLowerCase();
-        if (!isStringInArray(data.tags, lowerCaseTag) && lowerCaseTag.trim().length > 0) {
-            onUpdateField("tags", [...data.tags, lowerCaseTag]);
+    const changeTab = activeKey => setCurrentTab(activeKey);
+
+    const addTag = tag => {
+        if (!isStringInArray(data.tags, tag) && tag.trim().length > 0) {
+            onUpdateField("tags", [...data.tags, tag]);
         }
-        setTagInput("");
     };
     const removeTag = index => {
         const newTagList = [...data.tags];
@@ -45,15 +41,13 @@ export default function NewsEditor() {
         onUpdateField("tags", newTagList);
     };
 
-    const changeTab = activeKey => setCurrentTab(activeKey);
-
     const showSaveModal = () => {
         if (!data.title || !data.content) {
             setCurrentTab("content");
             message.error({ content: "Title and content are required." });
-        } else {
-            setIsSaveModalVisible(true);
+            return;
         }
+        setIsSaveModalVisible(true);
     };
     const closeSaveModal = () => setIsSaveModalVisible(false);
 
@@ -109,111 +103,31 @@ export default function NewsEditor() {
                 style={{ maxHeight: 1000 }}
             >
                 <Tabs.TabPane tab="Content" key="content">
-                    {inProgress ? (
-                        <Spin size="large" />
-                    ) : (
-                        <Form
-                            labelCol={{ xs: { span: 24 }, sm: { span: 4 } }}
-                            labelAlign="left"
-                            wrapperCol={{ span: 24 }}
-                            size="large"
-                            colon={false}
-                        >
-                            <Form.Item>
-                                <Input.TextArea
-                                    className="font-bold text-2xl"
-                                    placeholder="Type your title (required)"
-                                    value={data.title}
-                                    maxLength={100}
-                                    size="middle"
-                                    autoSize={{ minRows: 1, maxRows: 1 }}
-                                    allowClear
-                                    onChange={changeTitle}
-                                />
-                            </Form.Item>
-                            <Form.Item>
-                                <CKEditor
-                                    editor={Editor}
-                                    config={{
-                                        placeholder: "Type your content (required)",
-                                        extraPlugins: [UploadAdapterPlugin],
-                                        removePlugins: ["Title"]
-                                    }}
-                                    data={data.content}
-                                    onChange={changeContent}
-                                />
-                            </Form.Item>
-                        </Form>
-                    )}
+                    <ContentTab
+                        inProgress={inProgress}
+                        title={data.title}
+                        content={data.content}
+                        onTitleChange={changeTitle}
+                        onContentChange={changeContent}
+                    />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="More" key="more">
-                    {inProgress ? (
-                        <Spin size="large" />
-                    ) : (
-                        <Form
-                            labelCol={{ xs: { span: 24 }, sm: { span: 4 } }}
-                            labelAlign="left"
-                            wrapperCol={{ xs: { span: 24 }, sm: { span: 20 } }}
-                            size="large"
-                            colon={false}
-                            style={{ maxWidth: 1000, minWidth: 200 }}
-                        >
-                            <Form.Item label="Thumbnail">
-                                <Upload
-                                    listType="picture"
-                                    maxCount={1}
-                                    accept="image/*"
-                                    fileList={thumbnailImage}
-                                    beforeUpload={file =>
-                                        beforeUploadImage(file, changeThumbnail, setUploadingThumbnail)
-                                    }
-                                    onRemove={async file => changeThumbnail("")}
-                                >
-                                    <Button
-                                        className="flex items-center"
-                                        icon={isUploadingThumbnail ? <LoadingOutlined /> : <UploadOutlined />}
-                                    >
-                                        Upload thumbnail
-                                    </Button>
-                                </Upload>
-                            </Form.Item>
-                            <Form.Item label="Tags">
-                                <Input value={tagInput} onChange={onTagInputChange} onPressEnter={addTag} />
-                                <div>
-                                    {data.tags.map((tag, index) => (
-                                        <Tag
-                                            className="mt-3 p-1"
-                                            key={index}
-                                            color="processing"
-                                            closable
-                                            onClose={() => removeTag(index)}
-                                        >
-                                            {tag.toUpperCase()}
-                                        </Tag>
-                                    ))}
-                                </div>
-                            </Form.Item>
-                            <Form.Item label="Description">
-                                <Input.TextArea
-                                    placeholder="Type your description"
-                                    value={data.description}
-                                    size="large"
-                                    autoSize={{ minRows: 4, maxRows: 4 }}
-                                    maxLength={200}
-                                    onChange={changeDescription}
-                                    allowClear
-                                />
-                            </Form.Item>
-                        </Form>
-                    )}
+                    <MoreTab
+                        thumbnailImage={thumbnailImage}
+                        tags={data.tags}
+                        description={data.description}
+                        onThumbnailChange={changeThumbnail}
+                        onTagAdd={addTag}
+                        onTagRemove={removeTag}
+                        onDescriptionChange={changeDescription}
+                    />
                 </Tabs.TabPane>
             </Tabs>
 
-            <Space size="large">
+            <Space size="middle">
                 <Button disabled={inProgress} type="primary" onClick={showSaveModal}>
                     {slug ? "Save" : "Create"}
                 </Button>
-
                 <Button>
                     <Link to="/news">Cancel</Link>
                 </Button>
@@ -223,5 +137,117 @@ export default function NewsEditor() {
                 Confirm to save news?
             </Modal>
         </div>
+    );
+}
+
+function ContentTab(props) {
+    if (props.inProgress) {
+        return <Spin size="large" />;
+    }
+    return (
+        <Form
+            labelCol={{ xs: { span: 24 }, sm: { span: 4 } }}
+            labelAlign="left"
+            wrapperCol={{ span: 24 }}
+            size="large"
+            colon={false}
+        >
+            <Form.Item>
+                <Input.TextArea
+                    className="font-bold text-2xl"
+                    placeholder="Type your title (required)"
+                    value={props.title}
+                    maxLength={100}
+                    size="middle"
+                    autoSize={{ minRows: 1, maxRows: 1 }}
+                    allowClear
+                    onChange={props.onTitleChange}
+                />
+            </Form.Item>
+            <Form.Item>
+                <CKEditor
+                    editor={Editor}
+                    config={{
+                        placeholder: "Type your content (required)",
+                        extraPlugins: [UploadAdapterPlugin],
+                        removePlugins: ["Title"]
+                    }}
+                    data={props.content}
+                    onChange={props.onContentChange}
+                />
+            </Form.Item>
+        </Form>
+    );
+}
+
+function MoreTab(props) {
+    const [isUploadingThumbnail, setUploadingThumbnail] = useState(false);
+    const [tagInput, setTagInput] = useState("");
+    const onTagInputChange = e => setTagInput(e.target.value);
+    const addTag = e => {
+        e.preventDefault();
+        const lowerCaseTag = tagInput.toLocaleLowerCase();
+        props.onTagAdd(lowerCaseTag);
+        setTagInput("");
+    };
+    const removeTag = index => props.onTagRemove(index);
+
+    if (props.inProgress) {
+        return <Spin size="large" />;
+    }
+    return (
+        <Form
+            labelCol={{ xs: { span: 24 }, sm: { span: 4 } }}
+            labelAlign="left"
+            wrapperCol={{ xs: { span: 24 }, sm: { span: 20 } }}
+            size="large"
+            colon={false}
+            style={{ maxWidth: 1000, minWidth: 200 }}
+        >
+            <Form.Item label="Thumbnail">
+                <Upload
+                    listType="picture"
+                    maxCount={1}
+                    accept="image/*"
+                    fileList={props.thumbnailImage}
+                    beforeUpload={file => beforeUploadImage(file, props.onThumbnailChange, setUploadingThumbnail)}
+                    onRemove={async file => props.onThumbnailChange("")}
+                >
+                    <Button
+                        className="flex items-center"
+                        icon={isUploadingThumbnail ? <LoadingOutlined /> : <UploadOutlined />}
+                    >
+                        Upload thumbnail
+                    </Button>
+                </Upload>
+            </Form.Item>
+            <Form.Item label="Tags">
+                <Input value={tagInput} onChange={onTagInputChange} onPressEnter={addTag} />
+                <div>
+                    {props.tags.map((tag, index) => (
+                        <Tag
+                            className="mt-3 p-1"
+                            key={index}
+                            color="processing"
+                            closable
+                            onClose={() => removeTag(index)}
+                        >
+                            {tag.toUpperCase()}
+                        </Tag>
+                    ))}
+                </div>
+            </Form.Item>
+            <Form.Item label="Description">
+                <Input.TextArea
+                    placeholder="Type your description"
+                    value={props.description}
+                    size="large"
+                    autoSize={{ minRows: 4, maxRows: 4 }}
+                    maxLength={200}
+                    onChange={props.onDescriptionChange}
+                    allowClear
+                />
+            </Form.Item>
+        </Form>
     );
 }

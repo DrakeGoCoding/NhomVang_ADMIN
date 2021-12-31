@@ -25,6 +25,12 @@ const User = {
     create: user => agent.post(USER_ENDPOINT, { user: omitForUser(user) }),
     update: user => agent.put(USER_ENDPOINT, { user: omitForUser(user) }),
     delete: username => agent.delete(`${USER_ENDPOINT}?username=${encode(username)}`),
+    countSubscribers: () =>
+        agent.get(`${USER_ENDPOINT}/count`, {
+            params: {
+                subscribe: true
+            }
+        }),
     pageSize
 };
 

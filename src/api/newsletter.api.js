@@ -11,6 +11,7 @@ const Newsletter = {
                 offset: page * pageSize || 0
             }
         }),
+    getById: id => agent.get(`${NEWSLETTER_ENDPOINT}/${id}`),
     send: (subject = "", content) =>
         agent.post(NEWSLETTER_ENDPOINT, {
             newsletter: { subject, content }
