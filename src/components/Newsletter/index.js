@@ -29,7 +29,7 @@ export default function NewsletterPage() {
         <div className="newsletter-page flex flex-col">
             <div>
                 <Button type="primary" size="large">
-                    <Link to="/newsletter/create">New</Link>
+                    <Link to="/newsletters/create">New</Link>
                 </Button>
                 {inProgress ? <Spin /> : null}
             </div>

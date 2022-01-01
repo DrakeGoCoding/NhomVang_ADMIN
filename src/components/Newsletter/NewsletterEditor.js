@@ -48,7 +48,7 @@ export default function NewsletterEditor() {
             await Newsletter.send(data.subject, data.content);
             message.success({ content: "Sent successfully." });
         } catch (error) {
-            message.error({ content: error.response.data.message });
+            message.error({ content: error.message || error.response.data.message });
         } finally {
             setInProgress(false);
             closeModal();
@@ -100,7 +100,7 @@ export default function NewsletterEditor() {
 
             <Space className="float-right">
                 <Button disabled={inProgress} type="primary" onClick={showModal}>
-                    Broadcast
+                    Send
                 </Button>
             </Space>
 

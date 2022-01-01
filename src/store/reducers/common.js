@@ -67,14 +67,14 @@ export default function commonReducer(state = initialState, action) {
         case PRODUCT_SUBMITTED:
             return {
                 ...state,
-                redirectTo: action.error ? null : "/product",
+                redirectTo: action.error ? null : "/products",
                 inProgress: false
             };
 
         case INVOICE_SUBMITTED:
             return {
                 ...state,
-                redirectTo: action.error ? null : "/invoice",
+                redirectTo: action.error ? null : "/invoices",
                 inProgress: false
             };
 

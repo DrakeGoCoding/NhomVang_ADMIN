@@ -31,8 +31,8 @@ export default function AppSider() {
         {
             label: "User",
             icon: <UserOutlined />,
-            link: "/user",
-            key: "user"
+            link: "/users",
+            key: "users"
         },
         {
             label: "News",
@@ -43,20 +43,20 @@ export default function AppSider() {
         {
             label: "Product",
             icon: <ShoppingOutlined />,
-            link: "/product",
-            key: "product"
+            link: "/products",
+            key: "products"
         },
         {
             label: "Invoice",
             icon: <SolutionOutlined />,
-            link: "/invoice",
-            key: "invoice"
+            link: "/invoices",
+            key: "invoices"
         },
         {
             label: "Newsletter",
             icon: <FormOutlined />,
-            link: "/newsletter",
-            key: "newsletter"
+            link: "/newsletters",
+            key: "newsletters"
         }
     ];
 

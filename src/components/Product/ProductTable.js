@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { SET_PRODUCTLIST_PAGE } from "../../store/actions";
 import "../../style/product.css";
+import { toLocaleStringCurrency } from "../../utils";
 
 export default function ProductTable(props) {
     const dispatch = useDispatch();
@@ -70,18 +71,18 @@ export default function ProductTable(props) {
             dataIndex: "listedPrice",
             key: "listedPrice",
             width: 60,
-            align: "right",
+            align: "center",
             sorter: (a, b) => a.listedPrice - b.listedPrice,
-            render: text => (text ? text.toFixed(2).toLocaleString("en-US") : "")
+            render: text => toLocaleStringCurrency(text)
         },
         {
             title: "Discount Price",
             dataIndex: "discountPrice",
             key: "discountPrice",
             width: 60,
-            align: "right",
+            align: "center",
             sorter: (a, b) => a.discountPrice - b.discountPrice,
-            render: text => (text ? text.toFixed(2).toLocaleString("en-US") : "")
+            render: text => toLocaleStringCurrency(text)
         },
         {
             title: "Action",
@@ -90,7 +91,7 @@ export default function ProductTable(props) {
             render: (text, record) => (
                 <Space size="middle">
                     <Button type="primary">
-                        <Link to={`/product/edit/${record.slug}`}>Edit</Link>
+                        <Link to={`/products/edit/${record.slug}`}>Edit</Link>
                     </Button>
                     <Button type="primary" danger onClick={() => props.showDeleteUserModal(record.slug)}>
                         Delete
@@ -119,7 +120,7 @@ export default function ProductTable(props) {
                 pagination={false}
                 showSorterTooltip={false}
                 loading={{ indicator: <Spin size="large" />, spinning: inProgress }}
-                scroll={{ x: 1500, y: 670 }}
+                scroll={{ x: 1500, y: 620 }}
             />
             {props.total > 0 ? (
                 <Pagination

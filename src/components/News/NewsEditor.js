@@ -3,8 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Editor from "@drakegocoding/ckeditor5-custom-build";
 import UploadAdapterPlugin from "../Common/ckeditor/UploadAdapter";
-import { Button, Form, Input, message, Modal, Space, Spin, Tabs, Tag, Upload } from "antd";
-import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
+import { Button, Form, Input, message, Modal, Space, Spin, Tabs, Tag, Tooltip, Upload } from "antd";
+import { ArrowLeftOutlined, LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import News from "../../api/news.api";
 import { store } from "../../store";
 import {
@@ -15,6 +15,16 @@ import {
 } from "../../store/actions";
 import { useSelector } from "react-redux";
 import { beforeUploadImage, isStringInArray } from "../../utils";
+
+const ExtraTabSlot = {
+    left: (
+        <Tooltip title="Back">
+            <Link to="/news" className="mr-2">
+                <Button type="link" icon={<ArrowLeftOutlined />} />
+            </Link>
+        </Tooltip>
+    )
+};
 
 export default function NewsEditor() {
     const { slug } = useParams();
@@ -101,6 +111,7 @@ export default function NewsEditor() {
                 defaultActiveKey="content"
                 onChange={changeTab}
                 style={{ maxHeight: 1000 }}
+                tabBarExtraContent={ExtraTabSlot}
             >
                 <Tabs.TabPane tab="Content" key="content">
                     <ContentTab
@@ -124,12 +135,12 @@ export default function NewsEditor() {
                 </Tabs.TabPane>
             </Tabs>
 
-            <Space size="middle">
-                <Button disabled={inProgress} type="primary" onClick={showSaveModal}>
-                    {slug ? "Save" : "Create"}
-                </Button>
+            <Space size="middle" className="float-right">
                 <Button>
                     <Link to="/news">Cancel</Link>
+                </Button>
+                <Button disabled={inProgress} type="primary" onClick={showSaveModal}>
+                    {slug ? "Save" : "Create"}
                 </Button>
             </Space>
 

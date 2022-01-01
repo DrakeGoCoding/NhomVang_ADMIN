@@ -4,10 +4,21 @@ import { Link, useParams } from "react-router-dom";
 import { store } from "../../store";
 import { PRODUCT_PAGE_LOADED, PRODUCT_PAGE_UNLOADED, PRODUCT_SUBMITTED } from "../../store/actions";
 import Product from "../../api/product.api";
-import { Button, message, Modal, Space, Spin, Tabs } from "antd";
+import { Button, message, Modal, Space, Spin, Tabs, Tooltip } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import ProductDescriptor from "./ProductDescriptor";
 import ProductPhoto from "./ProductPhoto";
 import ProductDetail from "./ProductDetail";
+
+const ExtraTabSlot = {
+    left: (
+        <Tooltip title="Back">
+            <Link to="/products" className="mr-2">
+                <Button type="link" icon={<ArrowLeftOutlined />} />
+            </Link>
+        </Tooltip>
+    )
+};
 
 export default function ProductEditor() {
     const { slug } = useParams();
@@ -59,7 +70,14 @@ export default function ProductEditor() {
 
     return (
         <div className="product-editor">
-            <Tabs type="card" className="mb-4" activeKey={currentTab} defaultActiveKey="form" onChange={changeTab}>
+            <Tabs
+                type="card"
+                className="mb-4"
+                activeKey={currentTab}
+                defaultActiveKey="form"
+                onChange={changeTab}
+                tabBarExtraContent={ExtraTabSlot}
+            >
                 <Tabs.TabPane tab="Detail" key="form">
                     {inProgress ? <Spin size="large" /> : <ProductDetail product={data} />}
                 </Tabs.TabPane>
@@ -75,13 +93,13 @@ export default function ProductEditor() {
                 </Tabs.TabPane>
             </Tabs>
 
-            <Space size="large">
+            <Space size="middle">
                 <Button disabled={inProgress} type="primary" onClick={showSaveModal}>
                     {slug ? "Save" : "Create"}
                 </Button>
 
                 <Button>
-                    <Link to="/product">Cancel</Link>
+                    <Link to="/products">Cancel</Link>
                 </Button>
             </Space>
 

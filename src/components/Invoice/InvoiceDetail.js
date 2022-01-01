@@ -201,7 +201,7 @@ export default function InvoiceDetail({ invoice, disabled }) {
             </div>
             <Space className="float-right" size="middle">
                 <Button size="large">
-                    <Link to="/invoice">{disabled ? "Back" : "Cancel"}</Link>
+                    <Link to="/invoices">{disabled ? "Back" : "Cancel"}</Link>
                 </Button>
                 <Button
                     disabled={disabled || !["delivered", "failed"].includes(status)}

@@ -1,4 +1,5 @@
 import { Button, Pagination, Space, Spin, Table, Tag } from "antd";
+import { CheckOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { SET_USERLIST_PAGE } from "../../store/actions";
@@ -66,6 +67,14 @@ export default function UserTable(props) {
             align: "center"
         },
         {
+            title: "Subscribe?",
+            dataIndex: "isSubscribing",
+            key: "isSubscribing",
+            width: 70,
+            align: "center",
+            render: (text, record) => record.isSubscribing && <CheckOutlined style={{ color: "green" }} />
+        },
+        {
             title: "Action",
             key: "action",
             width: 120,
@@ -91,7 +100,7 @@ export default function UserTable(props) {
                         </>
                     ) : (
                         <Button type="primary" className="view-order-btn bg-green-400 text-white border-green-400">
-                            <Link to={`/invoice?user=${record.username}`}>View Orders</Link>
+                            <Link to={`/invoices?user=${record.username}`}>View Orders</Link>
                         </Button>
                     )}
                 </Space>

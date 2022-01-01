@@ -54,18 +54,18 @@ export default function App() {
             {common.token ? (
                 <Route path="/" element={<Home />}>
                     <Route index element={<h2>Welcome to Voucher Hunter Management Website</h2>} />
-                    <Route path="/user" element={<User />} />
+                    <Route path="/users" element={<User />} />
                     <Route path="/news" element={<News />} />
                     <Route path="/news/create" element={<NewsEditor />} />
                     <Route path="/news/edit/:slug" element={<NewsEditor />} />
-                    <Route path="/product" element={<Product />} />
-                    <Route path="/product/create" element={<ProductEditor />} />
-                    <Route path="/product/edit/:slug" element={<ProductEditor />} />
-                    <Route path="/invoice" element={<Invoice />} />
-                    <Route path="/invoice/:id" element={<InvoiceEditor />} />
-                    <Route path="/newsletter" element={<NewsletterPage />} />
-                    <Route path="/newsletter/create" element={<NewsletterEditor />} />
-                    <Route path="/newsletter/edit/:id" element={<NewsletterEditor />} />
+                    <Route path="/products" element={<Product />} />
+                    <Route path="/products/create" element={<ProductEditor />} />
+                    <Route path="/products/edit/:slug" element={<ProductEditor />} />
+                    <Route path="/invoices" element={<Invoice />} />
+                    <Route path="/invoices/:id" element={<InvoiceEditor />} />
+                    <Route path="/newsletters" element={<NewsletterPage />} />
+                    <Route path="/newsletters/create" element={<NewsletterEditor />} />
+                    <Route path="/newsletters/edit/:id" element={<NewsletterEditor />} />
                 </Route>
             ) : (
                 <Route path="/login" element={<Login />} />

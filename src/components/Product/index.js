@@ -185,7 +185,7 @@ export default function ProductPage() {
                 <Space className="flex-row mb-6 xl:mb-0 xl:items-end xl:flex-col" size="middle">
                     <Space className="items-start" size="middle">
                         <Button type="primary" size="large">
-                            <Link to="/product/create">New Product</Link>
+                            <Link to="/products/create">New Product</Link>
                         </Button>
                         <Tooltip title="Reload">
                             <Button size="large" icon={<ReloadOutlined />} onClick={onReload} />

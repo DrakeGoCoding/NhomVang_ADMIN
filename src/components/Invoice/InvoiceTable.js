@@ -146,7 +146,7 @@ export default function InvoiceTable(props) {
             render: (text, record) => (
                 <Space size="middle">
                     <Button type="primary">
-                        <Link to={`/invoice/${record._id}`}>View details</Link>
+                        <Link to={`/invoices/${record._id}`}>View details</Link>
                     </Button>
                 </Space>
             )
