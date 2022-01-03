@@ -11,3 +11,14 @@
     max-height: 600px;
     padding: 1rem 3rem;
 }
+
+.newsletter-page .view-newsletter-btn:hover {
+    background-color: rgb(22, 236, 165);
+    border-color: rgb(22, 236, 165);
+}
+
+.newsletter-page .view-newsletter-btn:active,
+.newsletter-page .view-newsletter-btn:focus {
+    background-color: rgb(26, 180, 129);
+    border-color: rgb(26, 180, 129);
+}

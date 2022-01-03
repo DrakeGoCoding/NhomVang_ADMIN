@@ -50,7 +50,7 @@ export default function userListReducer(state = {}, action) {
                 ...state,
                 userList: action.payload.userList || [],
                 total: action.payload.total || 0,
-                page: 0,
+                page: action.page || 0,
                 inProgress: false
             };
 

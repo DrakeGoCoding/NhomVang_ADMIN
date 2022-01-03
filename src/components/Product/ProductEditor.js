@@ -9,6 +9,7 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import ProductDescriptor from "./ProductDescriptor";
 import ProductPhoto from "./ProductPhoto";
 import ProductDetail from "./ProductDetail";
+import ProductLogger from "./ProductLogger";
 
 const ExtraTabSlot = {
     left: (
@@ -90,6 +91,9 @@ export default function ProductEditor() {
                     ) : (
                         <ProductPhoto thumbnail={data.thumbnail} photos={data.photos} />
                     )}
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="Logs" key="logs">
+                    {inProgress ? <Spin size="large" /> : <ProductLogger product={data} />}
                 </Tabs.TabPane>
             </Tabs>
 

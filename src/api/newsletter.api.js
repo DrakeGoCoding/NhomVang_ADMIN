@@ -15,7 +15,8 @@ const Newsletter = {
     send: (subject = "", content) =>
         agent.post(NEWSLETTER_ENDPOINT, {
             newsletter: { subject, content }
-        })
+        }),
+    pageSize
 };
 
 export default Newsletter;

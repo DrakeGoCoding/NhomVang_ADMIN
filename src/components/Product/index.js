@@ -96,6 +96,7 @@ export default function ProductPage() {
     const onReload = () => {
         store.dispatch({
             type: FILTER_PRODUCTLIST,
+            page,
             payload: pager(page, filter)
         });
     };

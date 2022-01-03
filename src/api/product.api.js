@@ -7,7 +7,8 @@ const omitForProduct = product =>
     Object.assign({}, product, {
         slug: undefined,
         createdDate: undefined,
-        modifiedDate: Date.now()
+        modifiedDate: undefined,
+        logs: undefined
     });
 
 const Product = {

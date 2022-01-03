@@ -8,12 +8,13 @@ import { useSelector } from "react-redux";
 import { store } from "../../store";
 import { NEWSLETTER_PAGE_LOADED, NEWSLETTER_PAGE_UNLOADED, UPDATE_FIELD_NEWSLETTER_EDITOR } from "../../store/actions";
 import User from "../../api/user.api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const { Link } = Typography;
 
 export default function NewsletterEditor() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const { data, subscriberCount } = useSelector(state => state.newsletter);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [inProgress, setInProgress] = useState(false);
@@ -47,6 +48,7 @@ export default function NewsletterEditor() {
             setInProgress(true);
             await Newsletter.send(data.subject, data.content);
             message.success({ content: "Sent successfully." });
+            navigate("/newsletters");
         } catch (error) {
             message.error({ content: error.message || error.response.data.message });
         } finally {
@@ -100,7 +102,7 @@ export default function NewsletterEditor() {
 
             <Space className="float-right">
                 <Button disabled={inProgress} type="primary" onClick={showModal}>
-                    Send
+                    {id ? "Resend" : "Send"}
                 </Button>
             </Space>
 

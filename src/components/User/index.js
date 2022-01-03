@@ -39,7 +39,7 @@ export default function UserPage() {
 
     const onFilter = () => store.dispatch({ type: FILTER_USERLIST, payload: pager(0, filter) });
     const resetFilter = () => setFilter({ role: "", regex: "" });
-    const onReload = () => store.dispatch({ type: FILTER_USERLIST, payload: pager(page, filter) });
+    const onReload = () => store.dispatch({ type: FILTER_USERLIST, page, payload: pager(page, filter) });
     const changeRegex = e => setFilter({ ...filter, regex: e.target.value });
     const changeRole = e => {
         setFilter({ ...filter, role: e.target.value });

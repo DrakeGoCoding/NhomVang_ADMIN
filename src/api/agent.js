@@ -6,7 +6,7 @@ import queryString from "query-string";
 // config` for the full list of configs
 
 const instance = axios.create({
-    // baseURL: REACT_APP_API_LOCAL,
+    // baseURL: process.env.REACT_APP_API_LOCAL,
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
         "content-type": "application/json"
