@@ -88,7 +88,7 @@ export default function NewsletterHistory(props) {
                 pagination={false}
                 showSorterTooltip={false}
                 loading={{ indicator: <Spin size="large" />, spinning: props.inProgress }}
-                scroll={{ x: 1500, y: 620 }}
+                scroll={{ x: 1500, y: 670 }}
             />
             {props.total > 0 && (
                 <Pagination
