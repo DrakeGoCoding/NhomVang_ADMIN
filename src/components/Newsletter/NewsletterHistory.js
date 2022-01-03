@@ -1,4 +1,5 @@
 import { Button, message, Pagination, Popconfirm, Space, Spin, Table } from "antd";
+import { QuestionCircleFilled } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Newsletter from "../../api/newsletter.api";
@@ -61,6 +62,7 @@ export default function NewsletterHistory(props) {
                         okText="Yes"
                         cancelText="No"
                         placement="topRight"
+                        icon={<QuestionCircleFilled style={{ color: "#1890ff" }} />}
                     >
                         <Button type="primary">Resend</Button>
                     </Popconfirm>
