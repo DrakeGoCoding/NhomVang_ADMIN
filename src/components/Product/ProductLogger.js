@@ -25,7 +25,6 @@ export default function ProductLogger({ product }) {
     };
 
     const renderUpdateDetails = details => {
-        console.log(details);
         const columns = [
             {
                 title: "Field",
