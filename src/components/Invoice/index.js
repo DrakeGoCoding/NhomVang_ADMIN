@@ -42,7 +42,6 @@ export default function InvoicePage() {
     };
 
     const updateFilter = (key, value) => {
-        console.log(value);
         setFilter({ ...filter, [key]: value });
     };
     const onFilter = () => {
