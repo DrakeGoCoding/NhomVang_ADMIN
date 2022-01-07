@@ -213,8 +213,8 @@ export default function InvoiceDetail({ invoice, disabled }) {
                 </Button>
             </Space>
 
-            <Modal title="Product" visible={isSaveModalVisible} onOk={handleSaveInvoice} onCancel={closeSaveModal}>
-                Confirm to save product?
+            <Modal title="Invoice" visible={isSaveModalVisible} onOk={handleSaveInvoice} onCancel={closeSaveModal}>
+                Confirm to save invoice?
             </Modal>
         </div>
     );
