@@ -33,7 +33,7 @@ export default function InvoiceLogger({ invoice }) {
 
     return (
         <Timeline>
-            {invoice.logs.map((log, index) => (
+            {invoice.logs.reverse().map((log, index) => (
                 <Timeline.Item key={index} color={log.action === "cancel" ? "red" : "green"}>
                     User <Text strong>{log.user}</Text> {renderAction(log)} on{" "}
                     <Text strong>{new Date(log.timestamp).toLocaleString()}</Text>.

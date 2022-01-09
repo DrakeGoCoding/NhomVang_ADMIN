@@ -59,7 +59,7 @@ export default function ProductLogger({ product }) {
 
     return (
         <Timeline>
-            {product.logs.map((log, index) => (
+            {product.logs.reverse().map((log, index) => (
                 <Timeline.Item key={index} color={log.action === "delete" ? "red" : "green"}>
                     User <Text strong>{log.user}</Text> {renderAction(log)} on{" "}
                     <Text strong>{new Date(log.timestamp).toLocaleString()}</Text>.
