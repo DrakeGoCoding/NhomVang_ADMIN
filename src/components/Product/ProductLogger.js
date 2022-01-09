@@ -36,14 +36,14 @@ export default function ProductLogger({ product }) {
                 dataIndex: "prevValue",
                 key: "prevValue",
                 align: "center",
-                render: (text, record) => <Tag color="error">{text.toString()}</Tag>
+                render: (text, record) => text && <Tag color="error">{text.toString()}</Tag>
             },
             {
                 title: "To",
                 dataIndex: "nextValue",
                 key: "nextValue",
                 align: "center",
-                render: (text, record) => <Tag color="success">{text.toString()}</Tag>
+                render: (text, record) => text && <Tag color="success">{text.toString()}</Tag>
             }
         ];
         return <Table className="w-max max-w-full" columns={columns} dataSource={details} pagination={false}></Table>;
