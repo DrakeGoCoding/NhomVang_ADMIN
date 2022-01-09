@@ -35,12 +35,6 @@ export default function AppSider() {
             key: "users"
         },
         {
-            label: "News",
-            icon: <FileOutlined />,
-            link: "/news",
-            key: "news"
-        },
-        {
             label: "Product",
             icon: <ShoppingOutlined />,
             link: "/products",
@@ -51,6 +45,12 @@ export default function AppSider() {
             icon: <SolutionOutlined />,
             link: "/invoices",
             key: "invoices"
+        },
+        {
+            label: "News",
+            icon: <FileOutlined />,
+            link: "/news",
+            key: "news"
         },
         {
             label: "Newsletter",
