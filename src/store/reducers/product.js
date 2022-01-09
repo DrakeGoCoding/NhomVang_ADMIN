@@ -19,7 +19,8 @@ const initialState = {
         photos: [],
         inStock: 0,
         description: "",
-        tags: []
+        tags: [],
+        logs: []
     },
     inProgress: false
 };

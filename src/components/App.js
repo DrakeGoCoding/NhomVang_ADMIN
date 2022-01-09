@@ -59,8 +59,8 @@ export default function App() {
                     <Route path="/news/create" element={<NewsEditor />} />
                     <Route path="/news/edit/:slug" element={<NewsEditor />} />
                     <Route path="/products" element={<Product />} />
-                    <Route path="/products/create" element={<ProductEditor />} />
-                    <Route path="/products/edit/:slug" element={<ProductEditor />} />
+                    <Route path="/products/create" element={<ProductEditor mode="create" />} />
+                    <Route path="/products/edit/:slug" element={<ProductEditor mode="edit" />} />
                     <Route path="/invoices" element={<Invoice />} />
                     <Route path="/invoices/:id" element={<InvoiceEditor />} />
                     <Route path="/newsletters" element={<NewsletterPage />} />

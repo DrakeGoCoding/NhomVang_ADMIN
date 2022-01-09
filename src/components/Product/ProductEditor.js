@@ -21,7 +21,7 @@ const ExtraTabSlot = {
     )
 };
 
-export default function ProductEditor() {
+export default function ProductEditor({ mode }) {
     const { slug } = useParams();
     const { data, inProgress } = useSelector(state => state.product);
 
@@ -92,9 +92,11 @@ export default function ProductEditor() {
                         <ProductPhoto thumbnail={data.thumbnail} photos={data.photos} />
                     )}
                 </Tabs.TabPane>
-                <Tabs.TabPane tab="Logs" key="logs">
-                    {inProgress ? <Spin size="large" /> : <ProductLogger product={data} />}
-                </Tabs.TabPane>
+                {mode === "edit" && (
+                    <Tabs.TabPane tab="Logs" key="logs">
+                        {inProgress ? <Spin size="large" /> : <ProductLogger product={data} />}
+                    </Tabs.TabPane>
+                )}
             </Tabs>
 
             <Space size="middle">
