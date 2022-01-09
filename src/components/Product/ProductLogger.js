@@ -46,7 +46,15 @@ export default function ProductLogger({ product }) {
                 render: (text, record) => text && <Tag color="success">{text.toString()}</Tag>
             }
         ];
-        return <Table className="w-max max-w-full" columns={columns} dataSource={details} pagination={false}></Table>;
+        return (
+            <Table
+                className="w-max max-w-full"
+                rowKey="field"
+                columns={columns}
+                dataSource={details}
+                pagination={false}
+            ></Table>
+        );
     };
 
     return (
