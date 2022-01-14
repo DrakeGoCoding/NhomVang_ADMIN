@@ -12,7 +12,8 @@ import {
     PRODUCT_SUBMITTED,
     REDIRECT,
     TOGGLE_SIDER,
-    USER_PAGE_LOADED
+    USER_PAGE_LOADED,
+    VIEW_NOTIFICATION
 } from "../actions";
 
 const initialState = {
@@ -20,6 +21,8 @@ const initialState = {
     appNameMini: "VH",
     appLoaded: false,
     token: null,
+    currentUser: null,
+    notificationList: [],
     inProgress: false,
     isSiderCollapsed: false
 };
@@ -31,7 +34,8 @@ export default function commonReducer(state = initialState, action) {
                 ...state,
                 token: action.error ? null : action.token,
                 appLoaded: true,
-                currentUser: action.payload ? action.payload.user : null,
+                currentUser: action.payload && action.payload[0] ? action.payload[0].user : null,
+                notificationList: action.payload && action.payload[1] ? action.payload[1].notificationList : [],
                 inProgress: false,
                 redirectTo: !action.token ? "/login" : undefined
             };
@@ -84,6 +88,12 @@ export default function commonReducer(state = initialState, action) {
         case PRODUCTLIST_PAGE_LOADED:
         case USER_PAGE_LOADED:
             return { ...state, inProgress: false };
+
+        case VIEW_NOTIFICATION:
+            return {
+                ...state,
+                notificationList: action.error ? state.notificationList : action.payload.notificationList
+            };
 
         default:
             return state;

@@ -28,7 +28,14 @@ const User = {
     countSubscribers: () =>
         agent.get(`${USER_ENDPOINT}/count`, {
             params: {
+                role: "user",
                 subscribe: true
+            }
+        }),
+    countClients: () =>
+        agent.get(`${USER_ENDPOINT}/count`, {
+            params: {
+                role: "user"
             }
         }),
     pageSize

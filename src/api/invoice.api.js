@@ -26,6 +26,14 @@ const Invoice = {
         }),
     getById: invoiceId => agent.get(`${ADMIN_INVOICE_ENDPOINT}/${invoiceId}`),
     update: invoice => agent.put(`${ADMIN_INVOICE_ENDPOINT}/${invoice._id}`, { invoice: omitForInvoice(invoice) }),
+    getMonthlyProfit: year =>
+        agent.get(`${ADMIN_INVOICE_ENDPOINT}/profit`, {
+            params: {
+                year
+            }
+        }),
+    getTopSpendingClients: () => agent.get(`${ADMIN_INVOICE_ENDPOINT}/topClients`),
+    getSummary: () => agent.get(`${ADMIN_INVOICE_ENDPOINT}/summary`),
     pageSize
 };
 

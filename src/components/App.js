@@ -21,6 +21,8 @@ import "../style/App.css";
 import InvoiceEditor from "./Invoice/InvoiceEditor";
 import NewsletterPage from "./Newsletter";
 import NewsletterEditor from "./Newsletter/NewsletterEditor";
+import Notification from "../api/notification.api";
+import Dashboard from "./Dashboard";
 
 export default function App() {
     const navigate = useNavigate();
@@ -39,7 +41,8 @@ export default function App() {
         if (token) {
             setToken(token);
         }
-        onLoad(token ? Auth.current() : null, token);
+        const payload = token ? Promise.all([Auth.current(), Notification.getAll()]) : null;
+        onLoad(payload, token);
     }, []);
 
     useEffect(() => {
@@ -53,7 +56,7 @@ export default function App() {
         <Routes>
             {common.token ? (
                 <Route path="/" element={<Home />}>
-                    <Route index element={<h2>Welcome to Voucher Hunter Management Website</h2>} />
+                    <Route index element={<Dashboard />} />
                     <Route path="/users" element={<User />} />
                     <Route path="/news" element={<News />} />
                     <Route path="/news/create" element={<NewsEditor />} />

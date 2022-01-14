@@ -12,7 +12,7 @@ export const promiseMiddleware = store => next => action => {
             },
             error => {
                 action.error = true;
-                action.payload = error.response.data;
+                action.payload = error.response?.data;
                 store.dispatch(action);
             }
         );

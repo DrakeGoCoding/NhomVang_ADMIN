@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <Layout style={{ minHeight: "100vh" }}>
             <AppSider />
-            <Layout>
+            <Layout className="max-h-screen overflow-y-auto">
                 <AppHeader />
                 <Layout.Content
                     className="p-4 sm:px-8 md:px-12 md:py-6"

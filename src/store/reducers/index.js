@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import auth from "./auth";
 import common from "./common";
+import dashboard from "./dashboard";
 import editor from "./editor";
 import invoice from "./invoice";
 import invoiceList from "./invoiceList";
@@ -14,6 +15,7 @@ import userList from "./userList";
 export default combineReducers({
     auth,
     common,
+    dashboard,
     editor,
     invoice,
     invoiceList,
