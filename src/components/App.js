@@ -23,6 +23,7 @@ import NewsletterPage from "./Newsletter";
 import NewsletterEditor from "./Newsletter/NewsletterEditor";
 import Notification from "../api/notification.api";
 import Dashboard from "./Dashboard";
+import NotFound from "./NotFound";
 
 export default function App() {
   const navigate = useNavigate();
@@ -77,6 +78,7 @@ export default function App() {
           <Route path="/newsletters" element={<NewsletterPage />} />
           <Route path="/newsletters/create" element={<NewsletterEditor />} />
           <Route path="/newsletters/edit/:id" element={<NewsletterEditor />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       ) : (
         <Route path="/login" element={<Login />} />
