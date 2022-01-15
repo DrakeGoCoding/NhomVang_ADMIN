@@ -3,6 +3,7 @@ import {
   DatePicker,
   Divider,
   Row,
+  Spin,
   Statistic,
   Table,
   Typography
@@ -173,7 +174,13 @@ export default function Dashboard() {
           </Row>
           <Divider className="mt-0 mb-4" />
           <Row>
-            <Bar options={chartOptions} data={profitData} />
+            {inProgress ? (
+              <div className="w-full text-center">
+                <Spin size="large" />
+              </div>
+            ) : (
+              <Bar options={chartOptions} data={profitData} />
+            )}
           </Row>
         </Col>
         <Col className="bg-white px-6 pb-4" span={24} xxl={8}>
