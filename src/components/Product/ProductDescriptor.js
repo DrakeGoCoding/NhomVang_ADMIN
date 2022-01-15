@@ -5,26 +5,26 @@ import { UPDATE_FIELD_PRODUCT_EDITOR } from "../../store/actions";
 import UploadAdapterPlugin from "../Common/ckeditor/UploadAdapter";
 
 export default function ProductDescriptor({ description }) {
-    const dispatch = useDispatch();
-    const changeDescription = (event, editor) => {
-        dispatch({
-            type: UPDATE_FIELD_PRODUCT_EDITOR,
-            key: "description",
-            value: editor.getData()
-        });
-    };
+  const dispatch = useDispatch();
+  const changeDescription = (event, editor) => {
+    dispatch({
+      type: UPDATE_FIELD_PRODUCT_EDITOR,
+      key: "description",
+      value: editor.getData()
+    });
+  };
 
-    return (
-        <div className="product-descriptor">
-            <CKEditor
-                editor={Editor}
-                config={{
-                    extraPlugins: [UploadAdapterPlugin],
-                    removePlugins: ["Title"]
-                }}
-                data={description}
-                onChange={changeDescription}
-            />
-        </div>
-    );
+  return (
+    <div className="product-descriptor">
+      <CKEditor
+        editor={Editor}
+        config={{
+          extraPlugins: [UploadAdapterPlugin],
+          removePlugins: ["Title"]
+        }}
+        data={description}
+        onChange={changeDescription}
+      />
+    </div>
+  );
 }

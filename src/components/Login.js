@@ -7,66 +7,73 @@ import { store } from "../store";
 import "../style/login.css";
 
 export default function Login() {
-    const auth = useSelector(state => state.auth);
+  const auth = useSelector(state => state.auth);
 
-    const onFinish = values => {
-        const { username, password } = values;
-        const payload = Auth.login(username, password);
-        store.dispatch({ type: LOGIN, payload });
+  const onFinish = values => {
+    const { username, password } = values;
+    const payload = Auth.login(username, password);
+    store.dispatch({ type: LOGIN, payload });
+  };
+
+  const onFinishFailed = errorInfo => {
+    console.log(errorInfo);
+  };
+
+  const onUnload = () => store.dispatch({ type: LOGIN_PAGE_UNLOADED });
+
+  useEffect(() => {
+    return () => {
+      onUnload();
     };
+  }, []);
 
-    const onFinishFailed = errorInfo => {
-        console.log(errorInfo);
-    };
+  return (
+    <div className="login-page flex justify-center items-center h-screen bg-gradient-to-r from-gray-600 to-blue-400">
+      <div className="login-page-wrapper bg-white rounded-md p-5">
+        <h2 className="text-center">Voucher Hunter</h2>
+        <Form
+          className="login-form flex flex-col justify-center items-center mt-8 mb-4 px-3"
+          labelCol={{ span: 7 }}
+          labelAlign="left"
+          wrapperCol={{ span: 18 }}
+          name="loginForm"
+          size="large"
+          autoComplete="off"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+        >
+          <Form.Item
+            className="w-full"
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: "Username is required" }]}
+          >
+            <Input />
+          </Form.Item>
 
-    const onUnload = () => store.dispatch({ type: LOGIN_PAGE_UNLOADED });
+          <Form.Item
+            className="w-full"
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: "Password is required" }]}
+          >
+            <Input.Password />
+          </Form.Item>
 
-    useEffect(() => {
-        return () => {
-            onUnload();
-        };
-    }, []);
+          {auth.error ? (
+            <Typography.Text type="danger">{auth.error}</Typography.Text>
+          ) : null}
 
-    return (
-        <div className="login-page flex justify-center items-center h-screen bg-gradient-to-r from-gray-600 to-blue-400">
-            <div className="login-page-wrapper bg-white rounded-md p-5">
-                <h2 className="text-center">Voucher Hunter</h2>
-                <Form
-                    className="login-form flex flex-col justify-center items-center mt-8 mb-4 px-3"
-                    labelCol={{ span: 7 }}
-                    labelAlign="left"
-                    wrapperCol={{ span: 18 }}
-                    name="loginForm"
-                    size="large"
-                    autoComplete="off"
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                >
-                    <Form.Item
-                        className="w-full"
-                        label="Username"
-                        name="username"
-                        rules={[{ required: true, message: "Username is required" }]}
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item
-                        className="w-full"
-                        label="Password"
-                        name="password"
-                        rules={[{ required: true, message: "Password is required" }]}
-                    >
-                        <Input.Password />
-                    </Form.Item>
-
-                    {auth.error ? <Typography.Text type="danger">{auth.error}</Typography.Text> : null}
-
-                    <Button className="mt-4" type="primary" htmlType="submit" disabled={auth.inProgress}>
-                        Login
-                    </Button>
-                </Form>
-            </div>
-        </div>
-    );
+          <Button
+            className="mt-4"
+            type="primary"
+            htmlType="submit"
+            disabled={auth.inProgress}
+          >
+            Login
+          </Button>
+        </Form>
+      </div>
+    </div>
+  );
 }

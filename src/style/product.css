@@ -1,13 +1,13 @@
 .product-descriptor {
-    max-width: inherit;
-    min-width: inherit;
-    max-height: inherit;
-    min-height: inherit;
+  max-width: inherit;
+  min-width: inherit;
+  max-height: inherit;
+  min-height: inherit;
 }
 
 .product-descriptor .ck.ck-content {
-    width: 100%;
-    min-height: 400px;
-    max-height: 600px;
-    padding: 1rem 2rem;
+  width: 100%;
+  min-height: 400px;
+  max-height: 600px;
+  padding: 1rem 2rem;
 }

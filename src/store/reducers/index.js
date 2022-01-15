@@ -13,16 +13,16 @@ import productList from "./productList";
 import userList from "./userList";
 
 export default combineReducers({
-    auth,
-    common,
-    dashboard,
-    editor,
-    invoice,
-    invoiceList,
-    newsList,
-    newsletter,
-    newsletterList,
-    product,
-    productList,
-    userList
+  auth,
+  common,
+  dashboard,
+  editor,
+  invoice,
+  invoiceList,
+  newsList,
+  newsletter,
+  newsletterList,
+  product,
+  productList,
+  userList
 });

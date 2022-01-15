@@ -1,24 +1,24 @@
 .newsletter-editor {
-    max-width: inherit;
-    min-width: inherit;
-    max-height: inherit;
-    min-height: inherit;
+  max-width: inherit;
+  min-width: inherit;
+  max-height: inherit;
+  min-height: inherit;
 }
 
 .newsletter-editor .ck.ck-content {
-    width: 100%;
-    min-height: 400px;
-    max-height: 600px;
-    padding: 1rem 3rem;
+  width: 100%;
+  min-height: 400px;
+  max-height: 600px;
+  padding: 1rem 3rem;
 }
 
 .newsletter-page .view-newsletter-btn:hover {
-    background-color: rgb(22, 236, 165);
-    border-color: rgb(22, 236, 165);
+  background-color: rgb(22, 236, 165);
+  border-color: rgb(22, 236, 165);
 }
 
 .newsletter-page .view-newsletter-btn:active,
 .newsletter-page .view-newsletter-btn:focus {
-    background-color: rgb(26, 180, 129);
-    border-color: rgb(26, 180, 129);
+  background-color: rgb(26, 180, 129);
+  border-color: rgb(26, 180, 129);
 }

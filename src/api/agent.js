@@ -6,31 +6,31 @@ import queryString from "query-string";
 // config` for the full list of configs
 
 const instance = axios.create({
-    // baseURL: process.env.REACT_APP_API_LOCAL,
-    baseURL: process.env.REACT_APP_API_URL,
-    headers: {
-        "content-type": "application/json"
-    },
-    paramsSerializer: params => queryString.stringify(params)
+  // baseURL: process.env.REACT_APP_API_LOCAL,
+  baseURL: process.env.REACT_APP_API_URL,
+  headers: {
+    "content-type": "application/json"
+  },
+  paramsSerializer: params => queryString.stringify(params)
 });
 
 let token = null;
 const tokenPlugin = req => {
-    if (token) {
-        req.headers["Authorization"] = "Bearer " + token;
-    }
-    return req;
+  if (token) {
+    req.headers["Authorization"] = "Bearer " + token;
+  }
+  return req;
 };
 
 const responsePlugin = res => {
-    if (res && res.data) {
-        return res.data;
-    }
-    return res;
+  if (res && res.data) {
+    return res.data;
+  }
+  return res;
 };
 
 const errorPlugin = error => {
-    throw error;
+  throw error;
 };
 
 instance.interceptors.request.use(tokenPlugin);

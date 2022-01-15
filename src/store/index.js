@@ -6,10 +6,13 @@ import reducers from "./reducers";
 import { localStorageMiddleware, promiseMiddleware } from "./middleware";
 
 const getMiddleware = () => {
-    if (process.env.NODE_ENV === "production") {
-        return applyMiddleware(promiseMiddleware, localStorageMiddleware);
-    }
-    return applyMiddleware(promiseMiddleware, localStorageMiddleware, logger);
+  if (process.env.NODE_ENV === "production") {
+    return applyMiddleware(promiseMiddleware, localStorageMiddleware);
+  }
+  return applyMiddleware(promiseMiddleware, localStorageMiddleware, logger);
 };
 
-export const store = createStore(reducers, composeWithDevTools(getMiddleware()));
+export const store = createStore(
+  reducers,
+  composeWithDevTools(getMiddleware())
+);
