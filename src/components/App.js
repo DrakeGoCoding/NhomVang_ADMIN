@@ -21,7 +21,6 @@ import "../style/App.css";
 import InvoiceEditor from "./Invoice/InvoiceEditor";
 import NewsletterPage from "./Newsletter";
 import NewsletterEditor from "./Newsletter/NewsletterEditor";
-import Notification from "../api/notification.api";
 import Dashboard from "./Dashboard";
 import NotFound from "./NotFound";
 
@@ -42,10 +41,7 @@ export default function App() {
     if (token) {
       setToken(token);
     }
-    const payload = token
-      ? Promise.all([Auth.current(), Notification.getAll()])
-      : null;
-    onLoad(payload, token);
+    onLoad(token ? Auth.current() : null, token);
   }, []);
 
   useEffect(() => {

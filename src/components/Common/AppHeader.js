@@ -52,7 +52,7 @@ export default function AppHeader() {
 
     return notificationList.length > 0 ? (
       <Menu>
-        {notificationList.map(notification => (
+        {notificationList.reverse().map(notification => (
           <Menu.Item key={notification._id} style={{ width: "inherit" }}>
             <Link
               to={notification.link}

@@ -2,6 +2,8 @@ import {
   APP_LOAD,
   ASYNC_START,
   EDITOR_PAGE_LOADED,
+  HOME_PAGE_LOADED,
+  HOME_PAGE_UNLOADED,
   INVOICE_SUBMITTED,
   LOGIN,
   LOGOUT,
@@ -34,12 +36,7 @@ export default function commonReducer(state = initialState, action) {
         ...state,
         token: action.error ? null : action.token,
         appLoaded: true,
-        currentUser:
-          action.payload && action.payload[0] ? action.payload[0].user : null,
-        notificationList:
-          action.payload && action.payload[1]
-            ? action.payload[1].notificationList
-            : [],
+        currentUser: action.error ? null : action.payload.user,
         inProgress: false,
         redirectTo: !action.token ? "/login" : undefined
       };
@@ -60,7 +57,13 @@ export default function commonReducer(state = initialState, action) {
       };
 
     case LOGOUT:
-      return { ...state, redirectTo: "/login", token: null, currentUser: null };
+      return {
+        ...state,
+        redirectTo: "/login",
+        token: null,
+        currentUser: null,
+        notificationList: []
+      };
 
     case REDIRECT:
       return { ...state, redirectTo: null };
@@ -84,6 +87,20 @@ export default function commonReducer(state = initialState, action) {
         ...state,
         redirectTo: action.error ? null : "/invoices",
         inProgress: false
+      };
+
+    case HOME_PAGE_LOADED:
+      return {
+        ...state,
+        notificationList: action.error
+          ? state.notificationList
+          : action.payload.notificationList
+      };
+
+    case HOME_PAGE_UNLOADED:
+      return {
+        ...state,
+        notificationList: []
       };
 
     case EDITOR_PAGE_LOADED:
