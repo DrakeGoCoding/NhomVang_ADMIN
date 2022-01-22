@@ -43,8 +43,8 @@ export default function productReducer(state = initialState, action) {
         inProgress: false,
         data: action.payload
           ? {
-              ...action.payload.product,
-              description: htmlDecode(action.payload.product.description)
+              ...action.payload?.product,
+              description: htmlDecode(action.payload?.product?.description)
             }
           : state.data
       };
@@ -56,7 +56,7 @@ export default function productReducer(state = initialState, action) {
       return {
         ...state,
         inProgress: false,
-        error: action.error ? action.payload.message : null
+        error: action.error ? action.payload?.message : null
       };
 
     case UPDATE_FIELD_PRODUCT_EDITOR:

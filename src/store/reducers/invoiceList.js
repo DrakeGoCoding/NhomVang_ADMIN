@@ -22,8 +22,8 @@ export default function invoiceListReducer(state = {}, action) {
       return {
         ...state,
         pager: action.pager,
-        invoiceList: action.payload.invoiceList || [],
-        total: action.payload.total || 0,
+        invoiceList: action.payload?.invoiceList || [],
+        total: action.payload?.total || 0,
         page: 0,
         inProgress: false
       };
@@ -34,8 +34,8 @@ export default function invoiceListReducer(state = {}, action) {
     case SET_INVOICELIST_PAGE:
       return {
         ...state,
-        invoiceList: action.payload.invoiceList || [],
-        total: action.payload.total || 0,
+        invoiceList: action.payload?.invoiceList || [],
+        total: action.payload?.total || 0,
         page: action.page,
         inProgress: false
       };
@@ -43,8 +43,8 @@ export default function invoiceListReducer(state = {}, action) {
     case FILTER_INVOICELIST:
       return {
         ...state,
-        invoiceList: action.payload.invoiceList || [],
-        total: action.payload.total || 0,
+        invoiceList: action.payload?.invoiceList || [],
+        total: action.payload?.total || 0,
         page: 0,
         inProgress: false
       };

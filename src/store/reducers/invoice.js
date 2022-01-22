@@ -38,7 +38,7 @@ export default function invoiceReducer(state = initialState, action) {
       return {
         ...state,
         inProgress: false,
-        data: action.payload ? action.payload.invoice : state.data
+        data: action.payload ? action.payload?.invoice : state.data
       };
 
     case INVOICE_PAGE_UNLOADED:
@@ -48,7 +48,7 @@ export default function invoiceReducer(state = initialState, action) {
       return {
         ...state,
         inProgress: false,
-        error: action.error ? action.payload.message : null
+        error: action.error ? action.payload?.message : null
       };
 
     case UPDATE_FIELD_INVOICE_EDITOR:

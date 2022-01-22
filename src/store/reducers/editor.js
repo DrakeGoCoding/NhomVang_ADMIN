@@ -38,8 +38,8 @@ export default function editorReducer(state = initialState, action) {
         inProgress: false,
         data: action.payload
           ? {
-              ...action.payload.news,
-              content: htmlDecode(action.payload.news.content)
+              ...action.payload?.news,
+              content: htmlDecode(action.payload?.news.content)
             }
           : state.data
       };
@@ -50,7 +50,7 @@ export default function editorReducer(state = initialState, action) {
       return {
         ...state,
         inProgress: false,
-        error: action.error ? action.payload.message : null
+        error: action.error ? action.payload?.message : null
       };
 
     case UPDATE_FIELD_NEWS_EDITOR:

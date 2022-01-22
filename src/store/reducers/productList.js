@@ -24,8 +24,8 @@ export default function productListReducer(state = {}, action) {
       return {
         ...state,
         pager: action.pager,
-        productList: action.payload.productList || [],
-        total: action.payload.total || 0,
+        productList: action.payload?.productList || [],
+        total: action.payload?.total || 0,
         page: 0,
         reload: false,
         inProgress: false
@@ -37,8 +37,8 @@ export default function productListReducer(state = {}, action) {
     case SET_PRODUCTLIST_PAGE:
       return {
         ...state,
-        productList: action.payload.productList || [],
-        total: action.payload.total || 0,
+        productList: action.payload?.productList || [],
+        total: action.payload?.total || 0,
         page: action.page,
         inProgress: false
       };
@@ -46,8 +46,8 @@ export default function productListReducer(state = {}, action) {
     case FILTER_PRODUCTLIST:
       return {
         ...state,
-        productList: action.payload.productList || [],
-        total: action.payload.total || 0,
+        productList: action.payload?.productList || [],
+        total: action.payload?.total || 0,
         page: action.page || 0,
         inProgress: false
       };
@@ -57,7 +57,7 @@ export default function productListReducer(state = {}, action) {
         ...state,
         inProgress: false,
         reload: !action.error,
-        error: action.error ? action.payload.message : null
+        error: action.error ? action.payload?.message : null
       };
 
     default:

@@ -45,8 +45,8 @@ export default function newsletterListReducer(state = initialState, action) {
     case FILTER_NEWSLETTERLIST:
       return {
         ...state,
-        newsletterList: action.payload.newsletterList || [],
-        total: action.payload.total || 0,
+        newsletterList: action.payload?.newsletterList || [],
+        total: action.payload?.total || 0,
         page: action.page || 0,
         inProgress: false
       };

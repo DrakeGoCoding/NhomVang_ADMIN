@@ -23,8 +23,8 @@ export default function newsListReducer(state = {}, action) {
       return {
         ...state,
         pager: action.pager,
-        newsList: action.payload.newsList,
-        total: action.payload.total,
+        newsList: action.payload?.newsList,
+        total: action.payload?.total,
         page: 0,
         reload: false,
         inProgress: false
@@ -35,8 +35,8 @@ export default function newsListReducer(state = {}, action) {
     case SET_NEWSLIST_PAGE:
       return {
         ...state,
-        newsList: action.payload.newsList,
-        total: action.payload.total,
+        newsList: action.payload?.newsList,
+        total: action.payload?.total,
         page: action.page,
         inProgress: false
       };

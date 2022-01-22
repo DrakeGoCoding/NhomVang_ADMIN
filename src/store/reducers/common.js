@@ -36,7 +36,7 @@ export default function commonReducer(state = initialState, action) {
         ...state,
         token: action.error ? null : action.token,
         appLoaded: true,
-        currentUser: action.error ? null : action.payload.user,
+        currentUser: action.error ? null : action.payload?.user,
         inProgress: false,
         redirectTo: !action.token ? "/login" : undefined
       };
@@ -51,8 +51,8 @@ export default function commonReducer(state = initialState, action) {
       return {
         ...state,
         redirectTo: action.error ? null : "/",
-        token: action.error ? null : action.payload.token,
-        currentUser: action.error ? null : action.payload.user,
+        token: action.error ? null : action.payload?.token,
+        currentUser: action.error ? null : action.payload?.user,
         inProgress: false
       };
 
@@ -94,7 +94,7 @@ export default function commonReducer(state = initialState, action) {
         ...state,
         notificationList: action.error
           ? state.notificationList
-          : action.payload.notificationList
+          : action.payload?.notificationList
       };
 
     case HOME_PAGE_UNLOADED:
@@ -115,7 +115,7 @@ export default function commonReducer(state = initialState, action) {
         ...state,
         notificationList: action.error
           ? state.notificationList
-          : action.payload.notificationList
+          : action.payload?.notificationList
       };
 
     default:

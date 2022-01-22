@@ -6,7 +6,7 @@ export default function authReducer(state = {}, action) {
       return {
         ...state,
         inProgress: false,
-        error: action.error ? action.payload.message : null
+        error: action.error ? action.payload?.message : null
       };
     case LOGIN_PAGE_UNLOADED:
       return {};

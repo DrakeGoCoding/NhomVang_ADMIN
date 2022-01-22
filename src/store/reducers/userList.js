@@ -26,8 +26,8 @@ export default function userListReducer(state = {}, action) {
       return {
         ...state,
         pager: action.pager,
-        userList: action.payload.userList || [],
-        total: action.payload.total || 0,
+        userList: action.payload?.userList || [],
+        total: action.payload?.total || 0,
         page: 0,
         reload: false,
         inProgress: false
@@ -39,8 +39,8 @@ export default function userListReducer(state = {}, action) {
     case SET_USERLIST_PAGE:
       return {
         ...state,
-        userList: action.payload.userList || [],
-        total: action.payload.total || 0,
+        userList: action.payload?.userList || [],
+        total: action.payload?.total || 0,
         page: action.page,
         inProgress: false
       };
@@ -48,8 +48,8 @@ export default function userListReducer(state = {}, action) {
     case FILTER_USERLIST:
       return {
         ...state,
-        userList: action.payload.userList || [],
-        total: action.payload.total || 0,
+        userList: action.payload?.userList || [],
+        total: action.payload?.total || 0,
         page: action.page || 0,
         inProgress: false
       };
@@ -60,7 +60,7 @@ export default function userListReducer(state = {}, action) {
         ...state,
         inProgress: false,
         reload: !action.error,
-        error: action.error ? action.payload.message : null
+        error: action.error ? action.payload?.message : null
       };
 
     default:
